@@ -9,8 +9,57 @@
     <navigation-rule>
         <from-view-id>/index.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>case1</from-outcome>
-            <to-view-id>/MuestraProductos.xhtml</to-view-id>
+            <from-outcome>verProducto</from-outcome>
+            <to-view-id>/MuestraProducto.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>verCarro</from-outcome>
+            <to-view-id>/carro.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>irLogin</from-outcome>
+            <to-view-id>/login.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/carro.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>verProductoDesdeCarro</from-outcome>
+            <to-view-id>/MuestraProducto.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>irCompra</from-outcome>
+            <to-view-id>/resumenCompra.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>volverInicio</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/login.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>volverDeLogin</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>loginExitoso</from-outcome>
+            <to-view-id>/carro.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>LoginFallido</from-outcome>
+            <to-view-id>/login.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/resumenCompra.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>irPaypal</from-outcome>
+            <to-view-id>/paypal.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>volverCarro</from-outcome>
+            <to-view-id>/carro.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 </faces-config>
