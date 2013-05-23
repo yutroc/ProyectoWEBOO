@@ -13,12 +13,13 @@ public class ProductoDTO {
     private int idProducto;
     private String nombre;
     private String descripcion;
-    private Byte image;
+    private byte image;
     private int stock;
     private int valorOferta;
     private boolean ofertaActiva;
+    private int idCategoria;
 
-    public ProductoDTO(int idProducto, String nombre, String descripcion, Byte image, int stock, int valorOferta, boolean ofertaActiva) {
+    public ProductoDTO(int idProducto, String nombre, String descripcion, byte image, int stock, int valorOferta, boolean ofertaActiva, int idCategoria) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -27,6 +28,7 @@ public class ProductoDTO {
         this.valorOferta = valorOferta;
         this.ofertaActiva = ofertaActiva;
     }
+   // public ProductoDTO(){}
     
     public int getIdProducto() {
         return idProducto;
@@ -39,6 +41,21 @@ public class ProductoDTO {
     public String getNombre() {
         return nombre;
     }
+     public byte getImage() {
+        return image;
+    }
+
+    public void setImage(byte image) {
+        this.image = image;
+    }
+
+    public int getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
+    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -50,14 +67,6 @@ public class ProductoDTO {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public Byte getImage() {
-        return image;
-    }
-
-    public void setImage(Byte image) {
-        this.image = image;
     }
 
     public int getStock() {
