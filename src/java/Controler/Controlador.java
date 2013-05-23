@@ -4,16 +4,18 @@
  */
 package Controler;
 
+import java.util.ArrayList;
+import DTO.ProductoDTO;
+import persistance.DAO;
+import utils.DAOException;
+
 /**
  *
  * @author Sebastian
  */
 public class Controlador {
 
-    private Controlador ctrl;
-
-    private Controlador() {
-    }
+    public Controlador ctrl;
 
     public Controlador getInstance() {
         if (ctrl == null) {
@@ -22,5 +24,8 @@ public class Controlador {
         } else {
             return this.ctrl;
         }
+    }
+    public ArrayList<ProductoDTO> obtenerTodosProductos() throws DAOException{
+        return DAO.obtenerTodosProductos();         
     }
 }

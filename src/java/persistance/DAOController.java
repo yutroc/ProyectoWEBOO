@@ -8,7 +8,6 @@ package persistance;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import static persistance.DAOController.DRIVER;
 import utils.DAOException;
 
 /**
@@ -18,9 +17,9 @@ import utils.DAOException;
 class DAOController {
     
     public static final String DRIVER = "org.postgresql.Driver";
-    public static final String DBURL = "jdbc:postgresql://146.83.196.216:5432/ServiMoto";
-    public static final String USER = "alumnos";
-    public static final String PASSWORD = "tallerweb";
+    public static final String DBURL = "jdbc:postgresql://colvin.chillan.ubiobio.cl:5432/SisVenta";
+    public static final String USER = "grupo0";
+    public static final String PASSWORD = "grupo0";
 
     public static Connection getConnection() throws DAOException{
         Connection conn = null;

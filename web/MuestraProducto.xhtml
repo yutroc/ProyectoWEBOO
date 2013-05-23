@@ -8,22 +8,22 @@
     </h:head>
     <h:body>
         <h:form>
-            <h:dataTable id="table1" value="#{proyectoBean.productos}" var="item"  border="1" headerClass="sorting_asc"  >
+            <h:dataTable id="table1" value="#{proyectoBean.productos}" var="item"  border="1"  >
                 <h:column>
-                    <f:facet name="id">
-                        id
+                    <f:facet name="header">
+                         <h:outputText value="ID"/>
                     </f:facet>
                     #{item.idProducto}
                 </h:column>
                 <h:column>
-                    <f:facet name="nombre">
-                        nombre
+                    <f:facet name="header">
+                         <h:outputText value="NOMBRE"/>
                     </f:facet>
                     #{item.nombre}
                 </h:column>
                 <h:column>
-                    <f:facet name="descrpcion">
-                        descrpcion
+                    <f:facet name="header">
+                         <h:outputText value="DESCRIPCION"/>
                     </f:facet>
                     #{item.descripcion}
                 </h:column>
