@@ -44,4 +44,8 @@ public class ProyectoBean {
     public void setProductos(ArrayList<ProductoDTO> productos) {
         this.productos = productos;
     }
+    
+    public void imprimirAlgo(){
+        System.out.println("hola");
+    }
 }
