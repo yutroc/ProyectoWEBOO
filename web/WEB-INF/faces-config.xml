@@ -13,12 +13,16 @@
             <to-view-id>/MuestraProducto.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-            <from-outcome>verCarro</from-outcome>
+            <from-outcome>irCarro</from-outcome>
             <to-view-id>/carro.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>irLogin</from-outcome>
             <to-view-id>/login.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>irRegistrar</from-outcome>
+            <to-view-id>/registrar.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
@@ -32,14 +36,14 @@
             <to-view-id>/resumenCompra.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-            <from-outcome>volverInicio</from-outcome>
+            <from-outcome>irIndex</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <from-view-id>/login.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>volverDeLogin</from-outcome>
+            <from-outcome>irIndex</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
@@ -49,6 +53,10 @@
         <navigation-case>
             <from-outcome>LoginFallido</from-outcome>
             <to-view-id>/login.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>irRegistrar</from-outcome>
+            <to-view-id>/registrar.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
@@ -60,6 +68,13 @@
         <navigation-case>
             <from-outcome>volverCarro</from-outcome>
             <to-view-id>/carro.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/registrar.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>irIndex</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 </faces-config>
