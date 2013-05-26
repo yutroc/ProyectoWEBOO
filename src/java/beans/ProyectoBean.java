@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import DTO.ProductoDTO;
 import Controler.Controlador;
+import DTO.UsuarioDTO;
 import javax.annotation.PostConstruct;
 import utils.DAOException;
 
@@ -26,6 +27,8 @@ public class ProyectoBean {
      * Creates a new instance of ProyectoBean
      */
     private ArrayList<ProductoDTO> productos = new ArrayList<ProductoDTO>();
+   private String nombreUser;
+   private String pass;
     @PostConstruct
     public void init(){
         /*for (int i=0;i<6;i++){
@@ -47,5 +50,31 @@ public class ProyectoBean {
     
     public void imprimirAlgo(){
         System.out.println("hola");
+    }
+
+    public String getNombreUser() {
+        return nombreUser;
+    }
+
+    public void setNombreUser(String nombreUser) {
+        this.nombreUser = nombreUser;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    
+    public String validarUsuario() throws DAOException{
+       UsuarioDTO user= controller.validarUser(nombreUser,pass);
+        if (user.getaPaterno().equals("perro"))
+            return "loginExitoso";
+        else{
+            return "LoginFallido";
+        }
     }
 }
