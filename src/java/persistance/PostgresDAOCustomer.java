@@ -26,6 +26,7 @@ public class PostgresDAOCustomer {
     }
 
     public UsuarioDTO getCustomer(String nombre, String contraseña) throws DAOException {
+        System.out.print("GOGOGOOGOOGOGO");
         //iniciar variables
         String name = "coso";
         UsuarioDTO user = new UsuarioDTO(null, "coso", "perro", null, null, null, null, null, null, null, null, null);

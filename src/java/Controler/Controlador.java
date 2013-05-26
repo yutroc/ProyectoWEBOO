@@ -18,7 +18,7 @@ import utils.DAOException;
 public class Controlador {
 
     public Controlador ctrl;
-    public PostgresDAOCustomer daoCustomer;
+    public PostgresDAOCustomer daoCustomer=new PostgresDAOCustomer();
 
     public Controlador getInstance() {
         if (ctrl == null) {
@@ -32,6 +32,7 @@ public class Controlador {
         return DAO.obtenerTodosProductos();         
     }
     public UsuarioDTO validarUser(String nombre,String pass) throws DAOException{
+        System.out.println("PASOcontrolador");
         return daoCustomer.getCustomer(nombre, pass); 
     }
 }
