@@ -8,7 +8,7 @@
     </h:head>
     <h:body>
         <h:form>
-            <h:dataTable id="table1" value="#{proyectoBean.productos}" var="item"  border="1"  >
+            <h:dataTable id="table1" value="#{proyectoBean.productos}" var="item"  border="1"  binding="#{proyectoBean.tablaProductos}">
                 <h:column>
                     <f:facet name="header">
                          <h:outputText value="ID"/>
@@ -27,7 +27,15 @@
                     </f:facet>
                     #{item.descripcion}
                 </h:column>
+                <h:column>
+                    <f:facet name="header">
+                         <h:outputText value="SELECCIONAR"/>
+                    </f:facet>
+                    <h:commandLink  value ="Seleccionar" action="#{proyectoBean.seleccionProducto()}"></h:commandLink>
+                
+                </h:column>
             </h:dataTable>
+            <h:outputLabel value ="#{proyectoBean.nombreProducto}" style="color: red"></h:outputLabel >
         </h:form>
     </h:body>
 </html>

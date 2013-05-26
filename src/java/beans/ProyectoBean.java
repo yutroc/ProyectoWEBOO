@@ -11,6 +11,7 @@ import DTO.ProductoDTO;
 import Controler.Controlador;
 import DTO.UsuarioDTO;
 import javax.annotation.PostConstruct;
+import javax.faces.component.html.HtmlDataTable;
 import utils.DAOException;
 
 /**
@@ -23,10 +24,16 @@ public class ProyectoBean {
 
     public Controlador controller = new Controlador();
     private ArrayList<ProductoDTO> productos = new ArrayList<ProductoDTO>();
+    //variables para seleecionar un producto
+    private ProductoDTO productoSeleccionado;
+    private int idProducto;
+    private String nombreProducto;
+    private String descripcionProducto;
     //variables para el login
     private String nombreUser = "";
     private String pass = "";
     private String msg = "";
+    private HtmlDataTable tablaProductos;
 
     @PostConstruct
     public void init() {
@@ -37,6 +44,13 @@ public class ProyectoBean {
     }
 
     public ProyectoBean() {
+    }
+
+    public void seleccionProducto() {
+        productoSeleccionado = (ProductoDTO) tablaProductos.getRowData();
+        this.idProducto = productoSeleccionado.getIdProducto();
+        this.nombreProducto = productoSeleccionado.getNombre();
+        this.descripcionProducto = productoSeleccionado.getDescripcion();
     }
 
     public ArrayList<ProductoDTO> getProductos() throws DAOException {
@@ -76,6 +90,25 @@ public class ProyectoBean {
         this.msg = msg;
     }
 
+    public HtmlDataTable getTablaProductos() {
+        return tablaProductos;
+    }
+
+    public void setTablaProductos(HtmlDataTable tablaProductos) {
+        this.tablaProductos = tablaProductos;
+    }
+
+    public String getNombreProducto() {
+        return nombreProducto;
+    }
+
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
+    }
+
+    
+
+    
     public String validarUsuario() throws DAOException {
         UsuarioDTO user = controller.validarUser(nombreUser, pass);
         if (user.getNombre().equals(nombreUser)) {
