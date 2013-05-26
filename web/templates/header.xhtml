@@ -1,0 +1,56 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+<div class="top_bar">
+    <div class="top_search">
+      <div class="search_text"><a href="#Implementar_Busqueda">Buscar</a></div>
+      <input type="text" class="search_input" name="search" />
+      <a href="#Implementar_Busqueda">
+        <input type="image" src="imagenes/search.gif" class="search_bt"/>
+      </a>
+    </div>
+  </div>
+  <div id="header">
+    <div id="logo"> <a href="#"><img src="imagenes/logo.png" alt="" border="0" width="250" height="140" /></a> </div>
+    <div class="oferte_content">
+      <div class="top_divider"><img src="imagenes/header_divider.png" alt="" width="1" height="164" /></div>
+      <div class="oferta">
+        <div class="oferta_content"> <img src="imagenes/manjarate.jpg" width="94" height="92" alt="" border="0" class="oferta_img" />
+          <div class="oferta_details">
+            <div class="oferta_title">Manjarate Soprole Black</div>
+            <div class="oferta_text"> Manjarate Soprole Black, 4 Unidades, Pote 125 grs. c/u </div>
+            <a href="details.html" class="details">details</a> </div>
+        </div>
+        <div class="oferta_pagination"> 
+            <span class="current">1</span> 
+            <a href="#Oferta_2">2</a> 
+            <a href="#Oferta_3">3</a> 
+            <a href="#Oferta_4">4</a> 
+            <a href="#Oferta_5">5</a> 
+        </div>
+      </div>
+      <div class="top_divider"><img src="imagenes/header_divider.png" alt="" width="1" height="164" /></div>
+    </div>
+    <!-- end of oferte_content-->
+  </div>
+  <div id="main_content">
+    <div id="menu_tab">
+      <div class="left_menu_corner"></div>
+      <ul class="menu">
+        <li><a href="index.xhtml" class="nav1"> Inicio</a></li>
+        <li class="divider"></li>
+        <li><a href="#" class="nav2">Ingresar a tu Cuenta</a></li>
+        <li class="divider"></li>
+        <li><a href="#" class="nav3">Registrarse</a></li>
+        <li class="divider"></li>
+        <li><a href="#" class="nav4">Carro de Compras</a></li>
+        <li class="divider"></li>
+        <li><a href="contact.xhtml" class="nav5">Contacto</a></li>
+        <li class="divider"></li>
+      </ul>
+      <div class="right_menu_corner"></div>
+    </div>
+  </div>
+</ui:composition>
