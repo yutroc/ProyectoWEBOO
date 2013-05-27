@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import DTO.ProductoDTO;
 import DTO.UsuarioDTO;
 import persistance.DAO;
-import persistance.PostgresDAOCustomer;
 import utils.DAOException;
 
 /**
@@ -18,7 +17,7 @@ import utils.DAOException;
 public class Controlador {
 
     public Controlador ctrl;
-    public PostgresDAOCustomer daoCustomer=new PostgresDAOCustomer();
+    public DAO dao = new DAO();
 
     public Controlador getInstance() {
         if (ctrl == null) {
@@ -29,10 +28,10 @@ public class Controlador {
         }
     }
     public ArrayList<ProductoDTO> obtenerTodosProductos() throws DAOException{
-        return DAO.obtenerTodosProductos();         
+        return dao.obtenerTodosProductos();         
     }
     public UsuarioDTO validarUser(String nombre,String pass) throws DAOException{
         System.out.println("PASOcontrolador");
-        return daoCustomer.getCustomer(nombre, pass); 
+        return dao.getCustomer(nombre, pass); 
     }
 }
