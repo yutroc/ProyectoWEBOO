@@ -39,7 +39,8 @@
     <div id="menu_tab">
       <div class="left_menu_corner"></div>
       <ul class="menu">
-        <li><a href="index.xhtml" class="nav1"> Inicio</a></li>
+          <h:form>
+        <li><h:commandLink id="link" value ="Inicio" action="irIndex" class="nav2"></h:commandLink></li>
         <li class="divider"></li>
         <li><a href="#" class="nav2">Ingresar a tu Cuenta</a></li>
         <li class="divider"></li>
@@ -49,6 +50,7 @@
         <li class="divider"></li>
         <li><a href="contact.xhtml" class="nav5">Contacto</a></li>
         <li class="divider"></li>
+          </h:form>
       </ul>
       <div class="right_menu_corner"></div>
     </div>
