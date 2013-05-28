@@ -7,6 +7,7 @@ package Controler;
 import java.util.ArrayList;
 import DTO.ProductoDTO;
 import DTO.UsuarioDTO;
+import java.sql.SQLException;
 import persistance.DAO;
 import utils.DAOException;
 
@@ -39,7 +40,7 @@ public class Controlador {
         return dao.obtenerProductosSimilares(idCategoria);
     }
     
-    public void crearProducto(ProductoDTO p) throws DAOException{
+    public void crearProducto(ProductoDTO p) throws DAOException, SQLException{
        dao.crearProducto(p);
     }
 }

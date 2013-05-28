@@ -10,6 +10,7 @@ import javax.faces.bean.RequestScoped;
 import DTO.ProductoDTO;
 import Controler.Controlador;
 import DTO.UsuarioDTO;
+import java.sql.SQLException;
 import javax.annotation.PostConstruct;
 import javax.faces.component.html.HtmlDataTable;
 import utils.DAOException;
@@ -42,7 +43,7 @@ public class ProyectoBean {
      private String descripcionNP;
     private int stockPN;
     private int ofertaPN;
-    private boolean ofertaActivaPN;
+    private boolean ofertaActivaPN=false;
     private int precioPN; 
     public String p;
 
@@ -201,8 +202,8 @@ public class ProyectoBean {
         }
 
     }
-    public void crearProducto() throws DAOException{
-        ProductoDTO p=new ProductoDTO(idPN,nombrePN,descripcionNP,"sin imagen",stockPN,precioPN,ofertaPN,ofertaActivaPN,0);
+    public void crearProducto() throws DAOException, SQLException{
+        ProductoDTO p=new ProductoDTO(idPN,nombrePN,descripcionNP,"sin imagen",stockPN,precioPN,ofertaPN,ofertaActivaPN,1);
         controller.crearProducto(p);
    
     }
