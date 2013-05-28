@@ -28,18 +28,19 @@ public class ProductoDTO {
     private boolean ofertaActiva;
     private int idCategoria;
 
-    public ProductoDTO(int idProducto, String nombre, String descripcion, int stock,int precio, int valorOferta, boolean ofertaActiva, int idCategoria) {
+    public ProductoDTO(int idProducto, String nombre, String descripcion, String imageUrl, int stock, int precio, int valorOferta, boolean ofertaActiva, int idCategoria) {
         this.idProducto = idProducto;
-        this.precio = precio;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.imageUrl = GetImagen(idProducto);
+         this.imageUrl = GetImagen(idProducto);
         this.stock = stock;
-        this.idCategoria = idCategoria;
+        this.precio = precio;
         this.valorOferta = valorOferta;
         this.ofertaActiva = ofertaActiva;
-        
+        this.idCategoria = idCategoria;
     }
+
+   
 
     public String getImageUrl() {
         return imageUrl;

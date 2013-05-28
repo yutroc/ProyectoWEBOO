@@ -38,4 +38,8 @@ public class Controlador {
     public ArrayList<ProductoDTO> obtenerProductosSimilares(int idCategoria) throws DAOException {
         return dao.obtenerProductosSimilares(idCategoria);
     }
+    
+    public void crearProducto(ProductoDTO p) throws DAOException{
+       dao.crearProducto(p);
+    }
 }

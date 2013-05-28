@@ -36,6 +36,15 @@ public class ProyectoBean {
     private String pass = "";
     private String msg = "";
     private HtmlDataTable tablaProductos;
+    //variables para crear un producto
+    private int idPN;
+    private String nombrePN;
+     private String descripcionNP;
+    private int stockPN;
+    private int ofertaPN;
+    private boolean ofertaActivaPN;
+    private int precioPN; 
+    public String p;
 
     @PostConstruct
     public void init() {
@@ -125,6 +134,62 @@ public class ProyectoBean {
         this.productoSeleccionado = productoSeleccionado;
     }
 
+    public int getIdPN() {
+        return idPN;
+    }
+
+    public void setIdPN(int idPN) {
+        this.idPN = idPN;
+    }
+
+    public String getNombrePN() {
+        return nombrePN;
+    }
+
+    public void setNombrePN(String nombrePN) {
+        this.nombrePN = nombrePN;
+    }
+
+    public String getDescripcionNP() {
+        return descripcionNP;
+    }
+
+    public void setDescripcionNP(String descripcionNP) {
+        this.descripcionNP = descripcionNP;
+    }
+
+    public int getStockPN() {
+        return stockPN;
+    }
+
+    public void setStockPN(int stockPN) {
+        this.stockPN = stockPN;
+    }
+
+    public int getOfertaPN() {
+        return ofertaPN;
+    }
+
+    public void setOfertaPN(int ofertaPN) {
+        this.ofertaPN = ofertaPN;
+    }
+
+    public boolean isOfertaActivaPN() {
+        return ofertaActivaPN;
+    }
+
+    public void setOfertaActivaPN(boolean ofertaActivaPN) {
+        this.ofertaActivaPN = ofertaActivaPN;
+    }
+
+    public int getPrecioPN() {
+        return precioPN;
+    }
+
+    public void setPrecioPN(int precioPN) {
+        this.precioPN = precioPN;
+    }
+
     
     public String validarUsuario() throws DAOException {
         UsuarioDTO user = controller.validarUser(nombreUser, pass);
@@ -135,5 +200,10 @@ public class ProyectoBean {
             return "LoginFallido";
         }
 
+    }
+    public void crearProducto() throws DAOException{
+        ProductoDTO p=new ProductoDTO(idPN,nombrePN,descripcionNP,"sin imagen",stockPN,precioPN,ofertaPN,ofertaActivaPN,0);
+        controller.crearProducto(p);
+   
     }
 }
