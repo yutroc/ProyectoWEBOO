@@ -34,4 +34,8 @@ public class Controlador {
         System.out.println("PASOcontrolador");
         return dao.getCustomer(nombre, pass); 
     }
+    
+    public ArrayList<ProductoDTO> obtenerProductosSimilares(int idCategoria) throws DAOException {
+        return dao.obtenerProductosSimilares(idCategoria);
+    }
 }

@@ -9,10 +9,6 @@
     <navigation-rule>
         <from-view-id>/index.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>verProducto</from-outcome>
-            <to-view-id>/MuestraProducto.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
             <from-outcome>irCarro</from-outcome>
             <to-view-id>/carro.xhtml</to-view-id>
         </navigation-case>
@@ -27,6 +23,10 @@
         <navigation-case>
             <from-outcome>irIndex</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>irProducto</from-outcome>
+            <to-view-id>/mostrarProducto.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
@@ -79,6 +79,17 @@
         <navigation-case>
             <from-outcome>irIndex</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/mostrarProducto.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>irIndex</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>irLogin</from-outcome>
+            <to-view-id>/login.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 </faces-config>

@@ -24,7 +24,7 @@ public class DAO {
          String descripcion="";
          byte image=0;
          int stock=0;
-         int valorOferta=0;
+         int valorOferta=0, precio;
          boolean ofertaActiva=false;
          int idCategoria=0;
          //_ProductoDTO producto = new ProductoDTO();
@@ -35,15 +35,15 @@ public class DAO {
          //statment
         try {
             // setup statement and retrieve results
-            PreparedStatement pstmt = con.prepareStatement("SELECT *\n" + "FROM \"Producto\";");
+            PreparedStatement pstmt = con.prepareStatement("SELECT \"idProducto\", \"nombre\", \"descripcion\", \"stock\", \"precio\", \"valorOferta\", \"ofertaActiva\", \"idCategoria\"" + "FROM \"Producto\" ORDER BY \"idProducto\";");
             ResultSet rs = pstmt.executeQuery();
             //create the transfer object using data from rs
             while(rs.next()){
                 idProducto= rs.getInt("idProducto");
                 nombre=rs.getString("nombre");
                 descripcion = rs.getString("descripcion");
-                image = rs.getByte("image");
                 stock = rs.getInt("stock");
+                precio=rs.getInt("precio");
                 valorOferta=rs.getInt("valorOferta");
                 ofertaActiva=rs.getBoolean("ofertaActiva");
                 idCategoria=rs.getInt("idCategoria");
@@ -56,7 +56,7 @@ public class DAO {
                 producto.setOfertaActiva(ofertaActiva);
                 producto.setIdProducto(idProducto);
                 listaProductos.add(producto);*/
-                ProductoDTO producto = new ProductoDTO(idProducto,nombre,descripcion,image,stock,valorOferta,ofertaActiva,idCategoria);
+                ProductoDTO producto = new ProductoDTO(idProducto,nombre,descripcion,stock,valorOferta,precio,ofertaActiva,idCategoria);
                 listaProductos.add(producto);
           } 
         } catch (Exception e) {
@@ -110,6 +110,62 @@ public class DAO {
             }
         }
         return user;
+    }
+    public static ArrayList<ProductoDTO> obtenerProductosSimilares(int idCategoriaSeleccionada) throws DAOException {
+       // iniciar variables
+         int idProducto= 0;
+         String nombre="";
+         String descripcion="";
+         byte[] image;
+         int stock=0;
+         int precio=0;
+         int valorOferta=0;
+         boolean ofertaActiva=false;
+         int idCategoria=0;
+         //_ProductoDTO producto = new ProductoDTO();
+         ArrayList<ProductoDTO> listaProductos = new ArrayList<ProductoDTO>();
+         // odbc conection
+         DAOController dc = new DAOController();
+         Connection con = dc.getConnection();     
+         //statment
+        try {
+            // setup statement and retrieve results
+            PreparedStatement pstmt = con.prepareStatement("SELECT \"idProducto\", \"nombre\", \"descripcion\", \"stock\", \"precio\", \"valorOferta\", \"ofertaActiva\", \"idCategoria\" FROM \"Producto\" WHERE \"idCategoria\" = "+idCategoriaSeleccionada+"ORDER BY \"idProducto\" LIMIT 3;");
+            ResultSet rs = pstmt.executeQuery();
+            //create the transfer object using data from rs
+            while(rs.next()){
+                idProducto= rs.getInt("idProducto");
+                nombre=rs.getString("nombre");
+                descripcion = rs.getString("descripcion");
+                stock = rs.getInt("stock");                
+                precio=rs.getInt("precio");
+                valorOferta=rs.getInt("valorOferta");
+                ofertaActiva=rs.getBoolean("ofertaActiva");
+                idCategoria=rs.getInt("idCategoria");
+                /*producto.setIdProducto(idProducto);
+                producto.setNombre(nombre);
+                producto.setDescripcion(descripcion);
+                producto.setImage(image);
+                producto.setStock(stock);
+                producto.setValorOferta(valorOferta);
+                producto.setOfertaActiva(ofertaActiva);
+                producto.setIdProducto(idProducto);
+                listaProductos.add(producto);*/
+                ProductoDTO producto = new ProductoDTO(idProducto,nombre,descripcion,stock,precio,valorOferta,ofertaActiva,idCategoria);
+                listaProductos.add(producto);
+          } 
+        } catch (Exception e) {
+                e.printStackTrace();
+              
+                throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                    con.close();
+            } catch (SQLException e) {
+                    throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
+        return listaProductos;
     }
 	
 }

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <head>
         <title>Demacia Food Store</title>
@@ -22,69 +23,48 @@
             <!-- Editar desde aqui -->
 
             <div class="center_content">
-                <div class="center_title_bar">Manjarate Soprole Black</div>
+                <div class="center_title_bar">#{proyectoBean.productoSeleccionado.nombre}</div>
                 <div class="prod_box_big">
                     <div class="top_prod_box_big"></div>
                     <div class="center_prod_box_big">
-                        <div class="product_img_big"> <a href="javascript:popImage('imagenes/manjarate.jpg','Manjarate Soprole Black')" title="header=[Zoom] body=[&nbsp;] fade=[on]"><img src="imagenes/manjarate.jpg" alt="" border="0" /></a>                        
+                        <div class="product_img_big"> <a href="javascript:popImage('#{proyectoBean.productoSeleccionado.imageUrl}','#{proyectoBean.productoSeleccionado.nombre}')" title="header=[Zoom] body=[&nbsp;] fade=[on]"><img src="#{proyectoBean.productoSeleccionado.imageUrl}" alt="" border="0" /></a>                        
                            
                         </div>
                          <div class="details_big_box">
-                                <div class="product_title_big">Manjarate Soprole Black</div>
-                                <div class="specifications"> Disponibilidad: <span class="blue">En stock</span><br />
-                                    Columna1: <span class="blue">dato</span><br />
-                                    Columna2: <span class="blue">dato</span><br />
-                                    Columna3: <span class="blue">dato</span><br />
+                                <div class="product_title_big">#{proyectoBean.productoSeleccionado.nombre}</div>
+                                <div class="specifications"> 
+                                    Descripcin: <span class="blue">#{proyectoBean.productoSeleccionado.descripcion}</span><br />
+                                    Disponibilidad: <span class="blue">#{proyectoBean.productoSeleccionado.stock}</span><br />
+                                    idCategoria: <span class="blue">#{proyectoBean.productoSeleccionado.idCategoria}</span><br />
                                 </div>
-                                <div class="prod_price_big"><span class="reduce">$ 839</span> <span class="price">$ 719</span></div>
+                                <div class="prod_price_big"><span class="price">$ #{proyectoBean.productoSeleccionado.precio}</span></div>
                                 <a href="#" class="addtocart">agregar</a> 
                                 <a href="#Comparar?" class="compare">comparar</a> </div>
                         <div class="bottom_prod_box_big"></div>
                     </div>
                 </div>
-                    <div class="center_title_bar">Productos Similares</div>
+                <div class="center_title_bar">Productos Similares</div>
+                <h:form>
+                <c:forEach var="producto" items="#{proyectoBean.getProductosSimilares(proyectoBean.productoSeleccionado.idCategoria)}" >
+                    
+                    
                     <div class="prod_box">
                         <div class="top_prod_box"></div>
                         <div class="center_prod_box">
-                            <div class="product_title"><a href="mostrarProducto.xhtml">Manjarate Soprole Black</a></div>
-                            <div class="product_img"><a href="mostrarProducto.xhtml"><img src="imagenes/manjarate.jpg" alt="" border="0" width="90" /></a></div>
-                            <div class="prod_price"><span class="reduce">$ 839</span> <span class="price">$ 719</span></div>
+                            <div class="product_title"><h:commandLink id="producto#{producto.idProducto}" value ="#{producto.nombre}" actionListener="#{proyectoBean.seleccionar(producto)}"></h:commandLink></div>
+                            <div class="product_img"><h:graphicImage value="#{producto.imageUrl}" ></h:graphicImage></div>
+                            <div class="prod_price"> <span class="price">$ #{producto.precio}</span></div>
                         </div>
                         <div class="bottom_prod_box"></div>
                         <div class="prod_details_tab"> 
                             <a href="#" title="header=[Agregar al Carro] body=[&nbsp;] fade=[on]"><img src="imagenes/cart.gif" alt="" border="0" class="left_bt" /></a> 
                             <a href="#" title="header=[Oferta] body=[&nbsp;] fade=[on]"><img src="imagenes/favs.gif" alt="" border="0" class="left_bt" /></a> 
                             <!--<a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="images/favorites.gif" alt="" border="0" class="left_bt" /></a>-->
-                            <a href="mostrarProducto.xhtml" class="prod_details">detalle</a> </div>
+                            <h:commandLink id="producto#{producto.idProducto}_detalle" class="prod_details" value ="detalle" actionListener="#{proyectoBean.seleccionar(producto)}"></h:commandLink> </div>
                     </div>
-                    <div class="prod_box">
-                        <div class="top_prod_box"></div>
-                        <div class="center_prod_box">
-                            <div class="product_title"><a href="mostrarProducto.xhtml">Manjarate Soprole Black</a></div>
-                            <div class="product_img"><a href="mostrarProducto.xhtml"><img src="imagenes/manjarate.jpg" alt="" border="0" width="90"/></a></div>
-                            <div class="prod_price"><span class="reduce">$ 839</span> <span class="price">$ 719</span></div>
-                        </div>
-                        <div class="bottom_prod_box"></div>
-                        <div class="prod_details_tab"> 
-                            <a href="#" title="header=[Agregar al Carro] body=[&nbsp;] fade=[on]"><img src="imagenes/cart.gif" alt="" border="0" class="left_bt" /></a> 
-                            <a href="#" title="header=[Oferta] body=[&nbsp;] fade=[on]"><img src="imagenes/favs.gif" alt="" border="0" class="left_bt" /></a> 
-                            <!--<a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="images/favorites.gif" alt="" border="0" class="left_bt" /></a>-->
-                            <a href="mostrarProducto.xhtml" class="prod_details">detalle</a> </div>
-                    </div>
-                    <div class="prod_box">
-                        <div class="top_prod_box"></div>
-                        <div class="center_prod_box">
-                            <div class="product_title"><a href="mostrarProducto.xhtml">Manjarate Soprole Black</a></div>
-                            <div class="product_img"><a href="mostrarProducto.xhtml"><img src="imagenes/manjarate.jpg" alt="" border="0" width="90"/></a></div>
-                            <div class="prod_price"><span class="reduce">$ 839</span> <span class="price">$ 719</span></div>
-                        </div>
-                        <div class="bottom_prod_box"></div>
-                        <div class="prod_details_tab"> 
-                            <a href="#" title="header=[Agregar al Carro] body=[&nbsp;] fade=[on]"><img src="imagenes/cart.gif" alt="" border="0" class="left_bt" /></a> 
-                            <a href="#" title="header=[Oferta] body=[&nbsp;] fade=[on]"><img src="imagenes/favs.gif" alt="" border="0" class="left_bt" /></a> 
-                            <!--<a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="images/favorites.gif" alt="" border="0" class="left_bt" /></a>-->
-                            <a href="mostrarProducto.xhtml" class="prod_details">detalle</a> </div>
-                    </div>
+                    </c:forEach>
+                    
+                    </h:form>
                 </div>
 
 

@@ -23,9 +23,11 @@ import utils.DAOException;
 public class ProyectoBean {
 
     public Controlador controller = new Controlador();
-    private ArrayList<ProductoDTO> productos = new ArrayList<ProductoDTO>();
+    private ArrayList<ProductoDTO> productos = null;
     //variables para seleecionar un producto
     private ProductoDTO productoSeleccionado;
+    private ArrayList<ProductoDTO> productosSimilares;
+
     private int idProducto;
     private String nombreProducto;
     private String descripcionProducto;
@@ -46,6 +48,11 @@ public class ProyectoBean {
     public ProyectoBean() {
     }
 
+    public void seleccionar(ProductoDTO producto){
+        productoSeleccionado = producto;
+        System.out.println("Seleccionado: " + productoSeleccionado.toString());
+    }
+    
     public void seleccionProducto() {
         productoSeleccionado = (ProductoDTO) tablaProductos.getRowData();
         this.idProducto = productoSeleccionado.getIdProducto();
@@ -54,16 +61,19 @@ public class ProyectoBean {
     }
 
     public ArrayList<ProductoDTO> getProductos() throws DAOException {
-        productos = controller.obtenerTodosProductos();
+        if(productos == null)
+            productos = controller.obtenerTodosProductos();
         return productos;
+    }
+    
+    public ArrayList<ProductoDTO> getProductosSimilares(int idCategoria) throws DAOException {
+        if(productosSimilares == null)
+            productosSimilares = controller.obtenerProductosSimilares(idCategoria);
+        return productosSimilares;
     }
 
     public void setProductos(ArrayList<ProductoDTO> productos) {
         this.productos = productos;
-    }
-
-    public void imprimirAlgo() {
-        System.out.println("hola");
     }
 
     public String getNombreUser() {
@@ -107,6 +117,13 @@ public class ProyectoBean {
     }
 
     
+    public ProductoDTO getProductoSeleccionado() {
+        return productoSeleccionado;
+    }
+
+    public void setProductoSeleccionado(ProductoDTO productoSeleccionado) {
+        this.productoSeleccionado = productoSeleccionado;
+    }
 
     
     public String validarUsuario() throws DAOException {
