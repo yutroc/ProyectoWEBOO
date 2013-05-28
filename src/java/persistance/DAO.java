@@ -167,30 +167,39 @@ public class DAO {
         }
         return listaProductos;
     }
-    public void crearProducto(ProductoDTO producto) throws DAOException, SQLException {
+    public void crearProducto(ProductoDTO producto) throws DAOException {
 
 
         DAOController dc = new DAOController();
         Connection con = dc.getConnection();
 
-       
+        try {
             // setup statement and retrieve results
 
-            PreparedStatement pstmt = con.prepareStatement(
-                    "INSERT INTO \"Producto\"(\"idProducto\",nombre,descripcion, stock,\"valorOferta\",\"ofertaActiva\",\"idCategoria\",precio)VALUES( ?,?,?,?,?,?,?,?)");
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO public.\"Producto\"(\"idProducto\",nombre,descripcion,image, stock,precio,\"valorOferta\",\"ofertaActiva\",\"idCategoria\")VALUES( ?,?,?,?,?,?,?,?,?)");
             pstmt.setInt(1, producto.getIdProducto());
             pstmt.setString(2, producto.getNombre());
             pstmt.setString(3, producto.getDescripcion());
-          //  pstmt.setByte(4, (byte)1);
-            pstmt.setInt(4, producto.getStock());      
-            pstmt.setInt(5, producto.getValorOferta());
-            pstmt.setBoolean(6, producto.isOfertaActiva());
-            pstmt.setInt(7, producto.getIdCategoria());
-             pstmt.setInt(8, producto.getPrecio());
+            pstmt.setString(4, producto.getImageUrl());
+            pstmt.setInt(5, producto.getStock());
+            pstmt.setInt(6, producto.getPrecio());
+            pstmt.setInt(7, producto.getValorOferta());
+            pstmt.setBoolean(8, producto.isOfertaActiva());
+            pstmt.setInt(9, producto.getIdCategoria());
             pstmt.executeUpdate();
 
 
 
-       
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
     }
 }
