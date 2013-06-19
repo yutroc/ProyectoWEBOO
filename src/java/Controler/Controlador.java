@@ -5,6 +5,7 @@
 package Controler;
 
 import DTO.CategoriaDTO;
+import DTO.CompraDTO;
 import java.util.ArrayList;
 import DTO.ProductoDTO;
 import DTO.UsuarioDTO;
@@ -29,31 +30,41 @@ public class Controlador {
             return this.ctrl;
         }
     }
-    public ArrayList<ProductoDTO> obtenerTodosProductos() throws DAOException{
-        return dao.obtenerTodosProductos();         
+
+    public ArrayList<ProductoDTO> obtenerTodosProductos() throws DAOException {
+        return dao.obtenerTodosProductos();
     }
-    public ArrayList<CategoriaDTO> obtenerTodosCategorias() throws DAOException{
-        return dao.obtenerTodosCategoria();         
+
+    public ArrayList<CategoriaDTO> obtenerTodosCategorias() throws DAOException {
+        return dao.obtenerTodosCategoria();
     }
-    public UsuarioDTO validarUser(String nombre,String pass) throws DAOException{
+
+    public UsuarioDTO validarUser(String nombre, String pass) throws DAOException {
         System.out.println("PASOcontrolador");
-        return dao.getCustomer(nombre, pass); 
+        return dao.getCustomer(nombre, pass);
     }
-    
+
     public ArrayList<ProductoDTO> obtenerProductosSimilares(int idCategoria) throws DAOException {
         return dao.obtenerProductosSimilares(idCategoria);
     }
-    
-    public void crearProducto(ProductoDTO p) throws DAOException, SQLException{
-       dao.crearProducto(p);
+
+    public void crearProducto(ProductoDTO p) throws DAOException, SQLException {
+        dao.crearProducto(p);
     }
-     public void crearCategoria(CategoriaDTO p) throws DAOException, SQLException{
-       dao.crearCategoria(p);
+
+    public void crearCategoria(CategoriaDTO p) throws DAOException, SQLException {
+        dao.crearCategoria(p);
     }
-      public void actualizarCategoria(CategoriaDTO p) throws DAOException, SQLException{
-       dao.actualizarCategoria(p);
+
+    public void actualizarCategoria(CategoriaDTO p) throws DAOException, SQLException {
+        dao.actualizarCategoria(p);
     }
-      public void eliminarCategoria(CategoriaDTO p) throws DAOException, SQLException{
-       dao.eliminarCategoria(p);
+
+    public void eliminarCategoria(CategoriaDTO p) throws DAOException, SQLException {
+        dao.eliminarCategoria(p);
+    }
+
+    public ArrayList<CompraDTO> obtenerTodasCompras() throws DAOException {
+        return dao.obtenerCompras();
     }
 }

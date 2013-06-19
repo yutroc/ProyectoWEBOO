@@ -4,6 +4,7 @@
 package persistance;
 
 import DTO.CategoriaDTO;
+import DTO.CompraDTO;
 import DTO.ProductoDTO;
 import DTO.UsuarioDTO;
 import java.sql.Connection;
@@ -11,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import utils.DAOException;
 
 public class DAO {
@@ -265,5 +267,49 @@ public class DAO {
 
         pstmt.executeUpdate();
         con.close();
+    }
+    
+    
+    public ArrayList<CompraDTO> obtenerCompras() throws DAOException {
+        // iniciar variables
+
+        int idCarro = 0; // este deberia ser serial, automatico
+        //para crear no deberia ingresarse un idCarro
+        String idUsuario = "";
+        int estado = 0;
+        Date fechaCreacion = new Date();
+        Date fechaFinalizacion = new Date();
+
+
+        ArrayList<CompraDTO> listaCompras = new ArrayList<CompraDTO>();
+        // odbc conection
+        DAOController dc = new DAOController();
+        Connection con = dc.getConnection();
+        //statment
+        try {
+            // setup statement and retrieve results
+            PreparedStatement pstmt = con.prepareStatement("SELECT \"idCarro\", \"idUsuario\", \"estado\", \"fechaCreacion\", \"fechaFinalizacion\" FROM \"Compra\" ORDER BY \"idCarro\";");
+            ResultSet rs = pstmt.executeQuery();
+            //create the transfer object using data from rs
+            while (rs.next()) {
+                idCarro = rs.getInt("idCarro");
+                idUsuario = rs.getString("idUsuario");
+                estado = rs.getInt("estado");
+                fechaCreacion = rs.getDate("fechaCreacion");
+                fechaFinalizacion = rs.getDate("fechaFinalizacion");
+                CompraDTO compra = new CompraDTO(idCarro,idUsuario, estado, fechaCreacion, fechaFinalizacion);
+                listaCompras.add(compra);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
+        return listaCompras;
     }
 }

@@ -16,12 +16,22 @@ public class CompraDTO {
     private int estado;
     private Date fechaCreacion;
     private Date fechaFinalizacion;
+    private String idUsuario;
 
-    public CompraDTO(int idCarro, int estado, Date fechaCreacion, Date fechaFinalizacion) {
+    public CompraDTO(int idCarro, String idUsuario, int estado, Date fechaCreacion, Date fechaFinalizacion) {
         this.idCarro = idCarro;
+        this.idUsuario = idUsuario;
         this.estado = estado;
         this.fechaCreacion = fechaCreacion;
         this.fechaFinalizacion = fechaFinalizacion;
+    }
+
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public int getIdCarro() {
@@ -58,6 +68,8 @@ public class CompraDTO {
 
     @Override
     public String toString() {
-        return "CompraDTO{" + "idCarro=" + idCarro + ", estado=" + estado + ", fechaCreacion=" + fechaCreacion + ", fechaFinalizacion=" + fechaFinalizacion + '}';
+        return "CompraDTO{" + "idCarro=" + idCarro + ", estado=" + estado + ", fechaCreacion=" + fechaCreacion + ", fechaFinalizacion=" + fechaFinalizacion + ", idUsuario=" + idUsuario + '}';
     }
+
+    
 }
