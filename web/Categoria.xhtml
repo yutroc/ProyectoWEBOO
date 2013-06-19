@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+
+    </h:head>
+    <h:body>
+
+        <h:form id ="tabla">
+           <h:commandButton value="Crear nueva categoria" action="AgregarCategoria"/>
+            <h:dataTable id="table1" value="#{proyectoBean.categorias}" var="item"  border="1"  binding="#{proyectoBean.tablaCategorias}">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ID"/>
+                    </f:facet>
+                    #{item.idCategoria}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="NOMBRE"/>
+                    </f:facet>
+                    #{item.nombre}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="IMAGEN"/>
+                    </f:facet>
+                    #{item.imagen}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Editar"/>
+                    </f:facet>
+                    <h:commandLink  value ="Editar" action="#{proyectoBean.seleccionCategoria()}"></h:commandLink>
+
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Eliminar"/>
+                    </f:facet>
+                    <h:commandLink  value ="Eliminar" action="#{proyectoBean.eliminarCategoria()}"></h:commandLink>
+
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </h:body>
+</html>
+

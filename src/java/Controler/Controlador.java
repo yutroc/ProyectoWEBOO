@@ -4,6 +4,7 @@
  */
 package Controler;
 
+import DTO.CategoriaDTO;
 import java.util.ArrayList;
 import DTO.ProductoDTO;
 import DTO.UsuarioDTO;
@@ -31,6 +32,9 @@ public class Controlador {
     public ArrayList<ProductoDTO> obtenerTodosProductos() throws DAOException{
         return dao.obtenerTodosProductos();         
     }
+    public ArrayList<CategoriaDTO> obtenerTodosCategorias() throws DAOException{
+        return dao.obtenerTodosCategoria();         
+    }
     public UsuarioDTO validarUser(String nombre,String pass) throws DAOException{
         System.out.println("PASOcontrolador");
         return dao.getCustomer(nombre, pass); 
@@ -42,5 +46,14 @@ public class Controlador {
     
     public void crearProducto(ProductoDTO p) throws DAOException, SQLException{
        dao.crearProducto(p);
+    }
+     public void crearCategoria(CategoriaDTO p) throws DAOException, SQLException{
+       dao.crearCategoria(p);
+    }
+      public void actualizarCategoria(CategoriaDTO p) throws DAOException, SQLException{
+       dao.actualizarCategoria(p);
+    }
+      public void eliminarCategoria(CategoriaDTO p) throws DAOException, SQLException{
+       dao.eliminarCategoria(p);
     }
 }
