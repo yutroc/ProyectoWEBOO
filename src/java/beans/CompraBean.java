@@ -7,6 +7,7 @@ package beans;
 import Controler.Controlador;
 import DTO.CompraDTO;
 import DTO.ProductoDTO;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
@@ -117,5 +118,17 @@ public class CompraBean {
 
     public void setFechaFinalizacion(Date fechaFinalizacion) {
         this.fechaFinalizacion = fechaFinalizacion;
+    }
+    
+     public void eliminarCompra() throws DAOException, SQLException {
+        compraSeleccionada = (CompraDTO) tablaCompras.getRowData();
+        this.idCarro = compraSeleccionada.getIdCarro();
+        this.idUsuario = compraSeleccionada.getIdUsuario();
+        this.estado = compraSeleccionada.getEstado();
+        this.fechaCreacion = compraSeleccionada.getFechaCreacion();
+        this.fechaFinalizacion = compraSeleccionada.getFechaFinalizacion();
+        CompraDTO c = new CompraDTO(idCarro, idUsuario, estado, fechaCreacion, fechaFinalizacion);
+        controller.eliminarCompra(c);
+        //return "Categoria";
     }
 }

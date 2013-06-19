@@ -233,40 +233,41 @@ public class DAO {
         DAOController dc = new DAOController();
         Connection con = dc.getConnection();
         PreparedStatement pstmt = con.prepareStatement("INSERT INTO \"Categoria\"(nombre)VALUES(?)");
-      
+
         pstmt.setString(1, categoria.getNombre());
 
         pstmt.executeUpdate();
         con.close();
     }
+
     public void actualizarCategoria(CategoriaDTO categoria) throws DAOException, SQLException {
         DAOController dc = new DAOController();
         Connection con = dc.getConnection();
         PreparedStatement pstmt = con.prepareStatement("UPDATE \"Categoria\" SET  nombre= ? WHERE \"idCategoria\"=?");
-         pstmt.setString(1, categoria.getNombre());
+        pstmt.setString(1, categoria.getNombre());
         pstmt.setInt(2, categoria.getIdCategoria());
-       
+
 
 
 
         pstmt.executeUpdate();
         con.close();
     }
+
     public void eliminarCategoria(CategoriaDTO categoria) throws DAOException, SQLException {
         DAOController dc = new DAOController();
         Connection con = dc.getConnection();
         PreparedStatement pstmt = con.prepareStatement("DELETE FROM \"Categoria\" WHERE \"idCategoria\"=?");
-         
+
         pstmt.setInt(1, categoria.getIdCategoria());
-       
+
 
 
 
         pstmt.executeUpdate();
         con.close();
     }
-    
-    
+
     public ArrayList<CompraDTO> obtenerCompras() throws DAOException {
         // iniciar variables
 
@@ -294,7 +295,7 @@ public class DAO {
                 estado = rs.getInt("estado");
                 fechaCreacion = rs.getDate("fechaCreacion");
                 fechaFinalizacion = rs.getDate("fechaFinalizacion");
-                CompraDTO compra = new CompraDTO(idCarro,idUsuario, estado, fechaCreacion, fechaFinalizacion);
+                CompraDTO compra = new CompraDTO(idCarro, idUsuario, estado, fechaCreacion, fechaFinalizacion);
                 listaCompras.add(compra);
             }
         } catch (Exception e) {
@@ -321,8 +322,27 @@ public class DAO {
         pstmt.setBoolean(5, p.isOfertaActiva());
         pstmt.setInt(6, p.getIdCategoria());
         pstmt.setInt(7, p.getPrecio());
-        pstmt.setInt(8, p.getIdProducto());        
+        pstmt.setInt(8, p.getIdProducto());
         pstmt.executeUpdate();
         con.close();
+    }
+
+    public void eliminarCompra(CompraDTO compra) throws SQLException, DAOException {
+        DAOController dc = new DAOController();
+        Connection con = dc.getConnection();
+        try {
+            PreparedStatement pstmt = con.prepareStatement("DELETE FROM  public.\"Compra\" WHERE  public.\"Compra\".\"idCarro\" = ?");
+            pstmt.setInt(1, compra.getIdCarro());
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
     }
 }
