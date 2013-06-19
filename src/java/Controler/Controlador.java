@@ -67,4 +67,8 @@ public class Controlador {
     public ArrayList<CompraDTO> obtenerTodasCompras() throws DAOException {
         return dao.obtenerCompras();
     }
+
+    public void editarProducto(ProductoDTO p) throws DAOException, SQLException {
+        dao.editarProducto(p);
+    }
 }

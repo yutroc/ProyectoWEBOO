@@ -11,10 +11,16 @@ import DTO.ProductoDTO;
 import Controler.Controlador;
 import DTO.CategoriaDTO;
 import DTO.UsuarioDTO;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import javax.annotation.PostConstruct;
 import javax.faces.component.html.HtmlDataTable;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 import utils.DAOException;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -59,7 +65,17 @@ public class ProyectoBean {
     private CategoriaDTO categoriaSeleccionada;
     private int idCategoriaSelecionada;
     private String nombreCategoriaSeleccionada;
-    private Byte imagenCategoriaSeleccionada;
+    private Byte imagenCategoriaSeleccionada;    
+    private boolean crearVisible = false;
+    private boolean editarVisible = false;
+
+    public boolean isCrearVisible() {
+        return crearVisible;
+    }
+
+    public void setCrearVisible(boolean crearVisible) {
+        this.crearVisible = crearVisible;
+    }
 
     @PostConstruct
     public void init() {
@@ -70,6 +86,8 @@ public class ProyectoBean {
     }
 
     public ProyectoBean() {
+        crearVisible = false;
+        editarVisible = false;
     }
 
     public void seleccionar(ProductoDTO producto) {
@@ -77,13 +95,21 @@ public class ProyectoBean {
         System.out.println("Seleccionado: " + productoSeleccionado.toString());
     }
 
-    public void seleccionProducto() {
+    public void seleccionProducto() {        
         productoSeleccionado = (ProductoDTO) tablaProductos.getRowData();
-        this.idProducto = productoSeleccionado.getIdProducto();
-        this.nombreProducto = productoSeleccionado.getNombre();
-        this.descripcionProducto = productoSeleccionado.getDescripcion();
+//        this.editarVisible = true;
+        
+        
+//        this.idProducto = productoSeleccionado.getIdProducto();
+//        this.nombreProducto = productoSeleccionado.getNombre();
+//        this.descripcionProducto = productoSeleccionado.getDescripcion();
     }
 
+    public ArrayList<ProductoDTO> getProductosF() throws DAOException {
+        productos = controller.obtenerTodosProductos();
+        return productos;
+    }
+    
     public ArrayList<ProductoDTO> getProductos() throws DAOException {
         if (productos == null) {
             productos = controller.obtenerTodosProductos();
@@ -149,6 +175,15 @@ public class ProyectoBean {
 
     public void setTablaProductos(HtmlDataTable tablaProductos) {
         this.tablaProductos = tablaProductos;
+    }
+    
+
+    public boolean isEditarVisible() {
+        return editarVisible;
+    }
+
+    public void setEditarVisible(boolean editarVisible) {
+        this.editarVisible = editarVisible;
     }
 
     public String getNombreProducto() {
@@ -307,9 +342,13 @@ public class ProyectoBean {
     }
 
     public void crearProducto() throws DAOException, SQLException {
-        ProductoDTO p = new ProductoDTO(idPN, nombrePN, descripcionNP, "sin imagen", stockPN, precioPN, ofertaPN, ofertaActivaPN, 0);
+        ProductoDTO p = new ProductoDTO(0, nombrePN, descripcionNP, "sin imagen", stockPN, precioPN, ofertaPN, ofertaActivaPN, idCategoriaSelecionada);
         controller.crearProducto(p);
-
+    }
+    
+    public void editarProducto() throws DAOException, SQLException {
+        //ProductoDTO p = new ProductoDTO(0, nombrePN, descripcionNP, "sin imagen", stockPN, precioPN, ofertaPN, ofertaActivaPN, idCategoriaSelecionada);
+        controller.editarProducto(this.productoSeleccionado);
     }
 
     public String crearCategoria() throws DAOException, SQLException {
@@ -339,4 +378,30 @@ public class ProyectoBean {
         //return "Categoria";
 
     }
+    
+    public void handleFileUpload(FileUploadEvent event) {  
+
+    //get uploaded file from the event
+    UploadedFile uploadedFile = (UploadedFile)event.getFile();
+
+    //create an InputStream from the uploaded file
+    InputStream inputStr = null;
+    try {
+        inputStr = uploadedFile.getInputstream();
+    } catch (IOException e) {
+        //log error
+    }
+
+    //create destination File
+    
+    String destPath = "C:/";
+    File destFile = new File(destPath);
+
+    //use org.apache.commons.io.FileUtils to copy the File
+    try {                    
+        FileUtils.copyInputStreamToFile(inputStr, destFile);
+    } catch (IOException e) {
+        //log error
+    }
+}
 }

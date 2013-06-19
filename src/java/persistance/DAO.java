@@ -216,17 +216,14 @@ public class DAO {
     public void crearProducto(ProductoDTO producto) throws DAOException, SQLException {
         DAOController dc = new DAOController();
         Connection con = dc.getConnection();
-        PreparedStatement pstmt = con.prepareStatement("INSERT INTO \"Producto\"(\"idProducto\",nombre,descripcion, stock,\"valorOferta\",\"ofertaActiva\",\"idCategoria\",precio)VALUES(?,?,?,?,?,?,?,?)");
-        pstmt.setInt(1, producto.getIdProducto());
-        pstmt.setString(2, producto.getNombre());
-        pstmt.setString(3, producto.getDescripcion());
-
-        pstmt.setInt(4, producto.getStock());
-
-        pstmt.setInt(5, producto.getValorOferta());
-        pstmt.setBoolean(6, producto.isOfertaActiva());
-        pstmt.setInt(7, producto.getIdCategoria());
-        pstmt.setInt(8, producto.getPrecio());
+        PreparedStatement pstmt = con.prepareStatement("INSERT INTO \"Producto\"(nombre,descripcion, stock,\"valorOferta\",\"ofertaActiva\",\"idCategoria\",precio)VALUES(?,?,?,?,?,?,?)");
+        pstmt.setString(1, producto.getNombre());
+        pstmt.setString(2, producto.getDescripcion());
+        pstmt.setInt(3, producto.getStock());
+        pstmt.setInt(4, producto.getValorOferta());
+        pstmt.setBoolean(5, producto.isOfertaActiva());
+        pstmt.setInt(6, producto.getIdCategoria());
+        pstmt.setInt(7, producto.getPrecio());
         pstmt.executeUpdate();
         con.close();
 
@@ -311,5 +308,21 @@ public class DAO {
             }
         }
         return listaCompras;
+    }
+
+    public void editarProducto(ProductoDTO p) throws DAOException, SQLException {
+        DAOController dc = new DAOController();
+        Connection con = dc.getConnection();
+        PreparedStatement pstmt = con.prepareStatement("UPDATE \"Producto\" SET nombre=? ,descripcion =?, stock =?,\"valorOferta\" =?,\"ofertaActiva\" =?,\"idCategoria\"=?,precio=? WHERE \"idProducto\" =?");
+        pstmt.setString(1, p.getNombre());
+        pstmt.setString(2, p.getDescripcion());
+        pstmt.setInt(3, p.getStock());
+        pstmt.setInt(4, p.getValorOferta());
+        pstmt.setBoolean(5, p.isOfertaActiva());
+        pstmt.setInt(6, p.getIdCategoria());
+        pstmt.setInt(7, p.getPrecio());
+        pstmt.setInt(8, p.getIdProducto());        
+        pstmt.executeUpdate();
+        con.close();
     }
 }
