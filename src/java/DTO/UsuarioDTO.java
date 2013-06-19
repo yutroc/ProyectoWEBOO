@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class UsuarioDTO {
 
-    private String idUsuario;
+    private int idUsuario;
     private String nombre;
     private String aPaterno;
     private String aMaterno;
@@ -24,8 +24,9 @@ public class UsuarioDTO {
     private Date fechaRegistro;
     private String contraseña;
     private String telefono;
+    private int idTipo;
 
-    public UsuarioDTO(String idUsuario, String nombre, String aPaterno, String aMaterno, String rut, String direccion, String comuna, String ciudad, String email, Date fechaRegistro, String contraseña, String telefono) {
+    public UsuarioDTO(int idUsuario, String nombre, String aPaterno, String aMaterno, String rut, String direccion, String comuna, String ciudad, String email, Date fechaRegistro, String contraseña, String telefono) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.aPaterno = aPaterno;
@@ -39,12 +40,27 @@ public class UsuarioDTO {
         this.contraseña = contraseña;
         this.telefono = telefono;
     }
+    public UsuarioDTO(int idUsuario, String nombre, String aPaterno, String aMaterno, String rut, String direccion, String comuna, String ciudad, String email, Date fechaRegistro, String contraseña, String telefono, int idTipo) {
+        this.idUsuario = idUsuario;
+        this.nombre = nombre;
+        this.aPaterno = aPaterno;
+        this.aMaterno = aMaterno;
+        this.rut = rut;
+        this.direccion = direccion;
+        this.comuna = comuna;
+        this.ciudad = ciudad;
+        this.email = email;
+        this.fechaRegistro = fechaRegistro;
+        this.contraseña = contraseña;
+        this.telefono = telefono;
+        this.idTipo = idTipo;
+    }
 
-    public String getIdUsuario() {
+    public int getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(String idUsuario) {
+    public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -56,7 +72,7 @@ public class UsuarioDTO {
         this.nombre = nombre;
     }
 
-    public String getaPaterno() {
+    public String getAPaterno() {
         return aPaterno;
     }
 
@@ -64,7 +80,7 @@ public class UsuarioDTO {
         this.aPaterno = aPaterno;
     }
 
-    public String getaMaterno() {
+    public String getAMaterno() {
         return aMaterno;
     }
 
@@ -135,6 +151,13 @@ public class UsuarioDTO {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+    public int getIdTipo() {
+        return idTipo;
+    }
+
+    public void setIdTipo(int idTipo) {
+        this.idTipo = idTipo;
+    }
 
     @Override
     public String toString() {
@@ -143,6 +166,6 @@ public class UsuarioDTO {
                 + rut + ", direccion=" + direccion + ", comuna=" + comuna
                 + ", ciudad=" + ciudad + ", email=" + email + ", fechaRegistro="
                 + fechaRegistro + ", contrase\u00f1a=" + contraseña
-                + ", telefono=" + telefono + '}';
+                + ", telefono=" + telefono + ",tipo=" + idTipo +'}';
     }
 }

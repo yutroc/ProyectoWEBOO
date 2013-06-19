@@ -17,10 +17,10 @@ import java.io.InputStream;
 import java.sql.SQLException;
 import javax.annotation.PostConstruct;
 import javax.faces.component.html.HtmlDataTable;
-import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
+//import org.primefaces.event.FileUploadEvent;
+//import org.primefaces.model.UploadedFile;
 import utils.DAOException;
-import org.apache.commons.io.FileUtils;
+//import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -378,31 +378,31 @@ public class ProyectoBean {
 
     }
 
-    public void handleFileUpload(FileUploadEvent event) {
-
-        //get uploaded file from the event
-        UploadedFile uploadedFile = (UploadedFile) event.getFile();
-
-        //create an InputStream from the uploaded file
-        InputStream inputStr = null;
-        try {
-            inputStr = uploadedFile.getInputstream();
-        } catch (IOException e) {
-            //log error
-        }
-
-        //create destination File
-
-        String destPath = "C:/";
-        File destFile = new File(destPath);
-
-        //use org.apache.commons.io.FileUtils to copy the File
-        try {
-            FileUtils.copyInputStreamToFile(inputStr, destFile);
-        } catch (IOException e) {
-            //log error
-        }
-    }
+//    public void handleFileUpload(FileUploadEvent event) {
+//
+//        //get uploaded file from the event
+//        UploadedFile uploadedFile = (UploadedFile) event.getFile();
+//
+//        //create an InputStream from the uploaded file
+//        InputStream inputStr = null;
+//        try {
+//            inputStr = uploadedFile.getInputstream();
+//        } catch (IOException e) {
+//            //log error
+//        }
+//
+//        //create destination File
+//
+//        String destPath = "C:/";
+//        File destFile = new File(destPath);
+//
+//        //use org.apache.commons.io.FileUtils to copy the File
+//        try {
+//            FileUtils.copyInputStreamToFile(inputStr, destFile);
+//        } catch (IOException e) {
+//            //log error
+//        }
+//    }
     
     
     

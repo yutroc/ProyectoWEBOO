@@ -4,11 +4,9 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>Registrar Nuevo Usuario</title>
+        <title>Editar Usuario</title>
     </h:head>
     <h:body>
-        <h2>Registrar nuevo Usuario</h2>
-        <label id="labelpresentacion" value="Por favor ingrese todos los daots"/>
         <h:form>
             <table border="4">
                 <tr>
@@ -50,6 +48,7 @@
                 <tr>
                     <td>Contraseña</td>
                     <td><h:inputText id="inputPass" value="#{userBean.passUsuario}"></h:inputText></td>
+                    <h:inputHidden id="hiddenID" value="#{userBean.idUsuario}"/>
                 </tr>
                 <tr>
                     <td>Tipo de Usuario</td>
@@ -61,7 +60,9 @@
                     </td>
                 </tr>
             </table>
-            <h:commandButton value="Enviar" action="#{userBean.crearUsuario}"></h:commandButton>
+            <h:commandButton value="Cancelar" action="mostrarUsuario.xhtml" immediate="true"/>
+            <h:commandButton value="Actualizar" action="#{userBean.actualizarUsuario}"/>
+             
         </h:form>
     </h:body>
 </html>

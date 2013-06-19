@@ -75,4 +75,20 @@ public class Controlador {
     public void eliminarCompra(CompraDTO c) throws SQLException, DAOException {
         dao.eliminarCompra(c);
     }
+     public String crearUsuario(UsuarioDTO user)throws DAOException, SQLException{
+        System.out.println("PASOOOOOOOOOOOO");
+        System.out.println("hola "+ user.toString());
+        return dao.crearUsuario(user);
+    }
+    public ArrayList<UsuarioDTO> obtenerUsuarios() throws DAOException, SQLException{
+        return dao.obtenerUsuarios();
+    }
+    public String actualizarUsuario(UsuarioDTO user) throws DAOException, SQLException{
+        return dao.actualizarUsuario(user);
+    }
+    public void eliminarUsuario(UsuarioDTO user) throws DAOException, SQLException{
+        dao.eliminarUsuario(user);
+    }
+
+
 }
