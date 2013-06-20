@@ -4,11 +4,11 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>ofertas</title>
+        Ofertas
     </h:head>
     <h:body>
         <h:form id ="tabla">
-           
+             <h:commandButton value="Atras" action="carro"/>
             <h:dataTable id="table1" value="#{ofertaBean.productos}" var="item"  border="1"  binding="#{ofertaBean.tablaProductos}">
                   <h:column>
                     <f:facet name="header">

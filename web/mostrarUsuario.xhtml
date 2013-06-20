@@ -4,10 +4,11 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>Mantenedor Usuarios</title>
+        Mantenedor Usuarios
     </h:head>
     <h:body>
         <h:form>
+             <h:commandButton value="Atras" action="carro"></h:commandButton>
             <h:commandButton value="Crear Nuevo Usuario" action="registrar.xhtml"></h:commandButton>
             <h:dataTable id="tableUsers" value="#{userBean.user}" var="user"  border="4"  binding="#{userBean.tablaUsuarios}">
                 <h:column>
