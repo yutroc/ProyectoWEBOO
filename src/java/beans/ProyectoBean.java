@@ -92,7 +92,7 @@ public class ProyectoBean {
 
     public void seleccionar(ProductoDTO producto) {
         productoSeleccionado = producto;
-        System.out.println("Seleccionado: " + productoSeleccionado.toString());
+        //System.out.println("Seleccionado: " + productoSeleccionado.toString());
     }
 
     public void seleccionProducto() {
@@ -141,7 +141,7 @@ public class ProyectoBean {
         this.idCategoriaSelecionada = categoriaSeleccionada.getIdCategoria();
         this.nombreCategoriaSeleccionada = categoriaSeleccionada.getNombre();
         this.imagenCategoriaSeleccionada = categoriaSeleccionada.getImagen();
-        System.out.print("jojojooojojooj" + idCategoriaSelecionada + nombreCategoriaSeleccionada + imagenCategoriaSeleccionada);
+        //System.out.print("jojojooojojooj" + idCategoriaSelecionada + nombreCategoriaSeleccionada + imagenCategoriaSeleccionada);
         return "EditarCategoria";
     }
 
@@ -359,7 +359,7 @@ public class ProyectoBean {
 
     public String actualizarCategoria() throws DAOException, SQLException {
         CategoriaDTO p = new CategoriaDTO(idCategoriaSelecionada, nombreCategoriaSeleccionada, imagen);
-        System.out.println(idCategoriaSelecionada + "pppppp" + nombreCategoriaSeleccionada);
+        //System.out.println(idCategoriaSelecionada + "pppppp" + nombreCategoriaSeleccionada);
         controller.actualizarCategoria(p);
         return "Categoria";
 
@@ -370,9 +370,9 @@ public class ProyectoBean {
         this.idCategoriaSelecionada = categoriaSeleccionada.getIdCategoria();
         this.nombreCategoriaSeleccionada = categoriaSeleccionada.getNombre();
         this.imagenCategoriaSeleccionada = categoriaSeleccionada.getImagen();
-        System.out.print("jojojooojojooj" + idCategoriaSelecionada + nombreCategoriaSeleccionada + imagenCategoriaSeleccionada);
+        //System.out.print("jojojooojojooj" + idCategoriaSelecionada + nombreCategoriaSeleccionada + imagenCategoriaSeleccionada);
         CategoriaDTO p = new CategoriaDTO(idCategoriaSelecionada, nombreCategoriaSeleccionada, imagen);
-        System.out.println(idCategoriaSelecionada + "pppppp" + nombreCategoriaSeleccionada);
+        //System.out.println(idCategoriaSelecionada + "pppppp" + nombreCategoriaSeleccionada);
         controller.eliminarCategoria(p);
         //return "Categoria";
 

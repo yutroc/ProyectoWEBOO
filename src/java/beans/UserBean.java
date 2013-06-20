@@ -131,7 +131,7 @@ public class UserBean {
     public void setIdTipoUsuario(int idTipoUsuario) {
         this.idTipoUsuario = idTipoUsuario;
     }
-    public String crearUsuario()throws DAOException, SQLException, Exception{
+    public String crearUsuario() throws DAOException, SQLException{
         Calendar cal = Calendar.getInstance();
         System.out.println(cal.get(Calendar.YEAR));
        // String fecha = cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DATE);

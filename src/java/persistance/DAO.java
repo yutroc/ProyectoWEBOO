@@ -216,15 +216,26 @@ public class DAO {
     public void crearProducto(ProductoDTO producto) throws DAOException, SQLException {
         DAOController dc = new DAOController();
         Connection con = dc.getConnection();
-        PreparedStatement pstmt = con.prepareStatement("INSERT INTO \"Producto\"(nombre,descripcion, stock,\"valorOferta\",\"ofertaActiva\",\"idCategoria\",precio)VALUES(?,?,?,?,?,?,?)");
-        pstmt.setString(1, producto.getNombre());
-        pstmt.setString(2, producto.getDescripcion());
-        pstmt.setInt(3, producto.getStock());
-        pstmt.setInt(4, producto.getValorOferta());
-        pstmt.setBoolean(5, producto.isOfertaActiva());
-        pstmt.setInt(6, producto.getIdCategoria());
-        pstmt.setInt(7, producto.getPrecio());
-        pstmt.executeUpdate();
+        try {
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO \"Producto\"(nombre,descripcion, stock,\"valorOferta\",\"ofertaActiva\",\"idCategoria\",precio)VALUES(?,?,?,?,?,?,?)");
+            pstmt.setString(1, producto.getNombre());
+            pstmt.setString(2, producto.getDescripcion());
+            pstmt.setInt(3, producto.getStock());
+            pstmt.setInt(4, producto.getValorOferta());
+            pstmt.setBoolean(5, producto.isOfertaActiva());
+            pstmt.setInt(6, producto.getIdCategoria());
+            pstmt.setInt(7, producto.getPrecio());
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
         con.close();
 
     }
@@ -232,39 +243,61 @@ public class DAO {
     public void crearCategoria(CategoriaDTO categoria) throws DAOException, SQLException {
         DAOController dc = new DAOController();
         Connection con = dc.getConnection();
-        PreparedStatement pstmt = con.prepareStatement("INSERT INTO \"Categoria\"(nombre)VALUES(?)");
-
-        pstmt.setString(1, categoria.getNombre());
-
-        pstmt.executeUpdate();
+        try {
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO \"Categoria\"(nombre)VALUES(?)");
+            pstmt.setString(1, categoria.getNombre());
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
         con.close();
     }
 
     public void actualizarCategoria(CategoriaDTO categoria) throws DAOException, SQLException {
         DAOController dc = new DAOController();
         Connection con = dc.getConnection();
-        PreparedStatement pstmt = con.prepareStatement("UPDATE \"Categoria\" SET  nombre= ? WHERE \"idCategoria\"=?");
-        pstmt.setString(1, categoria.getNombre());
-        pstmt.setInt(2, categoria.getIdCategoria());
-
-
-
-
-        pstmt.executeUpdate();
+        try {
+            PreparedStatement pstmt = con.prepareStatement("UPDATE \"Categoria\" SET  nombre= ? WHERE \"idCategoria\"=?");
+            pstmt.setString(1, categoria.getNombre());
+            pstmt.setInt(2, categoria.getIdCategoria());
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
         con.close();
     }
 
     public void eliminarCategoria(CategoriaDTO categoria) throws DAOException, SQLException {
         DAOController dc = new DAOController();
         Connection con = dc.getConnection();
-        PreparedStatement pstmt = con.prepareStatement("DELETE FROM \"Categoria\" WHERE \"idCategoria\"=?");
-
-        pstmt.setInt(1, categoria.getIdCategoria());
-
-
-
-
-        pstmt.executeUpdate();
+        try {
+            PreparedStatement pstmt = con.prepareStatement("DELETE FROM \"Categoria\" WHERE \"idCategoria\"=?");
+            pstmt.setInt(1, categoria.getIdCategoria());
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
         con.close();
     }
 
@@ -314,16 +347,28 @@ public class DAO {
     public void editarProducto(ProductoDTO p) throws DAOException, SQLException {
         DAOController dc = new DAOController();
         Connection con = dc.getConnection();
-        PreparedStatement pstmt = con.prepareStatement("UPDATE \"Producto\" SET nombre=? ,descripcion =?, stock =?,\"valorOferta\" =?,\"ofertaActiva\" =?,\"idCategoria\"=?,precio=? WHERE \"idProducto\" =?");
-        pstmt.setString(1, p.getNombre());
-        pstmt.setString(2, p.getDescripcion());
-        pstmt.setInt(3, p.getStock());
-        pstmt.setInt(4, p.getValorOferta());
-        pstmt.setBoolean(5, p.isOfertaActiva());
-        pstmt.setInt(6, p.getIdCategoria());
-        pstmt.setInt(7, p.getPrecio());
-        pstmt.setInt(8, p.getIdProducto());
-        pstmt.executeUpdate();
+
+        try {
+            PreparedStatement pstmt = con.prepareStatement("UPDATE \"Producto\" SET nombre=? ,descripcion =?, stock =?,\"valorOferta\" =?,\"ofertaActiva\" =?,\"idCategoria\"=?,precio=? WHERE \"idProducto\" =?");
+            pstmt.setString(1, p.getNombre());
+            pstmt.setString(2, p.getDescripcion());
+            pstmt.setInt(3, p.getStock());
+            pstmt.setInt(4, p.getValorOferta());
+            pstmt.setBoolean(5, p.isOfertaActiva());
+            pstmt.setInt(6, p.getIdCategoria());
+            pstmt.setInt(7, p.getPrecio());
+            pstmt.setInt(8, p.getIdProducto());
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
         con.close();
     }
 
@@ -349,31 +394,42 @@ public class DAO {
     public String crearUsuario(UsuarioDTO user) throws DAOException, SQLException {
         DAOController dc = new DAOController();
         Connection con = dc.getConnection();
-        Date fecha = new Date();
-        //java.sql.Date sqlDate = new java.sql.Date(fecha.getTime());
-        System.out.println("hola 2 " + user.toString());
-        PreparedStatement pstmt = con.prepareStatement("INSERT INTO \"Usuario\"(\n"
-                + "            nombre, \"aPaterno\", \"aMaterno\", rut, direccion, comuna, ciudad, \n"
-                + "            email, \"fechaRegistro\", \"contraseña\", telefono, \"idTipoUsuario\", \n"
-                + "            \"idUsuario\")\n"
-                + "    VALUES (?, ?, ?, ?, ?, ?, ?, \n"
-                + "            ?, ?, ?, ?, ?, \n"
-                + "            nextval('\"Usuario_idUsuario_seq\"'::regclass));");
+        try {
+            Date fecha = new Date();
+            //java.sql.Date sqlDate = new java.sql.Date(fecha.getTime());
+            System.out.println("hola 2 " + user.toString());
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO \"Usuario\"(\n"
+                    + "            nombre, \"aPaterno\", \"aMaterno\", rut, direccion, comuna, ciudad, \n"
+                    + "            email, \"fechaRegistro\", \"contraseña\", telefono, \"idTipoUsuario\", \n"
+                    + "            \"idUsuario\")\n"
+                    + "    VALUES (?, ?, ?, ?, ?, ?, ?, \n"
+                    + "            ?, ?, ?, ?, ?, \n"
+                    + "            nextval('\"Usuario_idUsuario_seq\"'::regclass));");
 
-        pstmt.setString(1, user.getNombre());
-        pstmt.setString(2, user.getAPaterno());
-        pstmt.setString(3, user.getAMaterno());
-        pstmt.setString(4, user.getRut());
-        pstmt.setString(5, user.getDireccion());
-        pstmt.setString(6, user.getComuna());
-        pstmt.setString(7, user.getCiudad());
-        pstmt.setString(8, user.getEmail());
-        java.sql.Date fechaD = new java.sql.Date(user.getFechaRegistro().getTime());
-        pstmt.setDate(9, fechaD);
-        pstmt.setString(10, user.getContraseña());
-        pstmt.setString(11, user.getTelefono());
-        pstmt.setInt(12, user.getIdTipo());
-        pstmt.executeUpdate();
+            pstmt.setString(1, user.getNombre());
+            pstmt.setString(2, user.getAPaterno());
+            pstmt.setString(3, user.getAMaterno());
+            pstmt.setString(4, user.getRut());
+            pstmt.setString(5, user.getDireccion());
+            pstmt.setString(6, user.getComuna());
+            pstmt.setString(7, user.getCiudad());
+            pstmt.setString(8, user.getEmail());
+            java.sql.Date fechaD = new java.sql.Date(user.getFechaRegistro().getTime());
+            pstmt.setDate(9, fechaD);
+            pstmt.setString(10, user.getContraseña());
+            pstmt.setString(11, user.getTelefono());
+            pstmt.setInt(12, user.getIdTipo());
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
         con.close();
         return "mostrarUsuario.xhtml";
     }
@@ -440,43 +496,80 @@ public class DAO {
     public String actualizarUsuario(UsuarioDTO user) throws DAOException, SQLException {
         DAOController dc = new DAOController();
         Connection con = dc.getConnection();
-        PreparedStatement pstmt = con.prepareStatement("UPDATE \"Usuario\" SET nombre=?, \"aPaterno\"=?, \"aMaterno\"=?, rut=?, direccion=?, comuna=?, ciudad=?, email=?, \"contraseña\"=?, telefono=?, \"idTipoUsuario\"=? WHERE \"idUsuario\"=?;");
-        pstmt.setString(1, user.getNombre());
-        pstmt.setString(2, user.getAPaterno());
-        pstmt.setString(3, user.getAMaterno());
-        pstmt.setString(4, user.getRut());
-        pstmt.setString(5, user.getDireccion());
-        pstmt.setString(6, user.getComuna());
-        pstmt.setString(7, user.getCiudad());
-        pstmt.setString(8, user.getEmail());
-        pstmt.setString(9, user.getContraseña());
-        pstmt.setString(10, user.getTelefono());
-        pstmt.setInt(11, user.getIdTipo());
-        pstmt.setInt(12, user.getIdUsuario());
-        pstmt.executeUpdate();
-        con.close();
-        return "mostrarUsuario.xhtml";
+
+        try {
+            PreparedStatement pstmt = con.prepareStatement("UPDATE \"Usuario\" SET nombre=?, \"aPaterno\"=?, \"aMaterno\"=?, rut=?, direccion=?, comuna=?, ciudad=?, email=?, \"contraseña\"=?, telefono=?, \"idTipoUsuario\"=? WHERE \"idUsuario\"=?;");
+            pstmt.setString(1, user.getNombre());
+            pstmt.setString(2, user.getAPaterno());
+            pstmt.setString(3, user.getAMaterno());
+            pstmt.setString(4, user.getRut());
+            pstmt.setString(5, user.getDireccion());
+            pstmt.setString(6, user.getComuna());
+            pstmt.setString(7, user.getCiudad());
+            pstmt.setString(8, user.getEmail());
+            pstmt.setString(9, user.getContraseña());
+            pstmt.setString(10, user.getTelefono());
+            pstmt.setInt(11, user.getIdTipo());
+            pstmt.setInt(12, user.getIdUsuario());
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+            return "mostrarUsuario.xhtml";
+        }
+
     }
 
     public void eliminarUsuario(UsuarioDTO user) throws DAOException, SQLException {
+
         DAOController dc = new DAOController();
         Connection con = dc.getConnection();
-        PreparedStatement pstmt = con.prepareStatement("DELETE FROM \"Usuario\" WHERE \"idUsuario\"=?");
-        pstmt.setInt(1, user.getIdUsuario());
-        pstmt.executeUpdate();
-        con.close();
+        try {
+            PreparedStatement pstmt = con.prepareStatement("DELETE FROM \"Usuario\" WHERE \"idUsuario\"=?");
+            pstmt.setInt(1, user.getIdUsuario());
+            pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
     }
 
     public void actualizarOferta(ProductoDTO p) throws DAOException, SQLException {
         DAOController dc = new DAOController();
         Connection con = dc.getConnection();
-        PreparedStatement pstmt = con.prepareStatement("UPDATE \"Producto\" SET  precio=?, \"valorOferta\"=?, \"ofertaActiva\"=? WHERE \"idProducto\"=?;");
-        pstmt.setInt(1, p.getPrecio());
-        pstmt.setInt(2, p.getValorOferta());
-        pstmt.setBoolean(3, p.isOfertaActiva());
-        pstmt.setInt(4, p.getIdProducto());
+        try {
+            PreparedStatement pstmt = con.prepareStatement("UPDATE \"Producto\" SET  precio=?, \"valorOferta\"=?, \"ofertaActiva\"=? WHERE \"idProducto\"=?;");
+            pstmt.setInt(1, p.getPrecio());
+            pstmt.setInt(2, p.getValorOferta());
+            pstmt.setBoolean(3, p.isOfertaActiva());
+            pstmt.setInt(4, p.getIdProducto());
 
-        pstmt.executeUpdate();
+            pstmt.executeUpdate();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
         con.close();
     }
 }

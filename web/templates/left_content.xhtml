@@ -3,20 +3,19 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets">
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
     <div class="crumb_navigation"> Navegación <span class="current">Inicio</span> </div>
-    <div class="left_content">
-      <div class="title_box">Categorias</div>
-      <ul class="left_menu">
-        <li class="odd"><a href="#">Frescos</a></li>
-        <li class="even"><a href="#">Carnes y pescados</a></li>
-        <li class="odd"><a href="#">Despensa</a></li>
-        <li class="even"><a href="#">Dulces</a></li>
-        <li class="odd"><a href="#">Panaderia</a></li>
-        <li class="even"><a href="#">Congelados</a></li>
-        <li class="odd"><a href="#">Bebidas y Licores</a></li>
-        <li class="even"><a href="#">Perfumeria</a></li>
-        <li class="odd"><a href="#">Hogar</a></li>
-      </ul>
-    </div>
+    <h:form>
+        <div class="left_content">
+            <div class="title_box">Categorias</div>
+            <ul class="left_menu">
+                <c:forEach class="left_menu" var="categoria" items="#{proyectoBean.categorias}">
+                    <li class="odd"><h:commandLink >#{categoria.nombre}</h:commandLink></li>
+                </c:forEach>
+                 <!--<li class="odd"><h:commandLink value ="Ingresar a tu Cuenta" action="irLogin" ></h:commandLink></li>-->
+            </ul>
+
+        </div>
+    </h:form>
 </ui:composition>

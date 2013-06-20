@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.component.html.HtmlDataTable;
 import utils.DAOException;
 
@@ -20,7 +21,7 @@ import utils.DAOException;
  * @author Sebastian
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class CompraBean {
 
     public Controlador controller = new Controlador();

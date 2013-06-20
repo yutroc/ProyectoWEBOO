@@ -2,103 +2,118 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
-    <h:head>
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>   
         Mantenedor Usuarios
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <style>         
+            div#main_container table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+            div#main_container table td, div#main_container table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+            .ui-dialog .ui-state-error { padding: .3em; }
+            .validateTips { border: 1px solid transparent; padding: 0.3em; }
+            .limitedHeightDiv {height: 500px; overflow: auto;
+            }
+        </style>
     </h:head>
     <h:body>
-        <h:form>
-             <h:commandButton value="Atras" action="carro"></h:commandButton>
-            <h:commandButton value="Crear Nuevo Usuario" action="registrar.xhtml"></h:commandButton>
-            <h:dataTable id="tableUsers" value="#{userBean.user}" var="user"  border="4"  binding="#{userBean.tablaUsuarios}">
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="ID"/>
-                    </f:facet>
-                    #{user.idUsuario}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="RUT"/>
-                    </f:facet>
-                    #{user.rut}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="NOMBRE"/>
-                    </f:facet>
-                    #{user.nombre}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Apellido Paterno"/>
-                    </f:facet>
-                    #{user.APaterno}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Apellido Materno"/>
-                    </f:facet>
-                    #{user.AMaterno}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Direccion"/>
-                    </f:facet>
-                    #{user.direccion}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Comuna"/>
-                    </f:facet>
-                    #{user.comuna}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Ciudad"/>
-                    </f:facet>
-                    #{user.ciudad}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Email"/>
-                    </f:facet>
-                    #{user.email}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Fecha de Ingreso"/>
-                    </f:facet>
-                    #{user.fechaRegistro}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Contrasena"/>
-                    </f:facet>
-                    #{user.contraseña}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Tipo Usuario"/>
-                    </f:facet>
-                    #{user.idTipo}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Editar"/>
-                    </f:facet>
-                    <h:commandLink  value ="Editar" action="#{userBean.seleccionUsuario}"></h:commandLink>
-
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Eliminar"/>
-                    </f:facet>
-                    <h:commandLink  value ="Eliminar" action="#{userBean.eliminarUsuario}"></h:commandLink>
-
-                </h:column>
-            </h:dataTable>
-        </h:form>
+        <div id="main_container">
+            <ui:include src="templates/header.xhtml"></ui:include>
+            <h1>Mantenedor de Usuarios</h1>
+            <h:form>
+                <div class="limitedHeightDiv">
+                    <h:commandButton value="Atras" action="carro"></h:commandButton>
+                    <h:commandButton value="Crear Nuevo Usuario" action="registrar.xhtml"></h:commandButton>
+                    <h:dataTable id ="tableUser" value="#{userBean.user}" var="user"  border="1"  binding="#{userBean.tablaUsuarios}">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="ID"/>
+                            </f:facet>
+                            #{user.idUsuario}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="RUT"/>
+                            </f:facet>
+                            #{user.rut}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="NOMBRE"/>
+                            </f:facet>
+                            #{user.nombre}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Apellido Paterno"/>
+                            </f:facet>
+                            #{user.APaterno}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Apellido Materno"/>
+                            </f:facet>
+                            #{user.AMaterno}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Direccion"/>
+                            </f:facet>
+                            #{user.direccion}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Comuna"/>
+                            </f:facet>
+                            #{user.comuna}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Ciudad"/>
+                            </f:facet>
+                            #{user.ciudad}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Email"/>
+                            </f:facet>
+                            #{user.email}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Fecha de Ingreso"/>
+                            </f:facet>
+                            #{user.fechaRegistro}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Contrasena"/>
+                            </f:facet>
+                            #{user.contraseña}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Tipo Usuario"/>
+                            </f:facet>
+                            #{user.idTipo}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Editar"/>
+                            </f:facet>
+                            <h:commandLink  value ="Editar" action="#{userBean.seleccionUsuario}"></h:commandLink>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Eliminar"/>
+                            </f:facet>
+                            <h:commandLink  value ="Eliminar" action="#{userBean.eliminarUsuario}"></h:commandLink>
+                        </h:column>
+                    </h:dataTable>
+                </div>
+            </h:form>
+        </div>
     </h:body>
 </html>
 

@@ -6,7 +6,6 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <h:head>
-
         <title>Demacia Food Store</title>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
         <link rel="stylesheet" type="text/css" href="style.css" />
@@ -24,18 +23,15 @@
             <div class="center_content">
                 <h:form>
                     <h1>Menu de administrador</h1>
-                    
-                    <p><h:commandLink  value ="Mantenedor usuarios" action="mostrarUsuario"></h:commandLink></p>
-                    <p> <h:commandLink  value ="Mantenedor compras" action="MantenedorCompras"></h:commandLink></p>
-                    <p>  <h:commandLink  value ="Mantenedor categorias" action="Categoria"></h:commandLink></p>
-                    <p>  <h:commandLink  value ="Mantenedor productos" action="mostrarProducto"></h:commandLink></p>
-                    <p>  <h:commandLink  value ="Configurar ofertas" action="Oferta"></h:commandLink></p>
-
+                    <h2><h:commandLink  value ="Mantenedor usuarios" action="mostrarUsuario"></h:commandLink></h2>
+                    <h2><h:commandLink  value ="Mantenedor compras" action="MantenedorCompras"></h:commandLink></h2>
+                    <h2> <h:commandLink  value ="Mantenedor categorias" action="Categoria"></h:commandLink></h2>
+                    <h2> <h:commandLink  value ="Mantenedor productos" action="agregarProducto"></h:commandLink></h2>
+                     <h2> <h:commandLink  value ="Configurar ofertas" action="Oferta"></h:commandLink></h2>
                 </h:form>
             </div>
 
             <!-- Hasta aca -->
-
 
             <ui:include src="templates/right_content.xhtml"></ui:include>
             <ui:include src="templates/footer.xhtml"></ui:include>

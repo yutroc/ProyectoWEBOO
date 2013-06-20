@@ -40,7 +40,7 @@ public class Controlador {
     }
 
     public UsuarioDTO validarUser(String nombre, String pass) throws DAOException {
-        System.out.println("PASOcontrolador");
+        //System.out.println("PASOcontrolador");
         return dao.getCustomer(nombre, pass);
     }
 
@@ -76,8 +76,8 @@ public class Controlador {
         dao.eliminarCompra(c);
     }
      public String crearUsuario(UsuarioDTO user)throws DAOException, SQLException{
-        System.out.println("PASOOOOOOOOOOOO");
-        System.out.println("hola "+ user.toString());
+        //System.out.println("PASOOOOOOOOOOOO");
+        //System.out.println("hola "+ user.toString());
         return dao.crearUsuario(user);
     }
     public ArrayList<UsuarioDTO> obtenerUsuarios() throws DAOException, SQLException{

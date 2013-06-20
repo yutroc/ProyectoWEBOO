@@ -20,7 +20,7 @@
         <script type="text/javascript" src="js/boxOver.js"></script>
         <script>
             $(function() {
-                $( "#dialog" ).dialog({
+                $("#dialog").dialog({
                     autoOpen: false,
                     show: {
                         effect: "blind",
@@ -31,7 +31,7 @@
                         duration: 10
                     }
                 });
-                $( "#dialog2" ).dialog({
+                $("#dialog2").dialog({
                     autoOpen: false,
                     show: {
                         effect: "blind",
@@ -43,11 +43,11 @@
                     }
                 });
 
-                $( "#opener" ).click(function() {
-                    $( "#dialog" ).dialog( "open" );
+                $("#opener").click(function() {
+                    $("#dialog").dialog("open");
                 });
-                $( "#opener2" ).click(function() {
-                    $( "#dialog2" ).dialog( "open" );
+                $("#opener2").click(function() {
+                    $("#dialog2").dialog("open");
                 });
             });
         </script>
@@ -57,167 +57,169 @@
             .ui-dialog .ui-state-error { padding: .3em; }
             .validateTips { border: 1px solid transparent; padding: 0.3em; }
             .limitedHeightDiv {height: 500px; overflow: auto;
-    }
+            }
         </style>
     </h:head>
     <h:body>
         <div id="main_container">
             <ui:include src="templates/header.xhtml"></ui:include>
             <!--<ui:include src="templates/left_content.xhtml"></ui:include>-->
-            
-            <!-- Editar desde aqui -->
+            <h1>Mantenedor de Productos</h1>
+            <h:form><h:commandButton value="Atras" action="carro"></h:commandButton></h:form>
             <div id="dialog" title="Agregar un producto" >
-            <h:form>
-                <table>
-                    <tr>
-                        <td> Id</td>
-                        <td><h:inputText value="#{proyectoBean.idPN}"/></td>
-                    </tr>
-                    <tr>
-                        <td>Nombre </td>
-                        <td><h:inputText value="#{proyectoBean.nombrePN}"/></td>
-                    </tr>
-                    <tr>
-                        <td>Categoria </td>
-                        <td>
-                            <h:selectOneMenu id="priceMenu" value="#{proyectoBean.idCategoriaSelecionada}">
-                                <f:selectItems value="#{proyectoBean.getCategorias()}" var="s" 
-                                               itemValue="#{s.idCategoria}" itemLabel="#{s.nombre}" />
-                            </h:selectOneMenu>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Stock </td>
-                        <td><h:inputText value="#{proyectoBean.stockPN}"/></td>
-                    </tr>
-                    <tr>
-                        <td>valor Oferta </td>
-                        <td><h:inputText value="#{proyectoBean.ofertaPN}"/></td>
-                    </tr>
-                    <tr>
-                        <td>oferta Activa </td>
-                        <td><h:inputText value="#{proyectoBean.ofertaActivaPN}" /></td>
-                    </tr>
-                    <tr>
-                        <td>Precio </td>
-                        <td><h:inputText value="#{proyectoBean.precioPN}" /></td>
-                    </tr>
-                    <tr>
-                        <td>Descripcion </td>
-                        <td><h:inputTextarea value="#{proyectoBean.descripcionNP}"/></td>
-                    </tr>
-                    
-                    <tr>
+                <!-- Editar desde aqui -->
 
-                    
-                    </tr>
-                </table>
+                <h:form>
+                    <table>
+                        <tr>
+                            <td> Id</td>
+                            <td><h:inputText value="#{proyectoBean.idPN}"/></td>
+                        </tr>
+                        <tr>
+                            <td>Nombre </td>
+                            <td><h:inputText value="#{proyectoBean.nombrePN}"/></td>
+                        </tr>
+                        <tr>
+                            <td>Categoria </td>
+                            <td>
+                                <h:selectOneMenu id="priceMenu" value="#{proyectoBean.idCategoriaSelecionada}">
+                                    <f:selectItems value="#{proyectoBean.getCategorias()}" var="s" 
+                                                   itemValue="#{s.idCategoria}" itemLabel="#{s.nombre}" />
+                                </h:selectOneMenu>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Stock </td>
+                            <td><h:inputText value="#{proyectoBean.stockPN}"/></td>
+                        </tr>
+                        <tr>
+                            <td>valor Oferta </td>
+                            <td><h:inputText value="#{proyectoBean.ofertaPN}"/></td>
+                        </tr>
+                        <tr>
+                            <td>oferta Activa </td>
+                            <td><h:inputText value="#{proyectoBean.ofertaActivaPN}" /></td>
+                        </tr>
+                        <tr>
+                            <td>Precio </td>
+                            <td><h:inputText value="#{proyectoBean.precioPN}" /></td>
+                        </tr>
+                        <tr>
+                            <td>Descripcion </td>
+                            <td><h:inputTextarea value="#{proyectoBean.descripcionNP}"/></td>
+                        </tr>
 
-                <p><h:commandButton value="Crear" action="#{proyectoBean.crearProducto()}"/></p>
-            </h:form>
-        </div>
-            
+                        <tr>
+
+
+                        </tr>
+                    </table>
+
+                    <p><h:commandButton value="Crear" action="#{proyectoBean.crearProducto()}"/></p>
+                </h:form>
+            </div>
+
             <div id="dialog2" title="Editar un producto">
+                <h:form>
+                    <table>
+                        <tr>
+                            <td> Id</td>
+                            <td><h:inputText value="#{proyectoBean.productoSeleccionado.idCategoria}"/></td>
+                        </tr>
+                        <tr>
+                            <td>Nombre </td>
+                            <td><h:inputText value="#{proyectoBean.productoSeleccionado.nombre}"/></td>
+                        </tr>
+                        <tr>
+                            <td>Categoria </td>
+                            <td>
+                                <h:selectOneMenu id="priceMenu" value="#{proyectoBean.productoSeleccionado.idCategoria}">
+                                    <f:selectItems value="#{proyectoBean.getCategorias()}" var="s" 
+                                                   itemValue="#{s.idCategoria}" itemLabel="#{s.nombre}" />
+                                </h:selectOneMenu>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Stock </td>
+                            <td><h:inputText value="#{proyectoBean.productoSeleccionado.stock}"/></td>
+                        </tr>
+                        <tr>
+                            <td>valor Oferta </td>
+                            <td><h:inputText value="#{proyectoBean.productoSeleccionado.valorOferta}"/></td>
+                        </tr>
+                        <tr>
+                            <td>oferta Activa </td>
+                            <td><h:inputText value="#{proyectoBean.productoSeleccionado.ofertaActiva}" /></td>
+                        </tr>
+                        <tr>
+                            <td>Precio </td>
+                            <td><h:inputText value="#{proyectoBean.productoSeleccionado.precio}" /></td>
+                        </tr>
+                        <tr>
+                            <td>Descripcion </td>
+                            <td><h:inputTextarea value="#{proyectoBean.productoSeleccionado.descripcion}"/></td>
+                        </tr>
+                    </table>
+
+                    <p><h:commandButton value="Editar" action="#{proyectoBean.editarProducto()}"/></p>
+                </h:form>
+            </div>
+
+            <button id="opener">Agregar Producto</button>
+            <h:outputLabel value ="#{proyectoBean.idProducto}" style="color: red"></h:outputLabel >
+            <h:outputLabel value ="#{proyectoBean.nombreProducto}" style="color: red"></h:outputLabel >
+            <h:outputLabel value ="#{proyectoBean.descripcionProducto}" style="color: red"></h:outputLabel >
+            <!--<h:outputLabel value ="#{proyectoBean.stockPN}" style="color: red"></h:outputLabel >
+            <h:outputLabel value ="#{proyectoBean.ofertaPN}" style="color: red"></h:outputLabel >
+            <h:outputLabel value ="#{proyectoBean.ofertaActivaPN}" style="color: red"></h:outputLabel >-->
             <h:form>
-                <table>
-                    <tr>
-                        <td> Id</td>
-                        <td><h:inputText value="#{proyectoBean.productoSeleccionado.idCategoria}"/></td>
-                    </tr>
-                    <tr>
-                        <td>Nombre </td>
-                        <td><h:inputText value="#{proyectoBean.productoSeleccionado.nombre}"/></td>
-                    </tr>
-                    <tr>
-                        <td>Categoria </td>
-                        <td>
-                            <h:selectOneMenu id="priceMenu" value="#{proyectoBean.productoSeleccionado.idCategoria}">
-                                <f:selectItems value="#{proyectoBean.getCategorias()}" var="s" 
-                                               itemValue="#{s.idCategoria}" itemLabel="#{s.nombre}" />
-                            </h:selectOneMenu>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Stock </td>
-                        <td><h:inputText value="#{proyectoBean.productoSeleccionado.stock}"/></td>
-                    </tr>
-                    <tr>
-                        <td>valor Oferta </td>
-                        <td><h:inputText value="#{proyectoBean.productoSeleccionado.valorOferta}"/></td>
-                    </tr>
-                    <tr>
-                        <td>oferta Activa </td>
-                        <td><h:inputText value="#{proyectoBean.productoSeleccionado.ofertaActiva}" /></td>
-                    </tr>
-                    <tr>
-                        <td>Precio </td>
-                        <td><h:inputText value="#{proyectoBean.productoSeleccionado.precio}" /></td>
-                    </tr>
-                    <tr>
-                        <td>Descripcion </td>
-                        <td><h:inputTextarea value="#{proyectoBean.productoSeleccionado.descripcion}"/></td>
-                    </tr>
-                </table>
+                <p:fileUpload fileUploadListener="#{fileUploadController.upload}"
+                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/" sizeLimit="100000"/>
+                <div class="limitedHeightDiv">
+                    <h:dataTable id="table1" value="#{proyectoBean.getProductosF()}" var="item"  border="1" binding="#{proyectoBean.tablaProductos}">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="ID"/>
+                            </f:facet>
+                            #{item.idProducto}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="NOMBRE"/>
+                            </f:facet>
+                            #{item.nombre}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="DESCRIPCION"/>
+                            </f:facet>
+                            #{item.descripcion}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="EDITAR"/>
+                            </f:facet>
+                            <h:commandLink onclick="dialog2.dialog('open')" value ="Editar" action="#{proyectoBean.seleccionProducto()}"></h:commandLink>
 
-                <p><h:commandButton value="Editar" action="#{proyectoBean.editarProducto()}"/></p>
-            </h:form>
-        </div>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="ELIMINAR"/>
+                            </f:facet>
+                            <h:commandLink  value ="Seleccionar" action="#{proyectoBean.seleccionProducto()}"></h:commandLink>
 
-        <button id="opener">Agregar Producto</button>
-        <h:outputLabel value ="#{proyectoBean.idProducto}" style="color: red"></h:outputLabel >
-        <h:outputLabel value ="#{proyectoBean.nombreProducto}" style="color: red"></h:outputLabel >
-        <h:outputLabel value ="#{proyectoBean.descripcionProducto}" style="color: red"></h:outputLabel >
-        <!--<h:outputLabel value ="#{proyectoBean.stockPN}" style="color: red"></h:outputLabel >
-        <h:outputLabel value ="#{proyectoBean.ofertaPN}" style="color: red"></h:outputLabel >
-        <h:outputLabel value ="#{proyectoBean.ofertaActivaPN}" style="color: red"></h:outputLabel >-->
-        <h:form>
-            <p:fileUpload fileUploadListener="#{fileUploadController.upload}"
-                    allowTypes="/(\.|\/)(gif|jpe?g|png)$/" sizeLimit="100000"/>
-            <div class="limitedHeightDiv">
-            <h:dataTable id="table1" value="#{proyectoBean.getProductosF()}" var="item"  border="1" binding="#{proyectoBean.tablaProductos}">
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="ID"/>
-                    </f:facet>
-                    #{item.idProducto}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="NOMBRE"/>
-                    </f:facet>
-                    #{item.nombre}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="DESCRIPCION"/>
-                    </f:facet>
-                    #{item.descripcion}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="EDITAR"/>
-                    </f:facet>
-                    <h:commandLink onclick="dialog2.dialog('open')" value ="Editar" action="#{proyectoBean.seleccionProducto()}"></h:commandLink>
-
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="ELIMINAR"/>
-                    </f:facet>
-                    <h:commandLink  value ="Seleccionar" action="#{proyectoBean.seleccionProducto()}"></h:commandLink>
-
-                </h:column>
-            </h:dataTable>
+                        </h:column>
+                    </h:dataTable>
                 </div>
-        </h:form>
-            
+            </h:form>
+
             <!-- Hasta aca -->
-            
-            
+
+
             <!--<ui:include src="templates/right_content.xhtml"></ui:include>-->
             <ui:include src="templates/footer.xhtml"></ui:include>
         </div>
     </h:body>
-    
+
 </html>
 
