@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id ="update">
+            <table>
+                <tr>
+                    <td>Nombre </td>
+                    <td> <h:outputLabel value ="#{ofertaBean.nombreProducto}" ></h:outputLabel >
+                    </td>
+
+                </tr> 
+                <tr>
+                    <td>Precio </td>
+                    <td><h:inputText value="#{ofertaBean.precio}">
+                            <f:validateLength minimum="1" maximum="50" />
+                        </h:inputText>
+                        <h:message for="run" style="color:red" /></td>
+
+                </tr>   
+                <tr>
+                    <td>Valor oferta </td>
+                    <td><h:inputText value="#{ofertaBean.valorOferta}">
+                            <f:validateLength minimum="1" maximum="50" />
+                        </h:inputText>
+                        <h:message for="run" style="color:red" /></td>
+
+                </tr>  
+                <tr>
+                    <td>Activar oferta </td>
+                    <td> <h:selectBooleanCheckbox value="#{ofertaBean.activada}"  /></td>
+
+                </tr>  
+            </table>
+            <h:commandButton value="Cancelar" action="Oferta" immediate="true"/>
+            <h:commandButton value="Actualizar" action="#{ofertaBean.actualizarOferta()}"/>
+        </h:form>
+    </h:body>
+</html>
+

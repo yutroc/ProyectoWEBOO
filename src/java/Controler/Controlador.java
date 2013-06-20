@@ -89,6 +89,8 @@ public class Controlador {
     public void eliminarUsuario(UsuarioDTO user) throws DAOException, SQLException{
         dao.eliminarUsuario(user);
     }
-
+    public void actualizarOferta(ProductoDTO p) throws DAOException, SQLException{
+         dao.actualizarOferta(p);
+    }
 
 }

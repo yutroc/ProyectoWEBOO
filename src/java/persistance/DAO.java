@@ -345,21 +345,21 @@ public class DAO {
             }
         }
     }
-    
-     public String crearUsuario(UsuarioDTO user) throws DAOException, SQLException{
+
+    public String crearUsuario(UsuarioDTO user) throws DAOException, SQLException {
         DAOController dc = new DAOController();
         Connection con = dc.getConnection();
         Date fecha = new Date();
         //java.sql.Date sqlDate = new java.sql.Date(fecha.getTime());
-        System.out.println("hola 2 "+ user.toString());
-        PreparedStatement pstmt = con.prepareStatement("INSERT INTO \"Usuario\"(\n" +
-"            nombre, \"aPaterno\", \"aMaterno\", rut, direccion, comuna, ciudad, \n" +
-"            email, \"fechaRegistro\", \"contraseña\", telefono, \"idTipoUsuario\", \n" +
-"            \"idUsuario\")\n" +
-"    VALUES (?, ?, ?, ?, ?, ?, ?, \n" +
-"            ?, ?, ?, ?, ?, \n" +
-"            nextval('\"Usuario_idUsuario_seq\"'::regclass));");
-        
+        System.out.println("hola 2 " + user.toString());
+        PreparedStatement pstmt = con.prepareStatement("INSERT INTO \"Usuario\"(\n"
+                + "            nombre, \"aPaterno\", \"aMaterno\", rut, direccion, comuna, ciudad, \n"
+                + "            email, \"fechaRegistro\", \"contraseña\", telefono, \"idTipoUsuario\", \n"
+                + "            \"idUsuario\")\n"
+                + "    VALUES (?, ?, ?, ?, ?, ?, ?, \n"
+                + "            ?, ?, ?, ?, ?, \n"
+                + "            nextval('\"Usuario_idUsuario_seq\"'::regclass));");
+
         pstmt.setString(1, user.getNombre());
         pstmt.setString(2, user.getAPaterno());
         pstmt.setString(3, user.getAMaterno());
@@ -370,27 +370,28 @@ public class DAO {
         pstmt.setString(8, user.getEmail());
         java.sql.Date fechaD = new java.sql.Date(user.getFechaRegistro().getTime());
         pstmt.setDate(9, fechaD);
-        pstmt.setString(10,user.getContraseña());
-        pstmt.setString(11,user.getTelefono());
+        pstmt.setString(10, user.getContraseña());
+        pstmt.setString(11, user.getTelefono());
         pstmt.setInt(12, user.getIdTipo());
         pstmt.executeUpdate();
         con.close();
         return "mostrarUsuario.xhtml";
     }
-    public ArrayList<UsuarioDTO> obtenerUsuarios() throws DAOException, SQLException{
+
+    public ArrayList<UsuarioDTO> obtenerUsuarios() throws DAOException, SQLException {
         int idUsuario = 0;
-        String nombre= "";
+        String nombre = "";
         String aPaterno = "";
-        String aMaterno="";
-        String RUT="";
-        String direccion="";
-        String ciudad="";
-        String comuna="";
-        String email="";
-        Date fecha=new Date();
-        String contraseña ="";
-        String telefono="";
-        int idTipo=0;
+        String aMaterno = "";
+        String RUT = "";
+        String direccion = "";
+        String ciudad = "";
+        String comuna = "";
+        String email = "";
+        Date fecha = new Date();
+        String contraseña = "";
+        String telefono = "";
+        int idTipo = 0;
         ArrayList<UsuarioDTO> usuarios = new ArrayList<UsuarioDTO>();
         // odbc conection
         DAOController dc = new DAOController();
@@ -398,10 +399,10 @@ public class DAO {
         //statment
         try {
             // setup statement and retrieve results
-            PreparedStatement pstmt = con.prepareStatement("SELECT nombre, \"aPaterno\", \"aMaterno\", rut, direccion, comuna, ciudad, \n" +
-"       email, \"fechaRegistro\", \"contraseña\", telefono, \"idTipoUsuario\", \n" +
-"       \"idUsuario\"\n" +
-"  FROM \"Usuario\";");
+            PreparedStatement pstmt = con.prepareStatement("SELECT nombre, \"aPaterno\", \"aMaterno\", rut, direccion, comuna, ciudad, \n"
+                    + "       email, \"fechaRegistro\", \"contraseña\", telefono, \"idTipoUsuario\", \n"
+                    + "       \"idUsuario\"\n"
+                    + "  FROM \"Usuario\";");
             ResultSet rs = pstmt.executeQuery();
             //create the transfer object using data from rs
             while (rs.next()) {
@@ -409,17 +410,17 @@ public class DAO {
                 nombre = rs.getString("nombre");
                 aPaterno = rs.getString("aPaterno");
                 aMaterno = rs.getString("aMaterno");
-                RUT=rs.getString("rut");
-                direccion=rs.getString("direccion");
-                ciudad=rs.getString("ciudad");
-                comuna=rs.getString("comuna");
-                email=rs.getString("email");
-                fecha=rs.getDate("fechaRegistro");
-                contraseña =rs.getString("contraseña");
-                telefono=rs.getString("telefono");
-                idTipo=rs.getInt("idTipoUsuario");
-                UsuarioDTO usuario = new UsuarioDTO(idUsuario,nombre, aPaterno, aMaterno, RUT,
-                        direccion,ciudad,comuna,email,fecha,contraseña,telefono,idTipo);
+                RUT = rs.getString("rut");
+                direccion = rs.getString("direccion");
+                ciudad = rs.getString("ciudad");
+                comuna = rs.getString("comuna");
+                email = rs.getString("email");
+                fecha = rs.getDate("fechaRegistro");
+                contraseña = rs.getString("contraseña");
+                telefono = rs.getString("telefono");
+                idTipo = rs.getInt("idTipoUsuario");
+                UsuarioDTO usuario = new UsuarioDTO(idUsuario, nombre, aPaterno, aMaterno, RUT,
+                        direccion, ciudad, comuna, email, fecha, contraseña, telefono, idTipo);
                 usuarios.add(usuario);
             }
         } catch (Exception e) {
@@ -435,7 +436,8 @@ public class DAO {
         con.close();
         return usuarios;
     }
-    public String actualizarUsuario(UsuarioDTO user) throws DAOException, SQLException{
+
+    public String actualizarUsuario(UsuarioDTO user) throws DAOException, SQLException {
         DAOController dc = new DAOController();
         Connection con = dc.getConnection();
         PreparedStatement pstmt = con.prepareStatement("UPDATE \"Usuario\" SET nombre=?, \"aPaterno\"=?, \"aMaterno\"=?, rut=?, direccion=?, comuna=?, ciudad=?, email=?, \"contraseña\"=?, telefono=?, \"idTipoUsuario\"=? WHERE \"idUsuario\"=?;");
@@ -447,19 +449,33 @@ public class DAO {
         pstmt.setString(6, user.getComuna());
         pstmt.setString(7, user.getCiudad());
         pstmt.setString(8, user.getEmail());
-        pstmt.setString(9,user.getContraseña());
-        pstmt.setString(10,user.getTelefono());
+        pstmt.setString(9, user.getContraseña());
+        pstmt.setString(10, user.getTelefono());
         pstmt.setInt(11, user.getIdTipo());
-        pstmt.setInt(12,user.getIdUsuario());
+        pstmt.setInt(12, user.getIdUsuario());
         pstmt.executeUpdate();
         con.close();
         return "mostrarUsuario.xhtml";
     }
-    public void eliminarUsuario(UsuarioDTO user) throws DAOException, SQLException{
-    DAOController dc = new DAOController();
+
+    public void eliminarUsuario(UsuarioDTO user) throws DAOException, SQLException {
+        DAOController dc = new DAOController();
         Connection con = dc.getConnection();
         PreparedStatement pstmt = con.prepareStatement("DELETE FROM \"Usuario\" WHERE \"idUsuario\"=?");
         pstmt.setInt(1, user.getIdUsuario());
+        pstmt.executeUpdate();
+        con.close();
+    }
+
+    public void actualizarOferta(ProductoDTO p) throws DAOException, SQLException {
+        DAOController dc = new DAOController();
+        Connection con = dc.getConnection();
+        PreparedStatement pstmt = con.prepareStatement("UPDATE \"Producto\" SET  precio=?, \"valorOferta\"=?, \"ofertaActiva\"=? WHERE \"idProducto\"=?;");
+        pstmt.setInt(1, p.getPrecio());
+        pstmt.setInt(2, p.getValorOferta());
+        pstmt.setBoolean(3, p.isOfertaActiva());
+        pstmt.setInt(4, p.getIdProducto());
+
         pstmt.executeUpdate();
         con.close();
     }

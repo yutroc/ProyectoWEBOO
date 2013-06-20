@@ -40,6 +40,14 @@ public class ProductoDTO {
         this.idCategoria = idCategoria;
     }
 
+    public ProductoDTO(int idProducto, String nombre, int precio, int valorOferta, boolean ofertaActiva) {
+        this.idProducto = idProducto;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.valorOferta = valorOferta;
+        this.ofertaActiva = ofertaActiva;
+    }
+
    
 
     public String getImageUrl() {
