@@ -4,7 +4,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
       >
 
     <h:head>
@@ -64,12 +64,15 @@
         <div id="main_container">
             <ui:include src="templates/header.xhtml"></ui:include>
             <!--<ui:include src="templates/left_content.xhtml"></ui:include>-->
+
             <h1>Mantenedor de Productos</h1>
             <h:form><h:commandButton value="Atras" action="carro"></h:commandButton></h:form>
-            <div id="dialog" title="Agregar un producto" >
-                <!-- Editar desde aqui -->
 
-                <h:form>
+
+            <!-- Editar desde aqui -->
+            <div id="dialog" title="Agregar un producto" >
+                <h:form >
+
                     <table>
                         <tr>
                             <td> Id</td>
@@ -82,7 +85,9 @@
                         <tr>
                             <td>Categoria </td>
                             <td>
-                                <h:selectOneMenu id="priceMenu" value="#{proyectoBean.idCategoriaSelecionada}">
+
+                                <h:selectOneMenu id="idCategoriaMenu" value="#{proyectoBean.idCategoriaSelecionada}">
+
                                     <f:selectItems value="#{proyectoBean.getCategorias()}" var="s" 
                                                    itemValue="#{s.idCategoria}" itemLabel="#{s.nombre}" />
                                 </h:selectOneMenu>
@@ -108,23 +113,22 @@
                             <td>Descripcion </td>
                             <td><h:inputTextarea value="#{proyectoBean.descripcionNP}"/></td>
                         </tr>
-
-                        <tr>
-
-
-                        </tr>
                     </table>
 
-                    <p><h:commandButton value="Crear" action="#{proyectoBean.crearProducto()}"/></p>
+
+                    <h:commandButton value="Crear" action="#{proyectoBean.crearProducto()}"/>
+
                 </h:form>
             </div>
 
             <div id="dialog2" title="Editar un producto">
-                <h:form>
+
+                
+                <h:form  enctype="multipart/form-data">
                     <table>
                         <tr>
                             <td> Id</td>
-                            <td><h:inputText value="#{proyectoBean.productoSeleccionado.idCategoria}"/></td>
+                            <td><h:inputText value="#{proyectoBean.productoSeleccionado.idProducto}"/></td>
                         </tr>
                         <tr>
                             <td>Nombre </td>
@@ -159,6 +163,19 @@
                             <td>Descripcion </td>
                             <td><h:inputTextarea value="#{proyectoBean.productoSeleccionado.descripcion}"/></td>
                         </tr>
+                        <tr>
+
+                            <h:panelGrid columns="3">
+                                <h:outputLabel for="file" value="Select file" />
+                                <t:inputFileUpload id="file" value="#{proyectoBean.uploadedFile}" required="true" />
+                                <h:message for="file" style="color: red;" />
+
+                                <h:panelGroup />
+                                <h:commandButton value="Submit" action="#{proyectoBean.submit}" />
+                                <h:message for="uploadForm" infoStyle="color: green;" errorStyle="color: red;" />
+                            </h:panelGrid>
+
+                        </tr>
                     </table>
 
                     <p><h:commandButton value="Editar" action="#{proyectoBean.editarProducto()}"/></p>
@@ -172,10 +189,9 @@
             <!--<h:outputLabel value ="#{proyectoBean.stockPN}" style="color: red"></h:outputLabel >
             <h:outputLabel value ="#{proyectoBean.ofertaPN}" style="color: red"></h:outputLabel >
             <h:outputLabel value ="#{proyectoBean.ofertaActivaPN}" style="color: red"></h:outputLabel >-->
-            <h:form>
-                <p:fileUpload fileUploadListener="#{fileUploadController.upload}"
-                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/" sizeLimit="100000"/>
-                <div class="limitedHeightDiv">
+
+            <div class="limitedHeightDiv">
+                <h:form>
                     <h:dataTable id="table1" value="#{proyectoBean.getProductosF()}" var="item"  border="1" binding="#{proyectoBean.tablaProductos}">
                         <h:column>
                             <f:facet name="header">
@@ -199,19 +215,23 @@
                             <f:facet name="header">
                                 <h:outputText value="EDITAR"/>
                             </f:facet>
-                            <h:commandLink onclick="dialog2.dialog('open')" value ="Editar" action="#{proyectoBean.seleccionProducto()}"></h:commandLink>
+                            <div>
+                                <button type="button" id="opener2" onclick="dialog2.dialog('open');" >editar </button>
+                                <!--<h:commandLink value ="Editar" action="#{proyectoBean.seleccionProducto()}"></h:commandLink>-->
+                            </div>
 
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="ELIMINAR"/>
                             </f:facet>
-                            <h:commandLink  value ="Seleccionar" action="#{proyectoBean.seleccionProducto()}"></h:commandLink>
-
+                                <h:commandLink value ="Eliminar" action="#{proyectoBean.seleccionProducto()}"></h:commandLink>
                         </h:column>
-                    </h:dataTable>
-                </div>
-            </h:form>
+                    </h:dataTable>              
+</h:form>
+
+            </div>  
+
 
             <!-- Hasta aca -->
 

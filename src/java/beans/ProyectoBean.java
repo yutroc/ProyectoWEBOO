@@ -12,15 +12,25 @@ import Controler.Controlador;
 import DTO.CategoriaDTO;
 import DTO.UsuarioDTO;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import javax.faces.component.html.HtmlDataTable;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+import javax.servlet.jsp.JspFactory;
+import javax.servlet.jsp.PageContext;
 //import org.primefaces.event.FileUploadEvent;
 //import org.primefaces.model.UploadedFile;
 import utils.DAOException;
 //import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.myfaces.custom.fileupload.UploadedFile;
 
 /**
  *
@@ -68,6 +78,8 @@ public class ProyectoBean {
     private Byte imagenCategoriaSeleccionada;
     private boolean crearVisible = false;
     private boolean editarVisible = false;
+    private UploadedFile uploadedFile;
+    private String fileName;
 
     public boolean isCrearVisible() {
         return crearVisible;
@@ -96,13 +108,14 @@ public class ProyectoBean {
     }
 
     public void seleccionProducto() {
+        //UIComponent myComponent = FacesContext.getCurrentInstance().getViewRoot().findComponent("dialog2");
         productoSeleccionado = (ProductoDTO) tablaProductos.getRowData();
 //        this.editarVisible = true;
 
 
-//        this.idProducto = productoSeleccionado.getIdProducto();
-//        this.nombreProducto = productoSeleccionado.getNombre();
-//        this.descripcionProducto = productoSeleccionado.getDescripcion();
+        this.idProducto = productoSeleccionado.getIdProducto();
+        this.nombreProducto = productoSeleccionado.getNombre();
+        this.descripcionProducto = productoSeleccionado.getDescripcion();
     }
 
     public ArrayList<ProductoDTO> getProductosF() throws DAOException {
@@ -143,6 +156,69 @@ public class ProyectoBean {
         this.imagenCategoriaSeleccionada = categoriaSeleccionada.getImagen();
         //System.out.print("jojojooojojooj" + idCategoriaSelecionada + nombreCategoriaSeleccionada + imagenCategoriaSeleccionada);
         return "EditarCategoria";
+    }
+
+    public void submit() {
+
+        // Just to demonstrate what information you can get from the uploaded file.
+        System.out.println("File type: " + uploadedFile.getContentType());
+        System.out.println("File name: " + uploadedFile.getName());
+        System.out.println("File size: " + uploadedFile.getSize() + " bytes");
+
+        // Prepare filename prefix and suffix for an unique filename in upload folder.
+        String prefix = FilenameUtils.getBaseName(uploadedFile.getName());
+        String suffix = FilenameUtils.getExtension(uploadedFile.getName());
+
+        // Prepare file and outputstream.
+        File file = null;
+        OutputStream output = null;
+
+        try {
+            // Create file with unique name in upload folder and write to it.
+            ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+            String serverRealPath = servletContext.getRealPath("/");
+            String serverContextPath = servletContext.getContextPath();
+            file = File.createTempFile(prefix + "_", "." + suffix, new File(serverRealPath + "/imagenes/productos"));
+            file.renameTo(new File(serverRealPath + "/imagenes/productos/" + this.productoSeleccionado.getIdProducto() + ".jpg"));
+            System.out.println("getAbsolutePath " + serverRealPath + "/imagenes/productos/" + this.productoSeleccionado.getIdProducto() + ".jpg");
+            output = new FileOutputStream(new File(serverRealPath + "/imagenes/productos/" + this.productoSeleccionado.getIdProducto() + ".jpg"));
+            IOUtils.copy(uploadedFile.getInputStream(), output);
+            fileName = file.getName();
+
+            // Show succes message.
+            FacesContext.getCurrentInstance().addMessage("uploadForm", new FacesMessage(
+                    FacesMessage.SEVERITY_INFO, "File upload succeed!", null));
+        } catch (IOException e) {
+            // Cleanup.
+            if (file != null) {
+                file.delete();
+            }
+
+            // Show error message.
+            FacesContext.getCurrentInstance().addMessage("uploadForm", new FacesMessage(
+                    FacesMessage.SEVERITY_ERROR, "File upload failed with I/O error.", null));
+
+            // Always log stacktraces (with a real logger).
+            e.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(output);
+        }
+    }
+
+    public UploadedFile getUploadedFile() {
+        return uploadedFile;
+    }
+
+    public void setUploadedFile(UploadedFile uploadedFile) {
+        this.uploadedFile = uploadedFile;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public String getNombreUser() {
@@ -340,14 +416,31 @@ public class ProyectoBean {
 
     }
 
+    private void resetProducto() {
+        nombrePN = "";
+        descripcionNP = "";
+        stockPN = 0;
+        precioPN = 0;
+        ofertaPN = 0;
+        ofertaActivaPN = false;
+        idCategoriaSelecionada = 1;
+
+    }
+
     public void crearProducto() throws DAOException, SQLException {
         ProductoDTO p = new ProductoDTO(0, nombrePN, descripcionNP, "sin imagen", stockPN, precioPN, ofertaPN, ofertaActivaPN, idCategoriaSelecionada);
         controller.crearProducto(p);
+        resetProducto();
     }
 
     public void editarProducto() throws DAOException, SQLException {
+        if(!this.uploadedFile.getName().equals(null)){
+            submit();
+        }
+        
         //ProductoDTO p = new ProductoDTO(0, nombrePN, descripcionNP, "sin imagen", stockPN, precioPN, ofertaPN, ofertaActivaPN, idCategoriaSelecionada);
         controller.editarProducto(this.productoSeleccionado);
+        resetProducto();
     }
 
     public String crearCategoria() throws DAOException, SQLException {
@@ -377,7 +470,6 @@ public class ProyectoBean {
         //return "Categoria";
 
     }
-
 //    public void handleFileUpload(FileUploadEvent event) {
 //
 //        //get uploaded file from the event
@@ -403,9 +495,4 @@ public class ProyectoBean {
 //            //log error
 //        }
 //    }
-    
-    
-    
-    
-    
 }
