@@ -120,6 +120,7 @@ public class DAO {
         System.out.print("GOGOGOOGOOGOGO");
         //iniciar variables
         String name = "coso";
+        int tipoUser=9;
         UsuarioDTO user = new UsuarioDTO(1, "coso", "perro", null, null, null, null, null, null, null, null, null);
 
 
@@ -129,7 +130,7 @@ public class DAO {
 
         try {
             // setup statement and retrieve results
-            PreparedStatement pstmt = con.prepareStatement("select nombre from \"Usuario\" where \"nombre\" = ? and \"contraseña\" = ? ");
+            PreparedStatement pstmt = con.prepareStatement("select nombre,\"idTipoUsuario\" from \"Usuario\" where \"nombre\" = ? and \"contraseña\" = ? ");
             pstmt.setString(1, nombre);
             pstmt.setString(2, contraseña);
             ResultSet rs = pstmt.executeQuery();
@@ -138,9 +139,10 @@ public class DAO {
             //create the transfer object using data from rs
             while (rs.next()) {
                 name = rs.getString("nombre");
-
+                tipoUser=rs.getInt("idTipoUsuario");
             }
             user.setNombre(name);
+            user.setIdUsuario(tipoUser);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -572,4 +574,61 @@ public class DAO {
         }
         con.close();
     }
+    public static ArrayList<ProductoDTO> obtenerProductosPorCategoria(int idCategoriaSeleccionada) throws DAOException {
+        // iniciar variables
+        int idProducto = 0;
+        String nombre = "";
+        String descripcion = "";
+        byte[] image;
+        int stock = 0;
+        int precio = 0;
+        int valorOferta = 0;
+        boolean ofertaActiva = false;
+        int idCategoria = 0;
+        //_ProductoDTO producto = new ProductoDTO();
+        ArrayList<ProductoDTO> listaProductos = new ArrayList<ProductoDTO>();
+        // odbc conection
+        DAOController dc = new DAOController();
+        Connection con = dc.getConnection();
+        //statment
+        try {
+            // setup statement and retrieve results
+            PreparedStatement pstmt = con.prepareStatement("SELECT \"idProducto\", \"nombre\", \"descripcion\", \"stock\", \"precio\", \"valorOferta\", \"ofertaActiva\", \"idCategoria\" FROM \"Producto\" WHERE \"idCategoria\" = " + idCategoriaSeleccionada + "ORDER BY \"idProducto\";");
+            ResultSet rs = pstmt.executeQuery();
+            //create the transfer object using data from rs
+            while (rs.next()) {
+                idProducto = rs.getInt("idProducto");
+                nombre = rs.getString("nombre");
+                descripcion = rs.getString("descripcion");
+                stock = rs.getInt("stock");
+                precio = rs.getInt("precio");
+                valorOferta = rs.getInt("valorOferta");
+                ofertaActiva = rs.getBoolean("ofertaActiva");
+                idCategoria = rs.getInt("idCategoria");
+                /*producto.setIdProducto(idProducto);
+                 producto.setNombre(nombre);
+                 producto.setDescripcion(descripcion);
+                 producto.setImage(image);
+                 producto.setStock(stock);
+                 producto.setValorOferta(valorOferta);
+                 producto.setOfertaActiva(ofertaActiva);
+                 producto.setIdProducto(idProducto);
+                 listaProductos.add(producto);*/
+                ProductoDTO producto = new ProductoDTO(idProducto, nombre, descripcion, "", stock, precio, valorOferta, ofertaActiva, idCategoria);
+                listaProductos.add(producto);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
+        return listaProductos;
+    }
+    
 }

@@ -80,7 +80,8 @@ public class ProyectoBean {
     private boolean editarVisible = false;
     private UploadedFile uploadedFile;
     private String fileName;
-
+    //carga de productos por categoria 
+    CategoriaDTO cat;
     public boolean isCrearVisible() {
         return crearVisible;
     }
@@ -101,7 +102,11 @@ public class ProyectoBean {
         crearVisible = false;
         editarVisible = false;
     }
-
+    public void seleccionarCat(CategoriaDTO c) throws DAOException {
+        cat = c;
+        productos=controller.obtenerProductosPorCategoria(cat.getIdCategoria());
+        //System.out.println("Seleccionado: " + productoSeleccionado.toString());
+    }
     public void seleccionar(ProductoDTO producto) {
         productoSeleccionado = producto;
         //System.out.println("Seleccionado: " + productoSeleccionado.toString());
@@ -125,7 +130,10 @@ public class ProyectoBean {
 
     public ArrayList<ProductoDTO> getProductos() throws DAOException {
         if (productos == null) {
+            
             productos = controller.obtenerTodosProductos();
+           
+            
         }
         return productos;
     }
@@ -397,6 +405,16 @@ public class ProyectoBean {
         this.idProducto = idProducto;
     }
 
+    public CategoriaDTO getCat() {
+        return cat;
+    }
+
+    public void setCat(CategoriaDTO cat) {
+        this.cat = cat;
+    }
+
+    
+
     public String getDescripcionProducto() {
         return descripcionProducto;
     }
@@ -407,8 +425,13 @@ public class ProyectoBean {
 
     public String validarUsuario() throws DAOException {
         UsuarioDTO user = controller.validarUser(nombreUser, pass);
+        System.out.println("user "+user.getIdUsuario());
         if (user.getNombre().equals(nombreUser)) {
-            return "loginExitoso";
+            if(user.getIdUsuario()==1){
+            return "loginExitoso";//admin
+            }
+            else
+                return "LoginNormal";
         } else {
             msg = "Datos ingresados son erróneos. Por favor, inténtelo otra vez.";
             return "LoginFallido";

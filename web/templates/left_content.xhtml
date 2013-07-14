@@ -11,9 +11,10 @@
             <div class="title_box">Categorias</div>
             <ul class="left_menu">
                 <c:forEach class="left_menu" var="categoria" items="#{proyectoBean.categorias}">
-                    <li class="odd"><h:commandLink >#{categoria.nombre}</h:commandLink></li>
+                    <li class="odd"><h:commandLink   id="categoria#{categoria.idCategoria}"  
+                                                     actionListener="#{proyectoBean.seleccionarCat(categoria)}">#{categoria.nombre}</h:commandLink></li>
                 </c:forEach>
-                 <!--<li class="odd"><h:commandLink value ="Ingresar a tu Cuenta" action="irLogin" ></h:commandLink></li>-->
+                <!--<li class="odd"><h:commandLink value ="Ingresar a tu Cuenta" action="irLogin" ></h:commandLink></li>-->
             </ul>
 
         </div>

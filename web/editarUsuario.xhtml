@@ -23,7 +23,9 @@
                 </tr>
                 <tr>
                     <td>RUT</td>
-                    <td><h:inputText id="inputRUT" value="#{userBean.rutUsuario}"></h:inputText></td>
+                    <td><h:inputText id="inputRUT" value="#{userBean.rutUsuario}">
+                     <f:validateRegex pattern="^\d{1,2}\.\d{3}\.\d{3}[-][0-9kK]{1}$"/></h:inputText>
+                        <h:message for="run" style="color:red"  /></td>
                 </tr>
                 <tr>
                     <td>Comuna</td>

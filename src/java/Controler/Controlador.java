@@ -92,5 +92,8 @@ public class Controlador {
     public void actualizarOferta(ProductoDTO p) throws DAOException, SQLException{
          dao.actualizarOferta(p);
     }
+     public ArrayList<ProductoDTO> obtenerProductosPorCategoria(int idCategoria) throws DAOException {
+        return dao.obtenerProductosPorCategoria(idCategoria);
+    }
 
 }

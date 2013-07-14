@@ -4,6 +4,8 @@
  */
 package DTO;
 
+import javax.faces.event.AjaxBehaviorEvent;
+
 /**
  *
  * @author Sebastian
@@ -20,6 +22,7 @@ public class CategoriaDTO {
     }
 
     public int getIdCategoria() {
+       System.out.println("id categoria: "+idCategoria);
         return idCategoria;
     }
 
@@ -28,6 +31,7 @@ public class CategoriaDTO {
     }
 
     public String getNombre() {
+        
         return nombre;
     }
 
@@ -42,7 +46,7 @@ public class CategoriaDTO {
     public void setImagen(Byte imagen) {
         this.imagen = imagen;
     }
-
+   
     @Override
     public String toString() {
         return nombre;
