@@ -25,8 +25,12 @@
             <h1>Mantenedor de Categorias</h1>
 
             <h:form >
-                <h:commandButton value="Atras" action="carro"></h:commandButton>
-                <h:commandButton value="Crear nueva categoria" action="AgregarCategoria"></h:commandButton>
+                <p><h:commandButton value="Atras" action="carro"></h:commandButton>
+                    <h:commandButton value="Crear nueva categoria" actionListener="#{proyectoBean.refrescarVariablesCategoria()}" action="AgregarCategoria"></h:commandButton></p>
+                <h:outputLabel id="usernameLabel" for="username" value="Ingrese el nombre" />
+                <h:inputText id="username" value="#{proyectoBean.nameCategoria}" />
+                     <h:commandButton value="Buscar" action="Categoria.xhtml"></h:commandButton>
+                
                 <h:dataTable id="table123" value="#{proyectoBean.categorias}" var="item"  binding="#{proyectoBean.tablaCategorias}">
                     <h:column>
                         <f:facet name="header">

@@ -31,12 +31,12 @@ public class Controlador {
         }
     }
 
-    public ArrayList<ProductoDTO> obtenerTodosProductos() throws DAOException {
-        return dao.obtenerTodosProductos();
+    public ArrayList<ProductoDTO> obtenerTodosProductos(String nameProducto) throws DAOException {
+        return dao.obtenerTodosProductos(nameProducto);
     }
 
-    public ArrayList<CategoriaDTO> obtenerTodosCategorias() throws DAOException {
-        return dao.obtenerTodosCategoria();
+    public ArrayList<CategoriaDTO> obtenerTodosCategorias(String nameCategoria) throws DAOException {
+        return dao.obtenerTodosCategoria(nameCategoria);
     }
 
     public UsuarioDTO validarUser(String nombre, String pass) throws DAOException {
@@ -80,8 +80,8 @@ public class Controlador {
         //System.out.println("hola "+ user.toString());
         return dao.crearUsuario(user);
     }
-    public ArrayList<UsuarioDTO> obtenerUsuarios() throws DAOException, SQLException{
-        return dao.obtenerUsuarios();
+    public ArrayList<UsuarioDTO> obtenerUsuarios(String name) throws DAOException, SQLException{
+        return dao.obtenerUsuarios(name);
     }
     public String actualizarUsuario(UsuarioDTO user) throws DAOException, SQLException{
         return dao.actualizarUsuario(user);

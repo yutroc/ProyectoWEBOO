@@ -22,6 +22,9 @@
             <ui:include src="templates/header.xhtml"></ui:include>
             <h:form id ="tabla">
                 <h:commandButton value="Atras" action="carro"> </h:commandButton>
+                 <h:outputLabel id="usernameLabel" for="username" value="Ingrese el nombre" />
+                 <h:inputText id="username"  value="#{ofertaBean.nameProducto}" />
+                     <h:commandButton value="Buscar" action="Oferta.xhtml"></h:commandButton>
                 <h:dataTable id="table1" value="#{ofertaBean.productos}" var="item"  border="1"  binding="#{ofertaBean.tablaProductos}">
                     <h:column>
                         <f:facet name="header">

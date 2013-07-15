@@ -82,6 +82,10 @@ public class ProyectoBean {
     private String fileName;
     //carga de productos por categoria 
     CategoriaDTO cat;
+    //
+    String nameCategoria = "";
+    String nameProducto = "";
+
     public boolean isCrearVisible() {
         return crearVisible;
     }
@@ -102,11 +106,13 @@ public class ProyectoBean {
         crearVisible = false;
         editarVisible = false;
     }
+
     public void seleccionarCat(CategoriaDTO c) throws DAOException {
         cat = c;
-        productos=controller.obtenerProductosPorCategoria(cat.getIdCategoria());
+        productos = controller.obtenerProductosPorCategoria(cat.getIdCategoria());
         //System.out.println("Seleccionado: " + productoSeleccionado.toString());
     }
+
     public void seleccionar(ProductoDTO producto) {
         productoSeleccionado = producto;
         //System.out.println("Seleccionado: " + productoSeleccionado.toString());
@@ -123,17 +129,21 @@ public class ProyectoBean {
         this.descripcionProducto = productoSeleccionado.getDescripcion();
     }
 
+    public void refrescarVariablesCategoria(){
+        nombre="";
+    }
+
     public ArrayList<ProductoDTO> getProductosF() throws DAOException {
-        productos = controller.obtenerTodosProductos();
+        productos = controller.obtenerTodosProductos(nameProducto);
         return productos;
     }
 
     public ArrayList<ProductoDTO> getProductos() throws DAOException {
         if (productos == null) {
-            
-            productos = controller.obtenerTodosProductos();
-           
-            
+
+            productos = controller.obtenerTodosProductos("");
+
+
         }
         return productos;
     }
@@ -149,8 +159,16 @@ public class ProyectoBean {
         this.productos = productos;
     }
 
+    public String getNameProducto() {
+        return nameProducto;
+    }
+
+    public void setNameProducto(String nameProducto) {
+        this.nameProducto = nameProducto;
+    }
+
     public ArrayList<CategoriaDTO> getCategorias() throws DAOException {
-        return categorias = controller.obtenerTodosCategorias();
+        return categorias = controller.obtenerTodosCategorias(nameCategoria);
     }
 
     public void setCategorias(ArrayList<CategoriaDTO> categorias) {
@@ -413,8 +431,6 @@ public class ProyectoBean {
         this.cat = cat;
     }
 
-    
-
     public String getDescripcionProducto() {
         return descripcionProducto;
     }
@@ -423,15 +439,23 @@ public class ProyectoBean {
         this.descripcionProducto = descripcionProducto;
     }
 
+    public String getNameCategoria() {
+        return nameCategoria;
+    }
+
+    public void setNameCategoria(String nameCategoria) {
+        this.nameCategoria = nameCategoria;
+    }
+
     public String validarUsuario() throws DAOException {
         UsuarioDTO user = controller.validarUser(nombreUser, pass);
-        System.out.println("user "+user.getIdUsuario());
+        System.out.println("user " + user.getIdUsuario());
         if (user.getNombre().equals(nombreUser)) {
-            if(user.getIdUsuario()==1){
-            return "loginExitoso";//admin
-            }
-            else
+            if (user.getIdUsuario() == 1) {
+                return "loginExitoso";//admin
+            } else {
                 return "LoginNormal";
+            }
         } else {
             msg = "Datos ingresados son erróneos. Por favor, inténtelo otra vez.";
             return "LoginFallido";
@@ -457,10 +481,10 @@ public class ProyectoBean {
     }
 
     public void editarProducto() throws DAOException, SQLException {
-        if(!this.uploadedFile.getName().equals(null)){
+        if (!this.uploadedFile.getName().equals(null)) {
             submit();
         }
-        
+
         //ProductoDTO p = new ProductoDTO(0, nombrePN, descripcionNP, "sin imagen", stockPN, precioPN, ofertaPN, ofertaActivaPN, idCategoriaSelecionada);
         controller.editarProducto(this.productoSeleccionado);
         resetProducto();

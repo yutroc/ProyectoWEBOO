@@ -23,8 +23,11 @@
             <h1>Mantenedor de Usuarios</h1>
             <h:form>
                 <div class="limitedHeightDiv">
-                    <h:commandButton value="Atras" action="carro"></h:commandButton>
-                    <h:commandButton value="Crear Nuevo Usuario" action="registrar.xhtml"></h:commandButton>
+                    <P><h:commandButton value="Atras" action="carro"></h:commandButton>
+                        <h:commandButton value="Crear Nuevo Usuario" actionListener="#{userBean.refrescarVariables()}" action="registrar.xhtml"></h:commandButton></P>
+                    <h:outputLabel id="usernameLabel" for="username" value="Ingrese el nombre" />
+                    <h:inputText id="username" value="#{userBean.name}" />
+                     <h:commandButton value="Buscar" action="mostrarUsuario.xhtml"></h:commandButton>
                     <h:dataTable id ="tableUser" value="#{userBean.user}" var="user"  border="1"  binding="#{userBean.tablaUsuarios}">
                         <h:column>
                             <f:facet name="header">

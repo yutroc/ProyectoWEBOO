@@ -21,7 +21,7 @@ public class DAO {
         // TODO Auto-generated constructor stub
     }
 
-    public ArrayList<ProductoDTO> obtenerTodosProductos() throws DAOException {
+    public ArrayList<ProductoDTO> obtenerTodosProductos(String nameProducto) throws DAOException {
         // iniciar variables
         int idProducto = 0;
         String nombre = "";
@@ -39,7 +39,8 @@ public class DAO {
         //statment
         try {
             // setup statement and retrieve results
-            PreparedStatement pstmt = con.prepareStatement("SELECT \"idProducto\", \"nombre\", \"descripcion\", \"stock\", \"precio\", \"valorOferta\", \"ofertaActiva\", \"idCategoria\"" + "FROM \"Producto\" ORDER BY \"idProducto\";");
+            PreparedStatement pstmt = con.prepareStatement("SELECT \"idProducto\", \"nombre\", \"descripcion\", \"stock\", \"precio\", \"valorOferta\", \"ofertaActiva\", \"idCategoria\"" + "FROM \"Producto\" where \"nombre\" like ? ORDER BY \"idProducto\";");
+              pstmt.setString(1, "%"+nameProducto+"%");
             ResultSet rs = pstmt.executeQuery();
             //create the transfer object using data from rs
             while (rs.next()) {
@@ -77,7 +78,7 @@ public class DAO {
         return listaProductos;
     }
 
-    public ArrayList<CategoriaDTO> obtenerTodosCategoria() throws DAOException {
+    public ArrayList<CategoriaDTO> obtenerTodosCategoria(String nameCategoria) throws DAOException {
         // iniciar variables
         int idCategoria = 0;
         String nombre = "";
@@ -91,7 +92,8 @@ public class DAO {
         //statment
         try {
             // setup statement and retrieve results
-            PreparedStatement pstmt = con.prepareStatement("SELECT \"idCategoria\", \"nombre\", \"imagen\"" + "FROM \"Categoria\" ORDER BY \"nombre\";");
+            PreparedStatement pstmt = con.prepareStatement("SELECT \"idCategoria\", \"nombre\", \"imagen\"" + "FROM \"Categoria\" where \"nombre\" like ? order by \"nombre\";");
+            pstmt.setString(1, "%"+nameCategoria+"%");
             ResultSet rs = pstmt.executeQuery();
             //create the transfer object using data from rs
             while (rs.next()) {
@@ -436,7 +438,7 @@ public class DAO {
         return "mostrarUsuario.xhtml";
     }
 
-    public ArrayList<UsuarioDTO> obtenerUsuarios() throws DAOException, SQLException {
+    public ArrayList<UsuarioDTO> obtenerUsuarios(String name) throws DAOException, SQLException {
         int idUsuario = 0;
         String nombre = "";
         String aPaterno = "";
@@ -460,7 +462,8 @@ public class DAO {
             PreparedStatement pstmt = con.prepareStatement("SELECT nombre, \"aPaterno\", \"aMaterno\", rut, direccion, comuna, ciudad, \n"
                     + "       email, \"fechaRegistro\", \"contraseña\", telefono, \"idTipoUsuario\", \n"
                     + "       \"idUsuario\"\n"
-                    + "  FROM \"Usuario\";");
+                    + "  FROM \"Usuario\" where nombre like ?;");
+            pstmt.setString(1,  "%"+ name + "%");
             ResultSet rs = pstmt.executeQuery();
             //create the transfer object using data from rs
             while (rs.next()) {

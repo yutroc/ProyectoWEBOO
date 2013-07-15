@@ -32,13 +32,13 @@ public class OfertaBean {
       int precio ;
       int valorOferta;
       boolean  activada;
-        
+      String nameProducto="";  
     public OfertaBean() {
       
     }
 
     public ArrayList<ProductoDTO> getProductos() throws DAOException {
-        productos=controller.obtenerTodosProductos();
+        productos=controller.obtenerTodosProductos(nameProducto);
         for(ProductoDTO p :productos ){
             System.out.println(p.toString());
         }
@@ -103,6 +103,14 @@ public class OfertaBean {
 
     public void setActivada(boolean activada) {
         this.activada = activada;
+    }
+
+    public String getNameProducto() {
+        return nameProducto;
+    }
+
+    public void setNameProducto(String nameProducto) {
+        this.nameProducto = nameProducto;
     }
     
     public String seleccionarProducto(){
