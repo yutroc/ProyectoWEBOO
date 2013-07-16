@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <h:head>
         <title>Demacia Food Store</title>
@@ -17,32 +18,40 @@
     <h:body>
         <div id="main_container">
             <ui:include src="templates/header.xhtml"></ui:include>
-            <ui:include src="templates/left_content.xhtml"></ui:include>
+
             
             <!-- Editar desde aqui -->
-            <div class="center_content">
-         <h:form>
-            
-            <table>
-                <tr>
-                    <td> Nombre de usuario</td>
-                    <td><h:inputText value="#{proyectoBean.nombreUser}"/></td>
-                </tr>
-                <tr>
-                    <td>Contrase&ntilde;a</td>
-                    <td><h:inputSecret value="#{proyectoBean.pass}"/></td>
-                </tr>
-            </table>
-             <p><h:commandButton value="Entrar"  action="#{proyectoBean.validarUsuario()}"  /></p>
-             <h:outputLabel value ="#{proyectoBean.msg}" style="color: red"></h:outputLabel >
-            
-        </h:form>
+
+            <h1>Ingresa a tu Cuenta</h1>
+            <div class="login">
+
+                <h:form>
+                    <div>
+                        <table class="iniciaSesion">
+                            <tr>
+                                <td><h2>Nombre de usuario</h2></td>
+                            </tr>
+                            <tr>
+                                <td><h:inputText value="#{proyectoBean.nombreUser}"/></td>
+                            </tr>
+                            <tr>
+                                <td><h2>Contrase&ntilde;a</h2></td></tr>
+                            <tr>
+                                <td><h:inputSecret value="#{proyectoBean.pass}"/></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="iniciaSesion">
+                        <p><h:commandButton value="Entrar"  action="#{proyectoBean.validarUsuario()}"  /></p>
+                        <h:outputLabel value ="#{proyectoBean.msg}" style="color: red"></h:outputLabel >
+                    </div>
+                </h:form>
             </div>
-            
+
             <!-- Hasta aca -->
-            
-            
-            <ui:include src="templates/right_content.xhtml"></ui:include>
+
+
+
             <ui:include src="templates/footer.xhtml"></ui:include>
         </div>
     </h:body>

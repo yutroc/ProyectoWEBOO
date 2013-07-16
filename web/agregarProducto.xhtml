@@ -125,6 +125,7 @@
 
 
                 <h:form  enctype="multipart/form-data">
+
                     <table>
                         <tr>
                             <td> Id</td>
@@ -178,6 +179,7 @@
                         </tr>
                     </table>
 
+
                     <p><h:commandButton value="Editar" action="#{proyectoBean.editarProducto()}"/></p>
                 </h:form>
             </div>
@@ -189,48 +191,45 @@
             <!--<h:outputLabel value ="#{proyectoBean.stockPN}" style="color: red"></h:outputLabel >
             <h:outputLabel value ="#{proyectoBean.ofertaPN}" style="color: red"></h:outputLabel >
             <h:outputLabel value ="#{proyectoBean.ofertaActivaPN}" style="color: red"></h:outputLabel >-->
-           
+
             <div class="limitedHeightDiv">
                 <h:form>
-                     <p><h:outputLabel id="usernameLabel" for="username" value="Ingrese el nombre" />
-            <h:inputText id="username" value="#{proyectoBean.nameProducto}" />
-            <h:commandButton value="Buscar" action="agregarProducto.xhtml"></h:commandButton></p>
-                    <h:dataTable id="table1" value="#{proyectoBean.getProductosF()}" var="item"  border="1" binding="#{proyectoBean.tablaProductos}">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="ID"/>
-                            </f:facet>
-                            #{item.idProducto}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="NOMBRE"/>
-                            </f:facet>
-                            #{item.nombre}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="DESCRIPCION"/>
-                            </f:facet>
-                            #{item.descripcion}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="EDITAR"/>
-                            </f:facet>
-                            <div>
-                                <button type="button" id="opener2" onclick="dialog2.dialog('open');" >editar </button>
-                                <!--<h:commandLink value ="Editar" action="#{proyectoBean.seleccionProducto()}"></h:commandLink>-->
-                            </div>
+                    <p><h:outputLabel id="usernameLabel" for="username" value="Ingrese el nombre" />
+                        <h:inputText id="username" value="#{proyectoBean.nameProducto}" />
+                        <h:commandButton value="Buscar" action="agregarProducto.xhtml"></h:commandButton></p>
+                    <div class="datagrid">
+                        <h:dataTable id="table1" value="#{proyectoBean.getProductosF()}" var="item"  border="1" binding="#{proyectoBean.tablaProductos}">
+                            
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="NOMBRE"/>
+                                </f:facet>
+                                #{item.nombre}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="DESCRIPCION"/>
+                                </f:facet>
+                                #{item.descripcion}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="EDITAR"/>
+                                </f:facet>
+                                <div>
+                                    <button type="button" id="opener2" onclick="dialog2.dialog('open');" >editar </button>
+                                    <!--<h:commandLink value ="Editar" action="#{proyectoBean.seleccionProducto()}"></h:commandLink>-->
+                                </div>
 
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="ELIMINAR"/>
-                            </f:facet>
-                            <h:commandLink value ="Eliminar" action="#{proyectoBean.seleccionProducto()}"></h:commandLink>
-                        </h:column>
-                    </h:dataTable>              
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ELIMINAR"/>
+                                </f:facet>
+                                <h:commandLink value ="Eliminar" action="#{proyectoBean.seleccionProducto()}"></h:commandLink>
+                            </h:column>
+                        </h:dataTable>     
+                    </div>
                 </h:form>
 
             </div>  

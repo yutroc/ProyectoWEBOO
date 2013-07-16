@@ -5,7 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        Mantenedor Categorias
+
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
         <link rel="stylesheet" type="text/css" href="style.css" />
         <style>         
@@ -18,56 +18,52 @@
         </style>
     </h:head>
     <h:body>
-
         <div id="main_container">
-
             <ui:include src="templates/header.xhtml"></ui:include>
             <h1>Mantenedor de Categorias</h1>
-
             <h:form >
                 <p><h:commandButton value="Atras" action="carro"></h:commandButton>
                     <h:commandButton value="Crear nueva categoria" actionListener="#{proyectoBean.refrescarVariablesCategoria()}" action="AgregarCategoria"></h:commandButton></p>
                 <h:outputLabel id="usernameLabel" for="username" value="Ingrese el nombre" />
                 <h:inputText id="username" value="#{proyectoBean.nameCategoria}" />
-                     <h:commandButton value="Buscar" action="Categoria.xhtml"></h:commandButton>
-                
-                <h:dataTable id="table123" value="#{proyectoBean.categorias}" var="item"  binding="#{proyectoBean.tablaCategorias}">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="id Categoria"/>
-                        </f:facet>
-                        #{item.idCategoria}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="NOMBRE"/>
-                        </f:facet>
-                        #{item.nombre}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="IMAGEN"/>
-                        </f:facet>
-                        #{item.imagen}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Editar"/>
-                        </f:facet>
-                        <h:commandLink  value ="Editar" action="#{proyectoBean.seleccionCategoria()}"></h:commandLink>
+                <h:commandButton value="Buscar" action="Categoria.xhtml"></h:commandButton>
+                <div class="datagrid">
+                    <h:dataTable id="table123" value="#{proyectoBean.categorias}" var="item"  binding="#{proyectoBean.tablaCategorias}">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="id Categoria"/>
+                            </f:facet>
+                            #{item.idCategoria}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="NOMBRE"/>
+                            </f:facet>
+                            #{item.nombre}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="IMAGEN"/>
+                            </f:facet>
+                            #{item.imagen}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Editar"/>
+                            </f:facet>
+                            <h:commandLink  value ="Editar" action="#{proyectoBean.seleccionCategoria()}"></h:commandLink>
 
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Eliminar"/>
-                        </f:facet>
-                        <h:commandLink  value ="Eliminar" action="#{proyectoBean.eliminarCategoria()}"></h:commandLink>
-                    </h:column>
-                </h:dataTable>
-
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Eliminar"/>
+                            </f:facet>
+                            <h:commandLink  value ="Eliminar" action="#{proyectoBean.eliminarCategoria()}"></h:commandLink>
+                        </h:column>
+                    </h:dataTable>
+                </div>
             </h:form>
             <ui:include src="templates/footer.xhtml"></ui:include>
         </div>
     </h:body>
 </html>
-

@@ -5,7 +5,6 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        Ofertas
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
         <link rel="stylesheet" type="text/css" href="style.css"></link>
         <style>         
@@ -20,49 +19,52 @@
     <h:body>
         <div id="main_container">
             <ui:include src="templates/header.xhtml"></ui:include>
+            <h1>Mantenedor de Ofertas</h1>
             <h:form id ="tabla">
                 <h:commandButton value="Atras" action="carro"> </h:commandButton>
-                 <h:outputLabel id="usernameLabel" for="username" value="Ingrese el nombre" />
-                 <h:inputText id="username"  value="#{ofertaBean.nameProducto}" />
-                     <h:commandButton value="Buscar" action="Oferta.xhtml"></h:commandButton>
-                <h:dataTable id="table1" value="#{ofertaBean.productos}" var="item"  border="1"  binding="#{ofertaBean.tablaProductos}">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Id Producto"/>
-                        </f:facet>
-                        #{item.idProducto}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Nombre"/>
-                        </f:facet>
-                        #{item.nombre}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Precio"/>
-                        </f:facet>
-                        #{item.precio}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Precio oferta"/>
-                        </f:facet>
-                        #{item.valorOferta}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Oferta activada"/>
-                        </f:facet>
-                        <h:selectBooleanCheckbox value="#{item.ofertaActiva}" disabled="true" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Editar"/>
-                        </f:facet>
-                        <h:commandLink  value ="Editar" action="#{ofertaBean.seleccionarProducto()}"/>
-                    </h:column>
-                </h:dataTable>
+                <h:outputLabel id="usernameLabel" for="username" value="Ingrese el nombre" />
+                <h:inputText id="username"  value="#{ofertaBean.nameProducto}" />
+                <h:commandButton value="Buscar" action="Oferta.xhtml"></h:commandButton>
+                <div class="datagrid">
+                    <h:dataTable id="table1" value="#{ofertaBean.productos}" var="item"  border="1"  binding="#{ofertaBean.tablaProductos}">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id Producto"/>
+                            </f:facet>
+                            #{item.idProducto}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nombre"/>
+                            </f:facet>
+                            #{item.nombre}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Precio"/>
+                            </f:facet>
+                            #{item.precio}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Precio oferta"/>
+                            </f:facet>
+                            #{item.valorOferta}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Oferta activada"/>
+                            </f:facet>
+                            <h:selectBooleanCheckbox value="#{item.ofertaActiva}" disabled="true" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Editar"/>
+                            </f:facet>
+                            <h:commandLink  value ="Editar" action="#{ofertaBean.seleccionarProducto()}"/>
+                        </h:column>
+                    </h:dataTable>
+                </div>
             </h:form>
         </div>
     </h:body>

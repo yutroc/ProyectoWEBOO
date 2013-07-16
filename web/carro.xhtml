@@ -17,23 +17,36 @@
     <h:body>
         <div id="main_container">
             <ui:include src="templates/header.xhtml"></ui:include>
-            <ui:include src="templates/left_content.xhtml"></ui:include>
 
             <!-- Editar desde aqui -->
             <div class="center_content">
                 <h:form>
                     <h1>Menu de administrador</h1>
-                    <h2><h:commandLink  value ="Mantenedor usuarios" action="mostrarUsuario"></h:commandLink></h2>
-                    <h2><h:commandLink  value ="Mantenedor compras" action="MantenedorCompras"></h:commandLink></h2>
-                    <h2> <h:commandLink  value ="Mantenedor categorias" action="Categoria"></h:commandLink></h2>
-                    <h2> <h:commandLink  value ="Mantenedor productos" action="agregarProducto"></h:commandLink></h2>
-                     <h2> <h:commandLink  value ="Configurar ofertas" action="Oferta"></h:commandLink></h2>
+                    <div class="menuAdm">
+                        <ul>
+                            <li>
+                                <h:commandLink  value ="Mantenedor usuarios" action="mostrarUsuario"></h:commandLink>
+                            </li>
+                            <li>
+                                <h:commandLink  value ="Mantenedor compras" action="MantenedorCompras"></h:commandLink>
+                            </li>
+                            <li>
+                                <h:commandLink  value ="Mantenedor categorias" action="Categoria"></h:commandLink>
+                            </li>
+                            <li>
+                                <h:commandLink  value ="Mantenedor productos" action="agregarProducto"></h:commandLink>
+                            </li>
+                            <li>
+                                <h:commandLink  value ="Configurar ofertas" action="Oferta"></h:commandLink>
+                            </li>
+                        </ul>
+                    </div>
                 </h:form>
             </div>
 
             <!-- Hasta aca -->
 
-            <ui:include src="templates/right_content.xhtml"></ui:include>
+
             <ui:include src="templates/footer.xhtml"></ui:include>
         </div>
     </h:body>

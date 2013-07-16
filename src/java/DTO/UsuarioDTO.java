@@ -155,6 +155,14 @@ public class UsuarioDTO {
         return idTipo;
     }
 
+    public String getIdTipoString() {
+        if (this.getIdTipo()==0) {
+           return "Admin";
+        }else{
+            return "User";
+        }
+    }
+    
     public void setIdTipo(int idTipo) {
         this.idTipo = idTipo;
     }

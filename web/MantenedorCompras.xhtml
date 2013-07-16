@@ -20,48 +20,51 @@
     <h:body>
         <div id="main_container">
             <ui:include src="templates/header.xhtml"></ui:include>
+            <h1>Mantenedor de Compras</h1>
             <h:form >
                 <h:commandButton value="Atras" action="carro"></h:commandButton>
                 <div class="limitedHeightDiv">
-                    <h:dataTable id="table1" value="#{compraBean.compras}" var="item"  border="1" binding="#{compraBean.tablaCompras}">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText  value="Id Compra"/>
-                            </f:facet>
-                            #{item.idCarro}
-                        </h:column>
-                        <h:column>
-                            <f:facet  name="header">
-                                <h:outputText value="Id Usuario"/>
-                            </f:facet>
-                            #{item.idUsuario}
-                        </h:column>
-                        <h:column>
-                            <f:facet  name="header">
-                                <h:outputText value="Estado"/>
-                            </f:facet>
-                            #{item.estado}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Fecha Creación"/>
-                            </f:facet>
-                            #{item.fechaCreacion}
-                        </h:column>
-                        <h:column>
-                            <f:facet  name="header">
-                                <h:outputText value="Fecha Eliminación"/>
-                            </f:facet>
-                            #{item.fechaFinalizacion}
-                        </h:column>
-                        <h:column>
-                            <f:facet  name="header">
-                                <h:outputText value="Eliminar"/>
-                            </f:facet>
-                            <h:commandButton  value ="Eliminar" action="#{compraBean.eliminarCompra()}"></h:commandButton>
-                        </h:column>
-                    </h:dataTable>
-                    <!--<h:outputLabel value ="#{proyectoBean.nombreProducto}" style="color: red"></h:outputLabel >-->
+                    <div class="datagrid">
+                        <h:dataTable id="table1" value="#{compraBean.compras}" var="item"  border="1" binding="#{compraBean.tablaCompras}">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText  value="Id Compra"/>
+                                </f:facet>
+                                #{item.idCarro}
+                            </h:column>
+                            <h:column>
+                                <f:facet  name="header">
+                                    <h:outputText value="Id Usuario"/>
+                                </f:facet>
+                                #{item.idUsuario}
+                            </h:column>
+                            <h:column>
+                                <f:facet  name="header">
+                                    <h:outputText value="Estado"/>
+                                </f:facet>
+                                #{item.estado}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Fecha Creación"/>
+                                </f:facet>
+                                #{item.fechaCreacion}
+                            </h:column>
+                            <h:column>
+                                <f:facet  name="header">
+                                    <h:outputText value="Fecha Eliminación"/>
+                                </f:facet>
+                                #{item.fechaFinalizacion}
+                            </h:column>
+                            <h:column>
+                                <f:facet  name="header">
+                                    <h:outputText value="Eliminar"/>
+                                </f:facet>
+                                <h:commandButton  value ="Eliminar" action="#{compraBean.eliminarCompra()}"></h:commandButton>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                <!--<h:outputLabel value ="#{proyectoBean.nombreProducto}" style="color: red"></h:outputLabel >-->
                 </div>
             </h:form>
             <ui:include src="templates/footer.xhtml"></ui:include>
