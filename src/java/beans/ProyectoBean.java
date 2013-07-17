@@ -493,7 +493,7 @@ public class ProyectoBean {
             if (user.getIdUsuario() == 1) {
                 return "loginExitoso";//admin
             } else {
-                return "LoginNormal";
+                return "index";
             }
         } else {
             msg = "Datos ingresados son erróneos. Por favor, inténtelo otra vez.";

@@ -14,7 +14,7 @@ import utils.DAOException;
  *
  * @author object
  */
-class DAOController {
+public class DAOController {
     
     public static final String DRIVER = "org.postgresql.Driver";
     public static final String DBURL = "jdbc:postgresql://colvin.chillan.ubiobio.cl:5432/SisVenta";
