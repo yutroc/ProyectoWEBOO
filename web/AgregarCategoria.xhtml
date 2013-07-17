@@ -18,23 +18,28 @@
         </style>
     </h:head>
     <h:body>
-        <ui:include src="templates/header.xhtml"></ui:include>
-        <h:form id ="insert">
-            <table>
+        <div id="main_container">
 
-                <tr>
-                    <td>Nombre </td>
-                    <td><h:inputText value="#{proyectoBean.nombre}">
-                            <f:validateLength minimum="1" maximum="50" />
-                        </h:inputText>
-                        <h:message for="run" style="color:red" />
-                    </td>
-                </tr>             
-            </table>
-            <p><h:commandButton value="Cancelar"  action="MantenedorCategorias" immediate="true"/></p>
-            <p><h:commandButton value="Crear" action="#{proyectoBean.crearCategoria()}"/></p>
-        </h:form>
-        <ui:include src="templates/footer.xhtml"></ui:include>
+            <ui:include src="templates/header.xhtml"></ui:include>
+            <h1>Agregar Nueva Categoria</h1>
+            <div class="login">
+                <h:form id ="insert">
+                    <table>
+                        <tr>
+                            <td>Nombre </td>
+                            <td><h:inputText value="#{proyectoBean.nombre}">
+                                    <f:validateLength minimum="1" maximum="50" />
+                                </h:inputText>
+                                <h:message for="run" style="color:red" />
+                            </td>
+                        </tr>             
+                    </table>
+                    <p><h:commandButton value="Cancelar"  action="MantenedorCategorias" immediate="true"/></p>
+                    <p><h:commandButton value="Crear" action="#{proyectoBean.crearCategoria()}"/></p>
+                </h:form>
+            </div>
+            <ui:include src="templates/footer.xhtml"></ui:include>
+        </div>
     </h:body>
 </html>
 

@@ -29,24 +29,14 @@
                 <h:commandButton value="Buscar" action="Categoria.xhtml"></h:commandButton>
                 <div class="datagrid">
                     <h:dataTable id="table123" value="#{proyectoBean.categorias}" var="item"  binding="#{proyectoBean.tablaCategorias}">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="id Categoria"/>
-                            </f:facet>
-                            #{item.idCategoria}
-                        </h:column>
+                        
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="NOMBRE"/>
                             </f:facet>
                             #{item.nombre}
                         </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="IMAGEN"/>
-                            </f:facet>
-                            #{item.imagen}
-                        </h:column>
+                        
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Editar"/>

@@ -32,17 +32,11 @@
 
             <h1>Mantenedor de Productos</h1>
             <h:form><h:commandButton value="Atras" action="MantenedorProductos"></h:commandButton></h:form>
-
-
             <!-- Editar desde aqui -->
             <div id="dialog" title="Agregar un producto" >
                 <h:form >
 
                     <table>
-                        <tr>
-                            <td> Id</td>
-                            <td><h:inputText value="#{proyectoBean.idPN}"/></td>
-                        </tr>
                         <tr>
                             <td>Nombre </td>
                             <td><h:inputText value="#{proyectoBean.nombrePN}"/></td>
@@ -50,7 +44,6 @@
                         <tr>
                             <td>Categoria </td>
                             <td>
-
                                 <h:selectOneMenu id="idCategoriaMenu" value="#{proyectoBean.idCategoriaSelecionada}">
 
                                     <f:selectItems value="#{proyectoBean.getCategorias()}" var="s" 
@@ -69,6 +62,7 @@
                         <tr>
                             <td>oferta Activa </td>
                             <td><h:inputText value="#{proyectoBean.ofertaActivaPN}" /></td>
+                            
                         </tr>
                         <tr>
                             <td>Precio </td>

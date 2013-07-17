@@ -28,15 +28,15 @@
                         <h:dataTable id="table1" value="#{compraBean.compras}" var="item"  border="1" binding="#{compraBean.tablaCompras}">
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText  value="Id Compra"/>
+                                    <h:outputText  value="Cod Compra"/>
                                 </f:facet>
                                 #{item.idCarro}
                             </h:column>
                             <h:column>
                                 <f:facet  name="header">
-                                    <h:outputText value="Id Usuario"/>
+                                    <h:outputText value="Usuario"/>
                                 </f:facet>
-                                #{item.idUsuario}
+                                #{item.usuario}
                             </h:column>
                             <h:column>
                                 <f:facet  name="header">
@@ -55,12 +55,6 @@
                                     <h:outputText value="Fecha Eliminación"/>
                                 </f:facet>
                                 #{item.fechaFinalizacion}
-                            </h:column>
-                            <h:column>
-                                <f:facet  name="header">
-                                    <h:outputText value="Eliminar"/>
-                                </f:facet>
-                                <h:commandButton  value ="Eliminar" action="#{compraBean.eliminarCompra()}"></h:commandButton>
                             </h:column>
                         </h:dataTable>
                     </div>

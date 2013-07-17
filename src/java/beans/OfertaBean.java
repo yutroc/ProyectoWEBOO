@@ -130,6 +130,6 @@ public class OfertaBean {
     public String actualizarOferta() throws DAOException, SQLException{
         ProductoDTO p=new ProductoDTO(idProducto,nombreProducto,precio,valorOferta,activada);
          controller.actualizarOferta(p);
-         return "Oferta";
+         return "MantenedorOfertas.xhtml";
     }
 }

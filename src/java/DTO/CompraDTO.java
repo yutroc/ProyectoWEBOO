@@ -17,6 +17,7 @@ public class CompraDTO {
     private Date fechaCreacion;
     private Date fechaFinalizacion;
     private String idUsuario;
+    private String usuario;
 
     public CompraDTO(int idCarro, String idUsuario, int estado, Date fechaCreacion, Date fechaFinalizacion) {
         this.idCarro = idCarro;
@@ -24,6 +25,23 @@ public class CompraDTO {
         this.estado = estado;
         this.fechaCreacion = fechaCreacion;
         this.fechaFinalizacion = fechaFinalizacion;
+    }
+
+    public CompraDTO(int idCarro, String idUsuario, int estado, Date fechaCreacion, Date fechaFinalizacion, String usuario) {
+        this.idCarro = idCarro;
+        this.idUsuario = idUsuario;
+        this.estado = estado;
+        this.fechaCreacion = fechaCreacion;
+        this.fechaFinalizacion = fechaFinalizacion;
+        this.usuario = usuario;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getIdUsuario() {

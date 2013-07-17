@@ -627,6 +627,7 @@ a.contact{
     float: inside;
     width: 300px;
     margin: 20px auto 40px auto;
+    font-size: 1.5em;
 }
 
 h1 {
@@ -638,7 +639,7 @@ h2{
     color : #7C6D01;
     font-family: 'WOL_SB','Segoe UI Semibold','Segoe UI',Tahoma,Helvetica,sans-serif;
     margin-bottom: 0px;
-    font-size: 1.8em;
+    font-size: 1.4em;
 }
 
 .login input{
@@ -738,3 +739,6 @@ h2{
     background-color: rgba(149,137,0,0.5);
 }
 
+.letraGrande{
+    font-size: 14px; 
+}

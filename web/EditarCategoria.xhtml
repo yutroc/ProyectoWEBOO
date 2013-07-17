@@ -2,26 +2,35 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>Editar categoria</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
     </h:head>
     <h:body>
-        <h:form id ="update">
-            <table>
-                <tr>
-                    <td>Nombre </td>
-                    <td><h:inputText value="#{proyectoBean.nombreCategoriaSeleccionada}">
-                     <f:validateLength minimum="1" maximum="50" />
-                        </h:inputText>
-                        <h:message for="run" style="color:red" /></td>
-                    
-                </tr>             
-            </table>
-            <h:commandButton value="Cancelar" action="Categoria" immediate="true"/>
-            <h:commandButton value="Actualizar" action="#{proyectoBean.actualizarCategoria()}"/>
-             
-        </h:form>
+        <div id="main_container">
+            <ui:include src="templates/header.xhtml"></ui:include>
+            <div class="login">
+                <h1>Editando Categoria</h1>
+                <h:form id ="update">
+                    <table>
+                        <tr>
+                            <td>Nombre </td>
+                            <td><h:inputText value="#{proyectoBean.nombreCategoriaSeleccionada}">
+                                    <f:validateLength minimum="1" maximum="50" />
+                                </h:inputText>
+                                <h:message for="run" style="color:red" /></td>
+
+                        </tr>             
+                    </table>
+                    <h:commandButton value="Cancelar" action="MantenedorCategorias.xhtml" immediate="true"/>
+                    <h:commandButton value="Actualizar" action="#{proyectoBean.actualizarCategoria()}"/>
+
+                </h:form>
+            </div>
+            <ui:include src="templates/footer.xhtml"></ui:include>
+        </div>
     </h:body>
 </html>
 

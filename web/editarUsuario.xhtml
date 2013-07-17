@@ -2,70 +2,79 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>Editar Usuario</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
     </h:head>
     <h:body>
-        <h:form>
-            <table border="4">
-                <tr>
-                    <td>Nombre</td>
-                    <td><h:inputText id="inputNombre" value="#{userBean.nombreUsuario}"></h:inputText></td>
-                </tr>
-                <tr>
-                    <td>Apellido Paterno</td>
-                    <td><h:inputText id="inputAPaterno" value="#{userBean.APaternoUsuario}"></h:inputText></td>
-                </tr>
-                <tr>
-                    <td>Apellido Materno</td>
-                    <td><h:inputText id="inputAMaterno" value="#{userBean.AMaternoUsuario}"></h:inputText></td>
-                </tr>
-                <tr>
-                    <td>RUT</td>
-                    <td><h:inputText id="inputRUT" value="#{userBean.rutUsuario}">
-                     <f:validateRegex pattern="^\d{1,2}\.\d{3}\.\d{3}[-][0-9kK]{1}$"/></h:inputText>
-                        <h:message for="run" style="color:red"  /></td>
-                </tr>
-                <tr>
-                    <td>Comuna</td>
-                    <td><h:inputText id="inputComuna" value="#{userBean.comunaUsuario}"></h:inputText></td>
-                </tr>
-                <tr>
-                    <td>Ciudad</td>
-                    <td><h:inputText id="inputCiudad" value="#{userBean.ciudadUsuario}"></h:inputText></td>
-                </tr>
-                <tr>
-                    <td>Direccion</td>
-                    <td><h:inputText id="inputDireccion" value="#{userBean.direccionUsuario}"></h:inputText></td>
-                </tr>
-                <tr>
-                    <td>Email</td>
-                    <td><h:inputText id="inputEmail" value="#{userBean.emailUsuario}"></h:inputText></td>
-                </tr>
-                <tr>
-                    <td>Telefono</td>
-                    <td><h:inputText id="inputtelefono" value="#{userBean.telefonoUsuario}"></h:inputText></td>
-                </tr>
-                <tr>
-                    <td>Contraseña</td>
-                    <td><h:inputText id="inputPass" value="#{userBean.passUsuario}"></h:inputText></td>
-                    <h:inputHidden id="hiddenID" value="#{userBean.idUsuario}"/>
-                </tr>
-                <tr>
-                    <td>Tipo de Usuario</td>
-                    <td>
-                        <h:selectOneMenu id="selectTipo" value="#{userBean.idTipoUsuario}">
-                            <f:selectItem itemLabel="Administrador" itemValue="0" />
-                            <f:selectItem itemLabel="Cliente" itemValue="1" />
-                        </h:selectOneMenu>
-                    </td>
-                </tr>
-            </table>
-            <h:commandButton value="Cancelar" action="mostrarUsuario.xhtml" immediate="true"/>
-            <h:commandButton value="Actualizar" action="#{userBean.actualizarUsuario}"/>
-             
-        </h:form>
+        <div id="main_container">
+            <ui:include src="templates/header.xhtml"></ui:include>
+
+            <h1>Editando Usuario</h1>
+            <div class="login">
+
+                <h:form>
+                    <table border="3">
+                        <tr>
+                            <td>Nombre</td>
+                            <td><h:inputText id="inputNombre" value="#{userBean.nombreUsuario}"></h:inputText></td>
+                        </tr>
+                        <tr>
+                            <td>Apellido Paterno</td>
+                            <td><h:inputText id="inputAPaterno" value="#{userBean.APaternoUsuario}"></h:inputText></td>
+                        </tr>
+                        <tr>
+                            <td>Apellido Materno</td>
+                            <td><h:inputText id="inputAMaterno" value="#{userBean.AMaternoUsuario}"></h:inputText></td>
+                        </tr>
+                        <tr>
+                            <td>RUT</td>
+                            <td><h:inputText id="inputRUT" value="#{userBean.rutUsuario}" /></td>
+                        </tr>
+                        <tr>
+                            <td>Comuna</td>
+                            <td><h:inputText id="inputComuna" value="#{userBean.comunaUsuario}"></h:inputText></td>
+                        </tr>
+                        <tr>
+                            <td>Ciudad</td>
+                            <td><h:inputText id="inputCiudad" value="#{userBean.ciudadUsuario}"></h:inputText></td>
+                        </tr>
+                        <tr>
+                            <td>Direccion</td>
+                            <td><h:inputText id="inputDireccion" value="#{userBean.direccionUsuario}"></h:inputText></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td><h:inputText id="inputEmail" value="#{userBean.emailUsuario}"></h:inputText></td>
+                        </tr>
+                        <tr>
+                            <td>Telefono</td>
+                            <td><h:inputText id="inputtelefono" value="#{userBean.telefonoUsuario}"></h:inputText></td>
+                        </tr>
+                        <tr>
+                            <td>ContraseÃƒÂ±a</td>
+                            <td><h:inputText id="inputPass" value="#{userBean.passUsuario}"></h:inputText></td>
+                            <h:inputHidden id="hiddenID" value="#{userBean.idUsuario}"/>
+                        </tr>
+                        <tr>
+                            <td>Tipo de Usuario</td>
+                            <td>
+                                <h:selectOneMenu id="selectTipo" value="#{userBean.idTipoUsuario}">
+                                    <f:selectItem itemLabel="Administrador" itemValue="0" />
+                                    <f:selectItem itemLabel="Cliente" itemValue="1" />
+                                </h:selectOneMenu>
+                            </td>
+                        </tr>
+                    </table>
+                    <h:commandButton value="Cancelar" action="MantenedorUsuarios.xhtml" immediate="true"/>
+                    <h:commandButton value="Actualizar" action="#{userBean.actualizarUsuario}"/>
+
+                </h:form>
+            </div>
+            <ui:include src="templates/footer.xhtml"></ui:include>
+        </div>
     </h:body>
 </html>
 

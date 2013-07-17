@@ -6,23 +6,30 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
-    <head>
-        <title>Carrito de Compra</title>
-    </head>
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </h:head>
     <body>
-        <div>Editar Cantidad</div>
-        <h:form>
-            <table boder="4">
-                <tr>
-                    <td>Cantidad</td>
-                    <td><h:inputText value="#{carroBean.cantidad}"></h:inputText></td>
-                    <td><h:inputHidden value="#{carroBean.idVentaProducto}"></h:inputHidden></td>
-                </tr>
-                <tr>
-                    <td><h:commandLink id="linkActualizar" action="#{carroBean.updateCant}">Actualizar</h:commandLink></td>
-                </tr>
-            </table>
-        </h:form>
+        <div id="main_container">
+            <ui:include src="templates/header.xhtml"></ui:include>
+            <h1>Editando Oferta</h1>
+            <div>Editar Cantidad</div>
+            <h:form>
+                <table boder="4">
+                    <tr>
+                        <td>Cantidad</td>
+                        <td><h:inputText value="#{carroBean.cantidad}"></h:inputText></td>
+                        <td><h:inputHidden value="#{carroBean.idVentaProducto}"></h:inputHidden></td>
+                    </tr>
+                    <tr>
+                        <td><h:commandLink id="linkActualizar" action="#{carroBean.updateCant}">Actualizar</h:commandLink></td>
+                    </tr>
+                </table>
+            </h:form>
+            <ui:include src="templates/footer.xhtml"></ui:include>
+        </div>
     </body>
 </html>

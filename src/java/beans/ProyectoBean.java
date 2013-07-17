@@ -36,7 +36,6 @@ import org.apache.myfaces.custom.fileupload.UploadedFile;
  *
  * @author Javier Andana
  */
-
 @ManagedBean
 @SessionScoped
 public class ProyectoBean {
@@ -129,7 +128,7 @@ public class ProyectoBean {
         this.nombreProducto = productoSeleccionado.getNombre();
         this.descripcionProducto = productoSeleccionado.getDescripcion();
     }
-    
+
     public void eliminarProducto() throws DAOException, SQLException {
         //UIComponent myComponent = FacesContext.getCurrentInstance().getViewRoot().findComponent("dialog2");
         productoSeleccionado = (ProductoDTO) tablaProductos.getRowData();
@@ -139,10 +138,10 @@ public class ProyectoBean {
         this.idProducto = productoSeleccionado.getIdProducto();
         this.nombreProducto = productoSeleccionado.getNombre();
         this.descripcionProducto = productoSeleccionado.getDescripcion();
-        
+
         controller.eliminarProducto(this.productoSeleccionado);
     }
-    
+
     public String ireditarProducto() {
         //UIComponent myComponent = FacesContext.getCurrentInstance().getViewRoot().findComponent("dialog2");
         productoSeleccionado = (ProductoDTO) tablaProductos.getRowData();
@@ -155,8 +154,8 @@ public class ProyectoBean {
         return "EditarProducto";
     }
 
-    public void refrescarVariablesCategoria(){
-        nombre="";
+    public void refrescarVariablesCategoria() {
+        nombre = "";
     }
 
     public ArrayList<ProductoDTO> getProductosF() throws DAOException {
@@ -500,10 +499,11 @@ public class ProyectoBean {
 
     }
 
-    public void crearProducto() throws DAOException, SQLException {
+    public String crearProducto() throws DAOException, SQLException {
         ProductoDTO p = new ProductoDTO(0, nombrePN, descripcionNP, "sin imagen", stockPN, precioPN, ofertaPN, ofertaActivaPN, idCategoriaSelecionada);
         controller.crearProducto(p);
         resetProducto();
+        return "MantenedorProductos.xhtml";
     }
 
     public String editarProducto() throws DAOException, SQLException {
@@ -514,13 +514,13 @@ public class ProyectoBean {
         //ProductoDTO p = new ProductoDTO(0, nombrePN, descripcionNP, "sin imagen", stockPN, precioPN, ofertaPN, ofertaActivaPN, idCategoriaSelecionada);
         controller.editarProducto(this.productoSeleccionado);
         resetProducto();
-        return "MantenedorProductos";
+        return "MantenedorProductos.xhtml";
     }
 
     public String crearCategoria() throws DAOException, SQLException {
         CategoriaDTO p = new CategoriaDTO(idCategoria, nombre, imagen);
         controller.crearCategoria(p);
-        return "MantenedorCategorias";
+        return "MantenedorCategorias.xhtml";
 
     }
 
@@ -528,7 +528,7 @@ public class ProyectoBean {
         CategoriaDTO p = new CategoriaDTO(idCategoriaSelecionada, nombreCategoriaSeleccionada, imagen);
         //System.out.println(idCategoriaSelecionada + "pppppp" + nombreCategoriaSeleccionada);
         controller.actualizarCategoria(p);
-        return "Categoria";
+        return "MantenedorCategorias.xhtml";
 
     }
 
@@ -543,6 +543,12 @@ public class ProyectoBean {
         controller.eliminarCategoria(p);
         //return "Categoria";
 
+    }
+
+    public String cerrarSesion() {
+        this.nombreUser = "";
+        this.pass = "";
+        return "index.xhtml";
     }
 //    public void handleFileUpload(FileUploadEvent event) {
 //
