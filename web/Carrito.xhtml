@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <head>
+        <title>Carrito de Compra</title>
+    </head>
+    <body>
+        <div>Su Carrito de Compra</div>
+        <h:form>
+            <h:dataTable id ="tableCarrito" value="#{carroBean.compraProducto}" var="carro"  border="1"  binding="#{carroBean.tablaProductos}">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value=""/>
+                    </f:facet>
+                    <h:commandLink id="linkEliminar" action="#{carroBean.eliminar}">Eliminar</h:commandLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nombre Producto"/>
+                    </f:facet>
+                    #{carro.nombreProducto}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Precio Unitario"/>
+                    </f:facet>
+                    #{carro.precio}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Cantidad"/>
+                    </f:facet>
+                    #{carro.cantidad}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Total"/>
+                    </f:facet>
+                    #{carro.total}
+                </h:column>
+                
+               <h:column>
+                    <f:facet name="header">
+                        <h:outputText value=""/>
+                    </f:facet>
+                    <h:commandLink id="hola" action="#{carroBean.editar}">Cambiar Cantidad</h:commandLink>
+                </h:column>
+            </h:dataTable>
+            <h2>
+                TOTAL: #{carroBean.totalVentaCarro}
+            </h2>
+            <script src="js/paypal-button.min.js?merchant=fel.lara.ram@gmail.com"
+                     data-button="buynow"
+                     data-name="Boleta ${carroBean.idCarro}"
+                     data-amount="${carroBean.totalVentaCarro}">
+            </script>
+        </h:form>
+<!--                        #{carroBean.cambiarCarro()}
+-->
+    </body>
+</html>

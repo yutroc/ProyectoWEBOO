@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <head>
+        <title>Carrito de Compra</title>
+    </head>
+    <body>
+        <div>Editar Cantidad</div>
+        <h:form>
+            <table boder="4">
+                <tr>
+                    <td>Cantidad</td>
+                    <td><h:inputText value="#{carroBean.cantidad}"></h:inputText></td>
+                    <td><h:inputHidden value="#{carroBean.idVentaProducto}"></h:inputHidden></td>
+                </tr>
+                <tr>
+                    <td><h:commandLink id="linkActualizar" action="#{carroBean.updateCant}">Actualizar</h:commandLink></td>
+                </tr>
+            </table>
+        </h:form>
+    </body>
+</html>

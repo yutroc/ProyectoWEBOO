@@ -12,6 +12,7 @@ import DTO.UsuarioDTO;
 import java.sql.SQLException;
 import persistance.DAO;
 import utils.DAOException;
+import DTO.CompraProductoDTO;
 
 /**
  *
@@ -34,7 +35,9 @@ public class Controlador {
     public ArrayList<ProductoDTO> obtenerTodosProductos(String nameProducto) throws DAOException {
         return dao.obtenerTodosProductos(nameProducto);
     }
-
+    public ArrayList<ProductoDTO> obtenerTodosProductos() throws DAOException {
+        return dao.obtenerTodosProductos();
+    }
     public ArrayList<CategoriaDTO> obtenerTodosCategorias(String nameCategoria) throws DAOException {
         return dao.obtenerTodosCategoria(nameCategoria);
     }
@@ -98,6 +101,44 @@ public class Controlador {
     }
      public ArrayList<ProductoDTO> obtenerProductosPorCategoria(int idCategoria) throws DAOException {
         return dao.obtenerProductosPorCategoria(idCategoria);
+    }
+      public ArrayList<CompraProductoDTO> obtenerCarritos(String idUsuario) throws DAOException {
+        return dao.obtenerCarritos(idUsuario);
+    }
+    public ArrayList<String> tieneCarro(String idUsuario) throws DAOException{
+        System.out.println(idUsuario+" Controller");
+        return dao.tieneCarro(idUsuario);
+    }
+    public ArrayList<String> obtenerIdCarrito(String idUsuario)throws DAOException{
+        return dao.obtenerIdCarrito(idUsuario);
+    }
+
+    public void CrearCarro(String idUsuario) throws DAOException {
+        dao.CrearCarro(idUsuario);
+    }
+
+    public ArrayList<String> existeEnCarro(int idProducto, int idCarro) throws DAOException {
+        return dao.existeEnCarro(idProducto,idCarro);
+    }
+
+    public void agregarACarro(int idProducto, int idCarro, ArrayList<ProductoDTO> productos)throws DAOException {
+        dao.agregarACarro(idProducto,idCarro, productos);
+    }
+
+    public ArrayList<CompraProductoDTO> obtenerProductos(int idCarro) throws DAOException {
+        return dao.obtenerProductos(idCarro);
+    }
+
+    public void eliminarDeCarrito(int idVenta) throws DAOException {
+        dao.elimnarDeCarrito(idVenta);
+    }
+
+    public void updateCant(int cantidad, int idVentaProducto)throws DAOException {
+        dao.updateCant(cantidad,idVentaProducto);
+    }
+
+    public void cambiarCarro(int idCarro)throws DAOException {
+        dao.cambiarCarro(idCarro);
     }
 
 }

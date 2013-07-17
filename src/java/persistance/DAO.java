@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import utils.DAOException;
+import DTO.CompraProductoDTO;
 
 public class DAO {
 
@@ -655,5 +656,343 @@ public class DAO {
         }
         return listaProductos;
     }
-    
+    public ArrayList<ProductoDTO> obtenerTodosProductos() throws DAOException {
+        // iniciar variables
+        int idProducto = 0;
+        String nombre = "";
+        String descripcion = "";
+        byte image = 0;
+        int stock = 0;
+        int valorOferta = 0, precio;
+        boolean ofertaActiva = false;
+        int idCategoria = 0;
+        //_ProductoDTO producto = new ProductoDTO();
+        ArrayList<ProductoDTO> listaProductos = new ArrayList<ProductoDTO>();
+        // odbc conection
+        DAOController dc = new DAOController();
+        Connection con = dc.getConnection();
+        //statment
+        try {
+            // setup statement and retrieve results
+            PreparedStatement pstmt = con.prepareStatement("SELECT \"idProducto\", \"nombre\", \"descripcion\", \"stock\", \"precio\", \"valorOferta\", \"ofertaActiva\", \"idCategoria\"" + "FROM \"Producto\" ORDER BY \"idProducto\";");
+            ResultSet rs = pstmt.executeQuery();
+            //create the transfer object using data from rs
+            while (rs.next()) {
+                idProducto = rs.getInt("idProducto");
+                nombre = rs.getString("nombre");
+                descripcion = rs.getString("descripcion");
+                stock = rs.getInt("stock");
+                precio = rs.getInt("precio");
+                valorOferta = rs.getInt("valorOferta");
+                ofertaActiva = rs.getBoolean("ofertaActiva");
+                idCategoria = rs.getInt("idCategoria");
+                /*producto.setIdProducto(idProducto);
+                 producto.setNombre(nombre);
+                 producto.setDescripcion(descripcion);
+                 producto.setImage(image);
+                 producto.setStock(stock);
+                 producto.setValorOferta(valorOferta);
+                 producto.setOfertaActiva(ofertaActiva);
+                 producto.setIdProducto(idProducto);
+                 listaProductos.add(producto);*/
+                ProductoDTO producto = new ProductoDTO(idProducto, nombre, descripcion, "", stock, valorOferta, precio, ofertaActiva, idCategoria);
+                listaProductos.add(producto);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
+        return listaProductos;
+    } 
+    public ArrayList<CompraProductoDTO> obtenerCarritos(String idUsuario) throws DAOException {
+        DAOController dc = new DAOController();
+        Connection con = dc.getConnection();
+        int idCarro=0;
+        
+        try {
+            PreparedStatement pstmt = con.prepareStatement("SELECT \"idCarro\", \"idUsuario\" FROM \"Compra\"  WHERE \"idUsuario\" = '?' AND estado = 1;");
+            pstmt.setString(1, idUsuario);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+            }
+                
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
+        
+        return null;
+    }
+    public ArrayList<String> tieneCarro(String idUsuario) throws DAOException{
+        DAOController dc = new DAOController();
+        Connection con = dc.getConnection();
+        ArrayList<String> carros = new ArrayList<String>();
+        int idCarro=0;
+        try {
+            PreparedStatement pstmt = con.prepareStatement("SELECT \"idCarro\" FROM \"Compra\"  WHERE \"idUsuario\" = ? AND estado = 1;");
+            System.out.println(idUsuario+" DAO");
+            System.out.println("SELECT \"idCarro\" FROM \"Compra\"  WHERE \"idUsuario\" = 1 AND estado = 1;");
+            pstmt.setString(1, idUsuario);
+            
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                idCarro = rs.getInt("idCarro");
+                System.out.println(idCarro+"aaASDFGHJKLÑERTYUIODFGHJKLTYUIASDANDIABFUISBFUS");
+                carros.add(idCarro+"");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
+        return carros;
+    }
+    public ArrayList<String> obtenerIdCarrito(String idUsuario) throws DAOException {
+        DAOController dc = new DAOController();
+        Connection con = dc.getConnection();
+        ArrayList<String> carros = new ArrayList<String>();
+        int idCarro=0;
+        try {
+            PreparedStatement pstmt = con.prepareStatement("SELECT \"idCarro\" FROM \"Compra\"  WHERE \"idUsuario\" = ? AND estado = 1;");
+            pstmt.setString(1, idUsuario);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                idCarro = rs.getInt("idCarro");
+                carros.add(idCarro+"");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
+        return carros;
+    }
+    public void CrearCarro(String idUsuario) throws DAOException {
+        DAOController dc = new DAOController();
+        Connection con = dc.getConnection();
+        Date fecha = new Date();
+        try {
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO \"Compra\"(\n" +
+"             estado, \"fechaCreacion\", \"idUsuario\")\n" +
+"    VALUES ( ?, ?, ?);");
+            pstmt.setInt(1, 1);
+            java.sql.Date fechaD = new java.sql.Date(fecha.getTime());
+            pstmt.setDate(2, fechaD);
+            pstmt.setString(3, idUsuario);
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
+    }
+    public ArrayList<String> existeEnCarro(int idProducto, int idCarro) throws DAOException {
+        String idCompra = "";
+        DAOController dc = new DAOController();
+        Connection con = dc.getConnection();
+        ArrayList<String> idVenta = new ArrayList<String>();
+        try {
+            PreparedStatement pstmt = con.prepareStatement("SELECT \"idVentaProducto\"\n" +
+"  FROM \"CompraProducto\"\n" +
+"  WHERE \"idCarro\" = ? and \"idProducto\"=?;");
+            pstmt.setInt(1, idCarro);
+            pstmt.setInt(2, idProducto);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                idCompra = rs.getString("idVentaProducto");
+                idVenta.add(idCompra);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
+        return idVenta;
+    }
+    public void agregarACarro(int idProducto, int idCarro,ArrayList<ProductoDTO> productos) throws DAOException {
+        DAOController dc = new DAOController();
+        Connection con = dc.getConnection();
+        int total=0;
+        for(int i=0;i<productos.size();i++){
+            if(productos.get(i).getIdProducto()==idProducto){
+                total = productos.get(i).getPrecio();
+            }
+        }
+        try {
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO \"CompraProducto\"(\n" +
+"            cantidad, total, \"idCarro\", \"idProducto\")\n" +
+"    VALUES (?, ?, ?, ?);");
+            pstmt.setInt(1, 1);
+            pstmt.setInt(2,total);
+            pstmt.setInt(3, idCarro);
+            pstmt.setInt(4, idProducto);
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
+    }
+    public ArrayList<CompraProductoDTO> obtenerProductos(int idCarro) throws DAOException {
+        DAOController dc = new DAOController();
+        Connection con = dc.getConnection();
+        int cantidad =0;
+        int total = 0;
+        int idProducto=0;
+        int idVentaProducto =0;
+        int idCarroC=0;
+        String nombreProducto="";
+        int precio=0;
+        int precioOferta=0;
+        boolean oferta=false;
+        ArrayList<CompraProductoDTO> producto = new ArrayList<CompraProductoDTO>();
+        try {
+            PreparedStatement pstmt = con.prepareStatement("SELECT \n" +
+"  \"CompraProducto\".cantidad, \n" +
+"  \"CompraProducto\".total, \n" +
+"  \"CompraProducto\".\"idCarro\", \n" +
+"  \"CompraProducto\".\"idProducto\", \n" +
+"  \"CompraProducto\".\"idVentaProducto\", \n" +
+"  \"Producto\".nombre, \n" +
+"  \"Producto\".precio, \n" +
+"  \"Producto\".\"valorOferta\", \n" +
+"  \"Producto\".\"ofertaActiva\"\n" +
+"FROM \n" +
+"  \"CompraProducto\"\n" +
+"INNER JOIN \"Producto\" ON \"CompraProducto\".\"idProducto\"=\"Producto\".\"idProducto\"\n" +
+"WHERE\n" +
+"  \"CompraProducto\".\"idCarro\"=? ;");
+           pstmt.setInt(1, idCarro);
+           ResultSet rs = pstmt.executeQuery();
+           while(rs.next()){
+               cantidad = rs.getInt("cantidad");
+               total = rs.getInt("total");
+               idCarroC=rs.getInt("idCarro");
+               idProducto = rs.getInt("idProducto");
+               idVentaProducto = rs.getInt("idVentaProducto");
+               nombreProducto = rs.getString("nombre");
+               precio = rs.getInt("precio");
+               precioOferta=rs.getInt("valorOferta");
+               oferta=rs.getBoolean("ofertaActiva");
+               CompraProductoDTO prod = new CompraProductoDTO(idVentaProducto,cantidad,total,idCarroC,
+                       idProducto,nombreProducto,precio,precioOferta,oferta);
+               producto.add(prod);
+           }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
+        return producto;
+
+    }
+
+    public void elimnarDeCarrito(int idVenta) throws DAOException {
+        DAOController dc = new DAOController();
+        Connection con = dc.getConnection();
+        try {
+            PreparedStatement pstmt = con.prepareStatement("DELETE FROM \"CompraProducto\"\n" +
+" WHERE \"idVentaProducto\"=?;");
+            pstmt.setInt(1, idVenta);
+            pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
+    }
+
+    public void updateCant(int cantidad, int idVentaProducto) throws DAOException {
+        DAOController dc = new DAOController();
+        Connection con = dc.getConnection();
+        try {
+            PreparedStatement pstmt = con.prepareStatement("UPDATE \"CompraProducto\"\n" +
+"SET cantidad=?\n" +
+"WHERE \"idVentaProducto\" = ?;");
+            pstmt.setInt(1, cantidad);
+            pstmt.setInt(2, idVentaProducto);
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
+    }
+
+    public void cambiarCarro(int idCarro) throws DAOException {
+        DAOController dc = new DAOController();
+        Connection con = dc.getConnection();
+        try {
+            PreparedStatement pstmt = con.prepareStatement("UPDATE \"Compra\"\n" +
+"   SET estado=0\n" +
+" WHERE \"idCarro\"=?;");
+            pstmt.setInt(1, idCarro);
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
+    }
 }
