@@ -36,6 +36,7 @@ import org.apache.myfaces.custom.fileupload.UploadedFile;
  *
  * @author Javier Andana
  */
+
 @ManagedBean
 @SessionScoped
 public class ProyectoBean {
@@ -493,7 +494,7 @@ public class ProyectoBean {
     public String crearCategoria() throws DAOException, SQLException {
         CategoriaDTO p = new CategoriaDTO(idCategoria, nombre, imagen);
         controller.crearCategoria(p);
-        return "Categoria";
+        return "MantenedorCategorias";
 
     }
 

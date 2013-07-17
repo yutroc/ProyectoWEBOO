@@ -419,6 +419,7 @@ public class DAO {
             pstmt.setString(7, user.getCiudad());
             pstmt.setString(8, user.getEmail());
             java.sql.Date fechaD = new java.sql.Date(user.getFechaRegistro().getTime());
+            
             pstmt.setDate(9, fechaD);
             pstmt.setString(10, user.getContraseña());
             pstmt.setString(11, user.getTelefono());
@@ -435,7 +436,7 @@ public class DAO {
             }
         }
         con.close();
-        return "mostrarUsuario.xhtml";
+        return "MantenedorUsuarios.xhtml";
     }
 
     public ArrayList<UsuarioDTO> obtenerUsuarios(String name) throws DAOException, SQLException {

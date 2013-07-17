@@ -308,20 +308,23 @@ ul.left_menu li.even a:hover, ul.left_menu li.odd a:hover{
     font-weight:bold;
     height:38px;
 }
-.product_title a{
-    text-decoration:none;
-    color:#ea2222;
-    padding:5px 0 5px 0;
-    font-weight:bold;
+.product_title a:hover {
+    color: #01A990;
 }
-.product_title a:hover{
-    color:#064E5A;
+.product_title a {
+    text-decoration: none;
+    color: #666;
+    padding: 5px 0 5px 0;
+    font-weight: bold;
+    font-size: 1.2em;
 }
 .product_img{
     padding:5px 0 5px 0;
 }
 .prod_price{
     padding:5px 0 5px 0;
+    font-size: 1.3em;
+    font-weight: bold;
 }
 span.reduce{
     color:#999999;
@@ -660,7 +663,7 @@ h2{
 }
 .menuAdm ul{
     list-style:  none;
-    
+
 }
 .menuAdm li{
     float: left;
@@ -687,7 +690,7 @@ h2{
     color: #333333;
 }
 
-    
+
 .datagrid table
 {
     margin-left:auto;

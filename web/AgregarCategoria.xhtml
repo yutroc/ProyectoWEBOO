@@ -2,11 +2,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>Agregar una categora</title>
+        <title>Agregar una Categoria</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <style>         
+            div#main_container table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+            div#main_container table td, div#main_container table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+            .ui-dialog .ui-state-error { padding: .3em; }
+            .validateTips { border: 1px solid transparent; padding: 0.3em; }
+            .limitedHeightDiv {height: 500px; overflow: auto;
+            }
+        </style>
     </h:head>
     <h:body>
+        <ui:include src="templates/header.xhtml"></ui:include>
         <h:form id ="insert">
             <table>
 
@@ -19,9 +31,10 @@
                     </td>
                 </tr>             
             </table>
-            <p><h:commandButton value="Cancelar"  action="Categoria" immediate="true"/></p>
+            <p><h:commandButton value="Cancelar"  action="MantenedorCategorias" immediate="true"/></p>
             <p><h:commandButton value="Crear" action="#{proyectoBean.crearCategoria()}"/></p>
         </h:form>
+        <ui:include src="templates/footer.xhtml"></ui:include>
     </h:body>
 </html>
 

@@ -46,6 +46,14 @@ public class CompraDTO {
         return estado;
     }
 
+    public String getEstadoString() {
+        if (this.getEstado() == 1) {
+            return "Vigente";
+        } else {
+            return "Finalizado";
+        }
+    }
+
     public void setEstado(int estado) {
         this.estado = estado;
     }
@@ -70,6 +78,4 @@ public class CompraDTO {
     public String toString() {
         return "CompraDTO{" + "idCarro=" + idCarro + ", estado=" + estado + ", fechaCreacion=" + fechaCreacion + ", fechaFinalizacion=" + fechaFinalizacion + ", idUsuario=" + idUsuario + '}';
     }
-
-    
 }

@@ -3,60 +3,66 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets">
-<div class="top_bar">
-    <div class="top_search">
-      <div class="search_text"><a href="#Implementar_Busqueda">Buscar</a></div>
-      <input type="text" class="search_input" name="search" />
-      <a href="#Implementar_Busqueda">
-        <input type="image" src="imagenes/search.gif" class="search_bt"/>
-      </a>
-    </div>
-  </div>
-  <div id="header">
-    <div id="logo"> <a href="#"><img src="imagenes/logo.png" alt="" border="0" width="250" height="140" /></a> </div>
-    <div class="oferte_content">
-      <div class="top_divider"><img src="imagenes/header_divider.png" alt="" width="1" height="164" /></div>
-      <div class="oferta">
-        <div class="oferta_content"> <img src="imagenes/manjarate.jpg" width="94" height="92" alt="" border="0" class="oferta_img" />
-          <div class="oferta_details">
-            <div class="oferta_title">Manjarate Soprole Black</div>
-            <div class="oferta_text"> Manjarate Soprole Black, 4 Unidades, Pote 125 grs. c/u </div>
-            <a href="details.html" class="details">Detalles</a> </div>
+    <div class="top_bar">
+        <div class="top_search">
+            <div class="search_text"><a href="#Implementar_Busqueda">Buscar</a></div>
+            <input type="text" class="search_input" name="search" />
+            <a href="#Implementar_Busqueda">
+                <input type="image" src="imagenes/search.gif" class="search_bt"/>
+            </a>
         </div>
-        <div class="oferta_pagination"> 
-            <span class="current">1</span> 
-            <a href="#Oferta_2">2</a> 
-            <a href="#Oferta_3">3</a> 
-            <a href="#Oferta_4">4</a> 
-            <a href="#Oferta_5">5</a> 
+    </div>
+    <div id="header">
+        <div id="logo"> <a href="#"><img src="imagenes/logo.png" alt="" border="0" width="250" height="140" /></a> </div>
+        <div class="oferte_content">
+            <div class="top_divider"><img src="imagenes/header_divider.png" alt="" width="1" height="164" /></div>
+            
+            
+            <div class="oferta">
+                <div class="oferta_content"> <img src="imagenes/manjarate.jpg" width="94" height="92" alt="" border="0" class="oferta_img" />
+                    <div class="oferta_details">
+                        <div class="oferta_title">Manjarate Soprole Black</div>
+                        <div class="oferta_text"> Manjarate Soprole Black, 4 Unidades, Pote 125 grs. c/u </div>
+                        <a href="details.html" class="details">Detalles</a> </div>
+                </div>
+                <div class="oferta_pagination"> 
+                    <span class="current">1</span> 
+                    <a href="#Oferta_2">2</a> 
+                    <a href="#Oferta_3">3</a> 
+                    <a href="#Oferta_4">4</a> 
+                    <a href="#Oferta_5">5</a> 
+                    <a href="#Oferta_6">6</a>
+                </div>
+            </div>
+            
+            
+            <div class="top_divider"><img src="imagenes/header_divider.png" alt="" width="1" height="164" /></div>
         </div>
-      </div>
-      <div class="top_divider"><img src="imagenes/header_divider.png" alt="" width="1" height="164" /></div>
+        <!-- end of oferte_content-->
     </div>
-    <!-- end of oferte_content-->
-  </div>
-  <div id="main_content">
-    <div id="menu_tab">
-      <div class="left_menu_corner"></div>
-      <ul class="menu">
-          <h:form>
-        <li><h:commandLink id="link1" value ="Inicio" action="irIndex" class="nav1"></h:commandLink></li>
-        <li class="divider"></li>
-        <li><h:commandLink id="link2" value ="Ingresar a tu Cuenta" action="irLogin" class="nav2"></h:commandLink></li>
-        <li class="divider"></li>
-        <!--<li><h:commandLink id="link5" value ="registrar" action="irRegistrar" class="nav5"></h:commandLink></li>
-        <li class="divider"></li>-->
-        <li><a href="#" class="nav4">Carro de Compras</a></li>
-        <li class="divider"></li>
-        <li><a href="contact.xhtml" class="nav5">Contacto</a></li>
-        <li class="divider"></li>
-         <!--<li><h:commandLink id="link3" value ="Categorias" action="Categoria" class="nav3"></h:commandLink></li>
-        <li class="divider"></li>
-         <li><h:commandLink id="link6" value ="Ofertas" action="Oferta" class="nav6"></h:commandLink></li>
-        <li class="divider"></li>-->
-          </h:form>
-      </ul>
-      <div class="right_menu_corner"></div>
+    <div id="main_content">
+        <div id="menu_tab">
+            <div class="left_menu_corner"></div>
+            <ul class="menu">
+                <h:form>
+                    <li><h:commandLink id="link1" value ="Inicio" action="irIndex" class="nav1"></h:commandLink></li>
+                    <li class="divider"></li>
+                    <li><h:commandLink id="link2" value ="Ingresar a tu Cuenta" action="irLogin" class="nav2"></h:commandLink></li>
+                    <li class="divider"></li>
+                    <!--<li><h:commandLink id="link5" value ="registrar" action="irRegistrar" class="nav5"></h:commandLink></li>
+                    <li class="divider"></li>-->
+                    <li><a href="#" class="nav4">Carro de Compras</a></li>
+                    <li class="divider"></li>
+                    <li><a href="contact.xhtml" class="nav5">Contacto</a></li>
+                    <li class="divider"></li>
+                    <!--<li><h:commandLink id="link3" value ="Categorias" action="Categoria" class="nav3"></h:commandLink></li>
+                    <li class="divider"></li>
+                    <li><h:commandLink id="link6" value ="Ofertas" action="Oferta" class="nav6"></h:commandLink></li>
+                    <li class="divider"></li>-->
+                    <li><h:commandLink id="link6" value ="Registrarse" action="irRegistrar" class="nav2"></h:commandLink></li>
+                </h:form>
+            </ul>
+            <div class="right_menu_corner"></div>
+        </div>
     </div>
-  </div>
 </ui:composition>

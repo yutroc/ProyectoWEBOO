@@ -198,6 +198,23 @@ public class UserBean {
         //System.out.println(user.getIdTipo());
         //return "index.xhtml";
     }
+    
+    public String crearUsuarioNuevo() throws DAOException, SQLException {
+        
+        Calendar cal = Calendar.getInstance();
+        System.out.println(cal.get(Calendar.YEAR));
+        // String fecha = cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DATE);
+        cal.set(Calendar.YEAR, Calendar.MONTH + 1, Calendar.DATE);
+        Date fechaD = cal.getTime();
+        System.out.println(fechaD);
+        UsuarioDTO user = new UsuarioDTO(1, nombreUsuario, APaternoUsuario, AMaternoUsuario, rutUsuario, direccionUsuario,
+                comunaUsuario, ciudadUsuario, emailUsuario, fechaD, passUsuario, telefonoUsuario, 1);
+        System.out.println(user.toString());
+        controller.crearUsuario(user);
+
+        //System.out.println(user.getIdTipo());
+        return "index.xhtml";
+    }
 
     public String actualizarUsuario() throws DAOException, SQLException {
         Calendar cal = Calendar.getInstance();
