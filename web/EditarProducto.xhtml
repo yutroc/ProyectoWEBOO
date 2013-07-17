@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      >
+
+    <h:head>
+        <title>Demacia Food Store</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <!--[if IE 6]>
+        <link rel="stylesheet" type="text/css" href="iecss.css" />
+        <![endif]-->
+        <style>         
+            div#main_container table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+            div#main_container table td, div#main_container table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+            .ui-dialog .ui-state-error { padding: .3em; }
+            .validateTips { border: 1px solid transparent; padding: 0.3em; }
+            .limitedHeightDiv {height: 500px; overflow: auto;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <div id="main_container">
+            <ui:include src="templates/header.xhtml"></ui:include>
+            <!--<ui:include src="templates/left_content.xhtml"></ui:include>-->
+
+            <h1>Mantenedor de Productos</h1>
+            <h:form><h:commandButton value="Atras" action="MantenedorProductos"></h:commandButton></h:form>
+
+
+            <!-- Editar desde aqui -->
+            <div id="dialog2" title="Editar un producto">
+
+
+                <h:form  enctype="multipart/form-data">
+                    <table>
+                        <tr>
+                            <td>Nombre </td>
+                            <td><h:inputText value="#{proyectoBean.productoSeleccionado.nombre}"/></td>
+                        </tr>
+                        <tr>
+                            <td>Categoria </td>
+                            <td>
+                                <h:selectOneMenu id="priceMenu" value="#{proyectoBean.productoSeleccionado.idCategoria}">
+                                    <f:selectItems value="#{proyectoBean.getCategorias()}" var="s" 
+                                                   itemValue="#{s.idCategoria}" itemLabel="#{s.nombre}" />
+                                </h:selectOneMenu>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Stock </td>
+                            <td><h:inputText value="#{proyectoBean.productoSeleccionado.stock}"/></td>
+                        </tr>
+                        <tr>
+                            <td>valor Oferta </td>
+                            <td><h:inputText value="#{proyectoBean.productoSeleccionado.valorOferta}"/></td>
+                        </tr>
+                        <tr>
+                            <td>oferta Activa </td>
+                            <td><h:inputText value="#{proyectoBean.productoSeleccionado.ofertaActiva}" /></td>
+                        </tr>
+                        <tr>
+                            <td>Precio </td>
+                            <td><h:inputText value="#{proyectoBean.productoSeleccionado.precio}" /></td>
+                        </tr>
+                        <tr>
+                            <td>Descripcion </td>
+                            <td><h:inputTextarea value="#{proyectoBean.productoSeleccionado.descripcion}"/></td>
+                        </tr>
+                        <tr>
+
+                            <h:panelGrid columns="3">
+                                <h:outputLabel for="file" value="Select file" />
+                                <t:inputFileUpload id="file" value="#{proyectoBean.uploadedFile}" />
+                                <h:message for="file" style="color: red;" />
+
+                                <h:panelGroup />
+                                <h:message for="uploadForm" infoStyle="color: green;" errorStyle="color: red;" />
+                            </h:panelGrid>
+
+                        </tr>
+                    </table>
+
+                    <p><h:commandButton value="Editar" action="#{proyectoBean.editarProducto()}"/></p>
+                </h:form>
+            </div>
+            <!-- Hasta aca -->
+
+
+            <!--<ui:include src="templates/right_content.xhtml"></ui:include>-->
+            <ui:include src="templates/footer.xhtml"></ui:include>
+        </div>
+    </h:body>
+
+</html>
+

@@ -71,6 +71,10 @@ public class Controlador {
     public void editarProducto(ProductoDTO p) throws DAOException, SQLException {
         dao.editarProducto(p);
     }
+    
+    public void eliminarProducto(ProductoDTO p) throws DAOException, SQLException {
+        dao.eliminarProducto(p);
+    }
 
     public void eliminarCompra(CompraDTO c) throws SQLException, DAOException {
         dao.eliminarCompra(c);

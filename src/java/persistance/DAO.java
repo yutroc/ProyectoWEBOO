@@ -375,6 +375,27 @@ public class DAO {
         }
         con.close();
     }
+    
+    public void eliminarProducto(ProductoDTO p) throws DAOException, SQLException {
+        DAOController dc = new DAOController();
+        Connection con = dc.getConnection();
+
+        try {
+            PreparedStatement pstmt = con.prepareStatement("DELETE FROM \"Producto\" WHERE \"idProducto\" =?");
+            pstmt.setInt(1, p.getIdProducto());
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
+        con.close();
+    }
 
     public void eliminarCompra(CompraDTO compra) throws SQLException, DAOException {
         DAOController dc = new DAOController();

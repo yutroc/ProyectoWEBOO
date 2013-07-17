@@ -129,6 +129,31 @@ public class ProyectoBean {
         this.nombreProducto = productoSeleccionado.getNombre();
         this.descripcionProducto = productoSeleccionado.getDescripcion();
     }
+    
+    public void eliminarProducto() throws DAOException, SQLException {
+        //UIComponent myComponent = FacesContext.getCurrentInstance().getViewRoot().findComponent("dialog2");
+        productoSeleccionado = (ProductoDTO) tablaProductos.getRowData();
+//        this.editarVisible = true;
+
+
+        this.idProducto = productoSeleccionado.getIdProducto();
+        this.nombreProducto = productoSeleccionado.getNombre();
+        this.descripcionProducto = productoSeleccionado.getDescripcion();
+        
+        controller.eliminarProducto(this.productoSeleccionado);
+    }
+    
+    public String ireditarProducto() {
+        //UIComponent myComponent = FacesContext.getCurrentInstance().getViewRoot().findComponent("dialog2");
+        productoSeleccionado = (ProductoDTO) tablaProductos.getRowData();
+//        this.editarVisible = true;
+
+
+        this.idProducto = productoSeleccionado.getIdProducto();
+        this.nombreProducto = productoSeleccionado.getNombre();
+        this.descripcionProducto = productoSeleccionado.getDescripcion();
+        return "EditarProducto";
+    }
 
     public void refrescarVariablesCategoria(){
         nombre="";
@@ -205,7 +230,7 @@ public class ProyectoBean {
             ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
             String serverRealPath = servletContext.getRealPath("/");
             String serverContextPath = servletContext.getContextPath();
-            file = File.createTempFile(prefix + "_", "." + suffix, new File(serverRealPath + "/imagenes/productos"));
+            file = File.createTempFile(prefix + "0000", "." + suffix, new File(serverRealPath + "/imagenes/productos"));
             file.renameTo(new File(serverRealPath + "/imagenes/productos/" + this.productoSeleccionado.getIdProducto() + ".jpg"));
             System.out.println("getAbsolutePath " + serverRealPath + "/imagenes/productos/" + this.productoSeleccionado.getIdProducto() + ".jpg");
             output = new FileOutputStream(new File(serverRealPath + "/imagenes/productos/" + this.productoSeleccionado.getIdProducto() + ".jpg"));
@@ -481,14 +506,15 @@ public class ProyectoBean {
         resetProducto();
     }
 
-    public void editarProducto() throws DAOException, SQLException {
-        if (!this.uploadedFile.getName().equals(null)) {
+    public String editarProducto() throws DAOException, SQLException {
+        if (this.uploadedFile != null) {
             submit();
         }
 
         //ProductoDTO p = new ProductoDTO(0, nombrePN, descripcionNP, "sin imagen", stockPN, precioPN, ofertaPN, ofertaActivaPN, idCategoriaSelecionada);
         controller.editarProducto(this.productoSeleccionado);
         resetProducto();
+        return "MantenedorProductos";
     }
 
     public String crearCategoria() throws DAOException, SQLException {
