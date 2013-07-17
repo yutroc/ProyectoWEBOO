@@ -48,6 +48,20 @@ public class ProyectoBean {
     //variables para el login
     private String nombreUser = "";
     private String pass = "";
+    private boolean estaLogeado=false;
+
+    public String isEstaLogeado() {
+        if(nombreUser.equals("")){
+            return "none";
+        }else{
+            return "block";
+        }
+       
+    }
+
+    public void setEstaLogeado(boolean estaLogeado) {
+        this.estaLogeado = estaLogeado;
+    }
     private String msg = "";
     //tablas
     private HtmlDataTable tablaProductos;

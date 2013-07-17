@@ -9,10 +9,13 @@
 <div class="right_content">
       <div class="shopping_cart">
         <div class="cart_title">Carro de Compras</div>
-        <div class="cart_details"> n&uacute;mero de items <br />
-          <span class="border_cart"></span> Total: <span class="price">$ total</span> </div>
+        <div class="cart_details"> n&uacute;mero de items #{carroBean.cantidadProductos}<br />
+          <span class="border_cart"></span> Total: <span class="price">#{carroBean.totalVentaCarro}</span> </div>
         <div class="cart_icon">
-            <a href="#" title="header=[Pagar] body=[&nbsp;] fade=[on]"><img src="imagenes/shoppingcart.png" alt="" width="48" height="48" border="0" /></a></div>
+        <h:form>
+                <h:commandLink action="Carrito.xhtml"  title="header=[Pagar] body=[&nbsp;] fade=[on]" actionListener="#{proyectoBean.seleccionar(producto)}"><img src="imagenes/shoppingcart.png" alt="" width="48" height="48" border="0" /></h:commandLink>
+            </h:form>    
+        </div>
       </div>
       <div class="title_box">Ofertas</div>
       <div class="border_box">

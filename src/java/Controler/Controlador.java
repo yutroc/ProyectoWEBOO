@@ -141,4 +141,8 @@ public class Controlador {
         dao.cambiarCarro(idCarro);
     }
 
+    public String getIdUsuario(String nombreUser) throws DAOException {
+        return dao.getIdUsuario(nombreUser);
+    }
+
 }

@@ -1019,4 +1019,31 @@ public class DAO {
             }
         }
     }
+
+    public String getIdUsuario(String nombreUser) throws DAOException {
+        DAOController dc = new DAOController();
+        Connection con = dc.getConnection();
+        int idUsuario = 0;
+        
+        try {
+            PreparedStatement pstmt = con.prepareStatement("SELECT \"idUsuario\"\n" +
+"  FROM \"Usuario\"\n" +
+"  WHERE \"nombre\"=?;");
+            pstmt.setString(1, nombreUser);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                idUsuario=rs.getInt("idUsuario");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException(DAOException.IMPOSIBLE_MAKE_QUERY);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new DAOException(DAOException.IMPOSIBLE_CLOSE_CONNECTION);
+            }
+        }
+        return idUsuario+"";
+    }
 }

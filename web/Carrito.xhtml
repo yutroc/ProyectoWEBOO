@@ -60,11 +60,14 @@ and open the template in the editor.
                     <h2>
                         TOTAL: #{carroBean.totalVentaCarro}
                     </h2>
+                    <div style="display: #{proyectoBean.isEstaLogeado()}}">
+                        
                     <script src="js/paypal-button.min.js?merchant=fel.lara.ram@gmail.com"
                             data-button="buynow"
                             data-name="Boleta ${carroBean.idCarro}"
                             data-amount="${carroBean.totalVentaCarro}">
                     </script>
+                        </div>
                 </h:form>
             </div>
             <ui:include src="templates/footer.xhtml"></ui:include>

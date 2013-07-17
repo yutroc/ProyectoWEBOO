@@ -40,14 +40,16 @@ public class CarroBean {
     private ArrayList<CompraProductoDTO> compraProducto;
     private HtmlDataTable tablaProductos;
     private int totalVentaCarro;
+    private int cantidadProductos;
     
     public CarroBean() {
     }
     
-    public String revisarCarro(ProductoDTO prod) throws DAOException {
-        System.out.println(prod.getIdProducto()+" ASDASDASDADADASDADASDADASDASDADADASDASDASDASD");
+    public String revisarCarro(ProductoDTO prod,String nombreUser) throws DAOException {
+        System.out.println(nombreUser+" ASDASDASDADADASDADASDADASDASDADADASDASDASDASD");
         this.idProducto = prod.getIdProducto();
-        this.idUsuario = 2 + "";
+        idUsuario= controller.getIdUsuario(nombreUser);
+        //this.idUsuario = 2 + "";
          System.out.println(idProducto +" "+ idUsuario + " ASDADASDASDASD");
          int numero = controller.tieneCarro(idUsuario).size();
          String idNuevoCarro="";
@@ -188,6 +190,23 @@ public class CarroBean {
     }
     public void setTotalVentaCarro(int totalVenta) {
         this.totalVentaCarro = totalVenta;
+    }
+    public int getCantidadProductos() throws DAOException {
+        System.out.println("ENTRA ACA");
+        CompraProductoDTO p = new CompraProductoDTO(0,0,0);
+        compraProducto = controller.obtenerProductos(idCarro);
+        System.out.println("ENTRA ACA 2");
+        compraProducto.add(p);
+        System.out.println("ENTRA ACA 3");
+        System.out.println(compraProducto.size()+" adsadadasdasdadasd");
+        if (compraProducto.isEmpty()){
+            return 0;
+        }else{
+            return compraProducto.size()-1;
+        }
+    }
+    public void setCantidadProductos(int cantidadProductos) {
+        this.cantidadProductos = cantidadProductos;
     }
     
 }
